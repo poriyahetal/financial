@@ -251,6 +251,7 @@ class _LoginPageState extends State<LoginPage> {
     var res =
         await emailAuth.sendOtp(recipientMail: _emailController.text);
     print('REEEE $res');
+
     try {
       if (res) {
         Fluttertoast.showToast(msg: "Code send to your device");
