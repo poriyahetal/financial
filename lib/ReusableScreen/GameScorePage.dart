@@ -27,7 +27,7 @@ class _GameScorePageState extends State<GameScorePage> {
   var userId;
   String? level;
 
-  int? _gameSco;
+  int _gameSco = 0;
 
   getUserValue() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -220,7 +220,7 @@ class _GameScorePageState extends State<GameScorePage> {
                   if (streamSnapshot.hasError) {
                     return Text('It\'s Error!');
                   }
-                  if (!streamSnapshot.hasData)
+                  if (!streamSnapshot.hasData || !streamSnapshot.data!.exists)
                     return Center(
                       child: SizedBox(
                         height: displayHeight(context) * .05,

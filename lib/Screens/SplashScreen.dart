@@ -116,14 +116,11 @@ class _SplashScreenState extends State<SplashScreen> {
                           payableBill: payableBill,
                           gameScore: gameScore))));
 
-        if(level == 'Level_2_Pop_Quiz'){
+        if (level == 'Level_2_Pop_Quiz') {
           Future.delayed(
               Duration(seconds: 6),
-                  () => Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          PopQuiz())));
+              () => Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => PopQuiz())));
         }
         if (level == 'Level_3_setUp_page') {
           Future.delayed(
@@ -135,7 +132,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           LevelThreeSetUpPage(controller: PageController()))));
         }
 
-        if (level == 'Level_3')
+        if (level == 'Level_3') {
           Future.delayed(
               Duration(seconds: 6),
               () => Navigator.pushReplacement(
@@ -151,6 +148,14 @@ class _SplashScreenState extends State<SplashScreen> {
                           creditCardBill: creditCardBill,
                           payableBill: payableBill,
                           gameScore: gameScore))));
+        }
+
+        if (level == 'Level_3_Pop_Quiz') {
+          Future.delayed(
+              Duration(seconds: 6),
+                  () => Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => PopQuiz())));
+        }
       });
     } else {
       //if user not login than move to intro screen

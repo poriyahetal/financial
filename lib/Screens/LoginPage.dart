@@ -1,11 +1,11 @@
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:email_auth/email_auth.dart';
+import 'package:financial/Screens/EmailVerificationPage.dart';
 import 'package:financial/Screens/LevelOneSetUpPage.dart';
 import 'package:financial/Screens/devicesSizePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,18 +19,18 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
   final _phoneController = TextEditingController();
   final _codeController = TextEditingController();
   final _emailController = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   bool showLoading = false;
   String? dropdownvalue = '+91';
   FirebaseAuth _auth = FirebaseAuth.instance;
 
-  EmailAuth emailAuth = new EmailAuth(sessionName: "Financial App");
-
-  String? text;
+  //for password visibility
+  bool hidePassword = true;
 
   //function for user login
   Future<bool?> loginUser(String phone, BuildContext context) async {
@@ -246,117 +246,48 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void sendOtp() async {
-    print(_emailController.text);
-    var res =
-        await emailAuth.sendOtp(recipientMail: _emailController.text);
-    print('REEEE $res');
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addObserver(this);
+  }
 
-    try {
-      if (res) {
-        Fluttertoast.showToast(msg: "Code send to your device");
-        showDialog(
-            context: context,
-            builder: (BuildContext bContext) {
-              return AlertDialog(
-                contentPadding: EdgeInsets.only(
-                    top: 12.0, left: 15.0, bottom: 12.0, right: 15.0),
-                title: Column(
-                  children: [
-                    Center(
-                        child: Text(
-                      'ENTER OTP',
-                      style: GoogleFonts.workSans(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff4D6EF2),
-                      ),
-                    )),
-                    SizedBox(
-                      height: 4.0,
-                    ),
-                    Divider(thickness: 2.0, color: Colors.black26),
-                  ],
-                ),
-                elevation: 1.0,
-                content: TextFormField(
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      labelText: 'OTP',
-                      labelStyle: GoogleFonts.workSans(color: Colors.black)),
-                  controller: _codeController,
-                  style:
-                      GoogleFonts.workSans(fontSize: 12.sp, color: Colors.red),
-                  keyboardType: TextInputType.number,
-                ),
-                actions: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 12.0),
-                    child: Center(
-                      child: GestureDetector(
-                        onTap: () async {
-                          verifyOtp();
-                        },
-                        child: Container(
-                          height: displayHeight(context) * .08,
-                          width: displayWidth(context) * .60,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xff4D6EF2),
-                                Color(0xff6448E8),
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                            ),
-                            borderRadius: BorderRadius.circular(
-                                displayWidth(context) * .12),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Send',
-                              style: GoogleFonts.workSans(
-                                  color: Colors.white,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            });
-      } else {
-        Fluttertoast.showToast(msg: 'We could not send OTP');
+  @override
+  void dispose() {
+    _emailController.dispose();
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.resumed) {
+      final PendingDynamicLinkData? data =
+          await FirebaseDynamicLinks.instance.getInitialLink();
+      if (data?.link != null) {
+        handleLink(data!.link);
       }
-    } on FirebaseAuthException catch (e) {
-      Fluttertoast.showToast(msg: e.message.toString());
-      Navigator.pop(context);
-      // Fluttertoast.showToast(
-      //     msg: 'Please enter valid Email');
+      FirebaseDynamicLinks.instance.onLink(
+          onSuccess: (PendingDynamicLinkData? dynamicLink) async {
+        final Uri deepLink = dynamicLink!.link;
+        handleLink(deepLink);
+      }, onError: (OnLinkErrorException e) async {
+        print('onLinkError');
+        print(e.message);
+      });
     }
   }
 
-  Future<void> verifyOtp() async {
-    print('email ${_emailController.text}');
-    print('otp ${_codeController.text}');
-    var res = emailAuth.validateOtp(
-        recipientMail: _emailController.text, userOtp: _codeController.text);
-    print('My res $res');
-    if (res) {
+  void handleLink(Uri link) async {
+    if (link != null) {
+      final User? user = (await _auth.signInWithEmailLink(
+        email: _emailController.text,
+        emailLink: link.toString(),
+      ))
+          .user;
       try {
-        FirebaseAuth _auth = FirebaseAuth.instance;
-        final code = _codeController.text.trim();
-        UserCredential credential = await _auth.createUserWithEmailAndPassword(
-            email: _emailController.text, password: code);
-        print('my cred $credential');
-        User? user = credential.user;
-        print('My User ${credential.user}');
-        Navigator.of(context).pop();
         if (user != null) {
+          Fluttertoast.showToast(msg: 'Verification Completed');
           SharedPreferences pref = await SharedPreferences.getInstance();
           pref.setString('uId', user.uid);
           print('Sign in ');
@@ -388,6 +319,7 @@ class _LoginPageState extends State<LoginPage> {
               .catchError((error) => print('$error'));
           print(users.id);
           Navigator.of(context).pop();
+          Fluttertoast.showToast(msg: 'You are Logged in Successfully');
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                   builder: (context) => LevelOneSetUpPage(
@@ -400,13 +332,34 @@ class _LoginPageState extends State<LoginPage> {
         }
       } on FirebaseAuthException catch (e) {
         Fluttertoast.showToast(msg: e.message.toString());
-        Navigator.pop(context);
+        // Navigator.pop(context);
         // Fluttertoast.showToast(
         //     msg: 'Please enter valid OTP');
       }
     } else {
-      Fluttertoast.showToast(msg: 'Please enter valid OTP');
+      setState(() {
+        // _success = false;
+      });
     }
+    setState(() {});
+  }
+
+  Future<void> _signInWithEmailAndLink() async {
+    _emailController.text = _emailController.text;
+    return await FirebaseAuth.instance
+        .sendSignInLinkToEmail(
+            email: _emailController.text,
+            actionCodeSettings: ActionCodeSettings(
+              url: 'https://finshark.page.link/finsharkApp',
+              handleCodeInApp: true,
+              androidPackageName: 'com.finshark',
+              androidMinimumVersion: "1",
+            ))
+        .then((value) => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    EmailVerificationPage(email: _emailController.text))));
   }
 
   @override
@@ -504,7 +457,7 @@ class _LoginPageState extends State<LoginPage> {
                         hintText: "Enter Email Address"),
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
-                    textInputAction: TextInputAction.done,
+                    textInputAction: TextInputAction.next,
                   ),
                 ),
                 SizedBox(
@@ -533,7 +486,6 @@ class _LoginPageState extends State<LoginPage> {
                                 msg: 'Please enter your phone number');
                             return null;
                           } else {
-
                             RegExp regExp = RegExp(pattern);
                             if (!regExp.hasMatch(_phoneController.text)) {
                               Fluttertoast.showToast(
@@ -582,15 +534,14 @@ class _LoginPageState extends State<LoginPage> {
                               return null;
                             }
                           }
-                          print(_emailController.text);
-                          sendOtp();
+                          _signInWithEmailAndLink();
                         }
                       }
                       if (_phoneController.text.isNotEmpty &&
                           _emailController.text.isNotEmpty) {
                         RegExp regExp = RegExp(pattern);
                         RegExp regExpEmail = RegExp(patternEmail);
-                        if(!regExp.hasMatch(_phoneController.text) ){
+                        if (!regExp.hasMatch(_phoneController.text)) {
                           Fluttertoast.showToast(
                               msg: 'Please enter valid  phone number');
                           return null;
@@ -621,7 +572,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       child: Center(
                         child: Text(
-                          'Send otp',
+                          'Send',
                           style: GoogleFonts.workSans(
                               color: Colors.white,
                               fontSize: 16.sp,
@@ -630,6 +581,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: displayHeight(context) * .02,
                 ),
               ],
             ),

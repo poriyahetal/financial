@@ -61,78 +61,94 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                lev >= 1
-                    ? TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.green),
-                        ),
-                        onPressed: () {
-                          i = 1;
-                          _showDialog(i);
-                        },
-                        child: Text(
-                          'Level 1 : Smart Money',
-                          style: TextStyle(color: Colors.white),
-                        ))
-                    : TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.grey),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          'Level 1 : Smart Money',
-                          style: TextStyle(color: Colors.white),
-                        )),
-                lev >= 2
-                    ? TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.green),
-                        ),
-                        onPressed: () {
-                          print('yes');
-                          _showDialog(2);
-                        },
-                        child: Text(
-                          'Level 2 : Smart Savers',
-                          style: TextStyle(color: Colors.white),
-                        ))
-                    : TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.grey),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          'Level 2 : Smart Savers',
-                          style: TextStyle(color: Colors.white),
-                        )),
-                lev >= 3
-                    ? TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.green),
-                        ),
-                        onPressed: () {
-                          print('yes');
-                          _showDialog(3);
-                        },
-                        child: Text(
-                          'Level 3 : Building Credit',
-                          style: TextStyle(color: Colors.white),
-                        ))
-                    : TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.grey),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          'Level 3 : Building Credit',
-                          style: TextStyle(color: Colors.white),
-                        )),
+                TextButton(
+                    style: ButtonStyle(
+                      backgroundColor: lev >= 1
+                          ? MaterialStateProperty.all(Colors.green)
+                          : MaterialStateProperty.all(Colors.grey),
+                    ),
+                    onPressed: () {
+                      i = 1;
+                      lev >= 1 ? _showDialog(i) : Container();
+                    },
+                    child: Text(
+                      'Level 1 : Smart Money',
+                      style: TextStyle(color: Colors.white),
+                    )),
+                TextButton(
+                    style: ButtonStyle(
+                      backgroundColor: lev >= 2
+                          ? MaterialStateProperty.all(Colors.green)
+                          : MaterialStateProperty.all(Colors.grey),
+                    ),
+                    onPressed: () {
+                      print('yes');
+                      lev >= 2 ? _showDialog(2) : Container();
+                    },
+                    child: Text(
+                      'Level 2 : Smart Savers',
+                      style: TextStyle(color: Colors.white),
+                    )),
+                TextButton(
+                    style: ButtonStyle(
+                      backgroundColor: lev >= 2
+                          ? MaterialStateProperty.all(Colors.green)
+                          : MaterialStateProperty.all(Colors.grey),
+                    ),
+                    onPressed: () {
+                      lev >= 2
+                          ? firestore.collection('User').doc(userId).update({
+                              'previous_session_info': 'Level_2_Pop_Quiz',
+                              'replay_level': true,
+                            }).then((value) {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PopQuiz()));
+                            })
+                          : Container();
+                    },
+                    child: Text(
+                      'Level 2 Pop Quiz',
+                      style: TextStyle(color: Colors.white),
+                    )),
+                TextButton(
+                    style: ButtonStyle(
+                      backgroundColor: lev >= 3
+                          ? MaterialStateProperty.all(Colors.green)
+                          : MaterialStateProperty.all(Colors.grey),
+                    ),
+                    onPressed: () {
+                      print('yes');
+                      lev >= 3 ? _showDialog(3) : Container();
+                    },
+                    child: Text(
+                      'Level 3 : Building Credit',
+                      style: TextStyle(color: Colors.white),
+                    )),
+                TextButton(
+                    style: ButtonStyle(
+                      backgroundColor: lev >= 3
+                          ? MaterialStateProperty.all(Colors.green)
+                          : MaterialStateProperty.all(Colors.grey),
+                    ),
+                    onPressed: () {
+                      lev >= 3
+                          ? firestore.collection('User').doc(userId).update({
+                              'previous_session_info': 'Level_3_Pop_Quiz',
+                              'replay_level': true,
+                            }).then((value) {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PopQuiz()));
+                            })
+                          : Container();
+                    },
+                    child: Text(
+                      'Level 3 Pop Quiz',
+                      style: TextStyle(color: Colors.white),
+                    )),
                 lev >= 4
                     ? TextButton(
                         style: ButtonStyle(
@@ -181,21 +197,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           'Level 5 : Stock Play',
                           style: TextStyle(color: Colors.white),
                         )),
-                TextButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                      MaterialStateProperty.all(Colors.grey),
-                    ),
-                    onPressed: () {
-                      firestore.collection('User').doc(userId).update({
-                        'previous_session_info' : 'Level_2_Pop_Quiz',
-                      });
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PopQuiz()));
-                    },
-                    child: Text(
-                      'Pop Quiz',
-                      style: TextStyle(color: Colors.white),
-                    )),
               ],
             ),
           ),

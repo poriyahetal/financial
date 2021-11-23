@@ -265,52 +265,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                               top: displayHeight(
                                                                       context) *
                                                                   .03),
-                                                          child: list[index]
-                                                                          .isSelected2 ==
-                                                                      true ||
-                                                                  list[index]
-                                                                          .isSelected1 ==
-                                                                      true
-                                                              ? Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .centerLeft,
-                                                                  width: displayWidth(
-                                                                          context) *
-                                                                      .62,
-                                                                  height: displayHeight(
-                                                                          context) *
-                                                                      .07,
-                                                                  decoration: BoxDecoration(
-                                                                      color: list[index].isSelected1 ==
-                                                                              true
-                                                                          ? Color(
-                                                                              0xff00C673)
-                                                                          : Colors
-                                                                              .white,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(displayWidth(context) *
-                                                                              .12)),
-                                                                  child:
-                                                                      TextButton(
-                                                                          onPressed:
-                                                                              () {},
-                                                                          child:
-                                                                              Center(
-                                                                            child:
-                                                                                FittedBox(
-                                                                              child: RichText(
-                                                                                textAlign: TextAlign.left,
-                                                                                overflow: TextOverflow.clip,
-                                                                                text: TextSpan(
-                                                                                  text: document['option_1'],
-                                                                                  style: GoogleFonts.workSans(color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          )),
-                                                                )
-                                                              : StatefulBuilder(
+                                                          child:  StatefulBuilder(
                                                                   builder: (context,
                                                                       _setState1) {
                                                                   return Container(
@@ -341,7 +296,28 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                                       width: displayWidth(
                                                                               context) *
                                                                           .62,
-                                                                      child: TextButton(
+                                                                      child: list[index]
+                                                                          .isSelected2 ==
+                                                                          true ||
+                                                                          list[index]
+                                                                              .isSelected1 ==
+                                                                              true
+                                                                          ? TextButton(
+                                                                          style: ButtonStyle(alignment: Alignment.centerLeft),
+                                                                          onPressed: ()  {},
+                                                                          child: Center(
+                                                                            child:
+                                                                                FittedBox(
+                                                                              child: RichText(
+                                                                                textAlign: TextAlign.left,
+                                                                                overflow: TextOverflow.clip,
+                                                                                text: TextSpan(
+                                                                                  text: document['option_1'],
+                                                                                  style: GoogleFonts.workSans(color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          )) : TextButton(
                                                                           style: ButtonStyle(alignment: Alignment.centerLeft),
                                                                           onPressed: () async {
                                                                             _setState1(() {
@@ -363,7 +339,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                                           },
                                                                           child: Center(
                                                                             child:
-                                                                                FittedBox(
+                                                                            FittedBox(
                                                                               child: RichText(
                                                                                 textAlign: TextAlign.left,
                                                                                 overflow: TextOverflow.clip,
@@ -383,52 +359,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                               top: displayHeight(
                                                                       context) *
                                                                   .02),
-                                                          child: list[index]
-                                                                          .isSelected2 ==
-                                                                      true ||
-                                                                  list[index]
-                                                                          .isSelected1 ==
-                                                                      true
-                                                              ? Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .centerLeft,
-                                                                  width: displayWidth(
-                                                                          context) *
-                                                                      .62,
-                                                                  height: displayHeight(
-                                                                          context) *
-                                                                      .07,
-                                                                  decoration: BoxDecoration(
-                                                                      color: list[index].isSelected2 ==
-                                                                              true
-                                                                          ? Color(
-                                                                              0xff00C673)
-                                                                          : Colors
-                                                                              .white,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(displayWidth(context) *
-                                                                              .12)),
-                                                                  child:
-                                                                      TextButton(
-                                                                          onPressed:
-                                                                              () {},
-                                                                          child:
-                                                                              Center(
-                                                                            child:
-                                                                                FittedBox(
-                                                                              child: RichText(
-                                                                                overflow: TextOverflow.clip,
-                                                                                textAlign: TextAlign.left,
-                                                                                text: TextSpan(
-                                                                                  text: document['option_2'],
-                                                                                  style: GoogleFonts.workSans(color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          )),
-                                                                )
-                                                              : StatefulBuilder(
+                                                          child:  StatefulBuilder(
                                                                   builder: (context,
                                                                       _setState2) {
                                                                   return Container(
@@ -459,7 +390,29 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                                       width: displayWidth(
                                                                               context) *
                                                                           .62,
-                                                                      child: TextButton(
+                                                                      child:list[index]
+                                                                          .isSelected2 ==
+                                                                          true ||
+                                                                          list[index]
+                                                                              .isSelected1 ==
+                                                                              true
+                                                                          ? TextButton(
+                                                                          style: ButtonStyle(alignment: Alignment.centerLeft),
+                                                                          onPressed: ()  {
+                                                                          },
+                                                                          child: Center(
+                                                                            child:
+                                                                            FittedBox(
+                                                                              child: RichText(
+                                                                                overflow: TextOverflow.clip,
+                                                                                textAlign: TextAlign.left,
+                                                                                text: TextSpan(
+                                                                                  text: document['option_2'],
+                                                                                  style: GoogleFonts.workSans(color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          )) : TextButton(
                                                                           style: ButtonStyle(alignment: Alignment.centerLeft),
                                                                           onPressed: () async {
                                                                             _setState2(() {
@@ -627,32 +580,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                   height: forPortrait * .06,
                 ),
                 StatefulBuilder(builder: (context, setState) {
-                  return flagForKnow
-                      ? GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            height: displayHeight(context) * .08,
-                            width: displayWidth(context) * .75,
-                            decoration: BoxDecoration(
-                                color: flagForKnow
-                                    ? Color(0xff00C673)
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(
-                                    displayWidth(context) * .12)),
-                            child: Center(
-                              child: Text(
-                                'Continue',
-                                style: GoogleFonts.workSans(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: flagForKnow
-                                        ? Colors.white
-                                        : Color(0xff6D00C2)),
-                              ),
-                            ),
-                          ),
-                        )
-                      : GestureDetector(
+                  return  GestureDetector(
                           onTap: () async {
                             setState(() {
                               flagForKnow = true;
@@ -934,8 +862,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                   displayHeight(context) * .04),
                                           child: StatefulBuilder(
                                               builder: (context, setState) {
-                                            return color == Color(0xff00C673)
-                                                ? Container(
+                                            return  Container(
                                                     alignment:
                                                         Alignment.centerLeft,
                                                     width:
@@ -951,39 +878,41 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                                 displayWidth(
                                                                         context) *
                                                                     .12)),
-                                                    child: TextButton(
-                                                        onPressed: () {},
+                                                    child:color == Color(0xff00C673)
+                                                        ?  TextButton(
+                                                        onPressed: () {
+                                                        },
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsets.only(
-                                                                  left: 6.0),
+                                                          EdgeInsets.only(
+                                                              left: 6.0),
                                                           child: Center(
                                                             child: FittedBox(
                                                               child: RichText(
                                                                 textAlign:
-                                                                    TextAlign
-                                                                        .left,
+                                                                TextAlign
+                                                                    .left,
                                                                 overflow:
-                                                                    TextOverflow
-                                                                        .clip,
+                                                                TextOverflow
+                                                                    .clip,
                                                                 text: TextSpan(
                                                                     text:
-                                                                        'Pay now ',
+                                                                    'Pay now ',
                                                                     style: GoogleFonts.workSans(
                                                                         color: color == Color(0xff00C673)
                                                                             ? Colors
-                                                                                .white
+                                                                            .white
                                                                             : Color(
-                                                                                0xff4D5DDD),
+                                                                            0xff4D5DDD),
                                                                         fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
+                                                                        FontWeight
+                                                                            .w500,
                                                                         fontSize:
-                                                                            15.sp),
+                                                                        15.sp),
                                                                     children: [
                                                                       TextSpan(
                                                                         text:
-                                                                            '\$',
+                                                                        '\$',
                                                                         style: GoogleFonts.workSans(
                                                                             color: color == Color(0xff00C673)
                                                                                 ? Colors.white
@@ -1005,25 +934,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                               ),
                                                             ),
                                                           ),
-                                                        )),
-                                                  )
-                                                : Container(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    width:
-                                                        displayWidth(context) *
-                                                            .62,
-                                                    height:
-                                                        displayHeight(context) *
-                                                            .07,
-                                                    decoration: BoxDecoration(
-                                                        color: color,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                displayWidth(
-                                                                        context) *
-                                                                    .12)),
-                                                    child: TextButton(
+                                                        )) : TextButton(
                                                         onPressed: () {
                                                           setState(() {
                                                             color = Color(
@@ -1229,8 +1140,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                               top: displayHeight(context) * .04),
                                           child: StatefulBuilder(
                                               builder: (context, setState) {
-                                            return color == Color(0xff00C673)
-                                                ? Container(
+                                            return  Container(
                                                     alignment: Alignment.centerLeft,
                                                     width:
                                                         displayWidth(context) * .62,
@@ -1243,8 +1153,10 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                                 displayWidth(
                                                                         context) *
                                                                     .12)),
-                                                    child: TextButton(
-                                                        onPressed: () {},
+                                                    child: color == Color(0xff00C673)
+                                                        ? TextButton(
+                                                        onPressed: () {
+                                                        },
                                                         child: Padding(
                                                           padding: EdgeInsets.only(
                                                               left: 6.0),
@@ -1275,22 +1187,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                               ),
                                                             ),
                                                           ),
-                                                        )),
-                                                  )
-                                                : Container(
-                                                    alignment: Alignment.centerLeft,
-                                                    width:
-                                                        displayWidth(context) * .62,
-                                                    height: displayHeight(context) *
-                                                        .07,
-                                                    decoration: BoxDecoration(
-                                                        color: color,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                displayWidth(
-                                                                        context) *
-                                                                    .12)),
-                                                    child: TextButton(
+                                                        )) : TextButton(
                                                         onPressed: () {
                                                           setState(() {
                                                             color =
@@ -1302,15 +1199,15 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                               .doc(userId)
                                                               .update({
                                                             'account_balance':
-                                                                balance,
+                                                            balance,
                                                             'game_score':
-                                                                gameScore +
-                                                                    balance +
-                                                                    qualityOfLife,
+                                                            gameScore +
+                                                                balance +
+                                                                qualityOfLife,
                                                           });
                                                           Future.delayed(
                                                               Duration(seconds: 1),
-                                                              () => Navigator.pop(
+                                                                  () => Navigator.pop(
                                                                   context));
                                                         },
                                                         child: Padding(
@@ -1320,25 +1217,25 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                             child: FittedBox(
                                                               child: RichText(
                                                                 textAlign:
-                                                                    TextAlign.left,
+                                                                TextAlign.left,
                                                                 overflow:
-                                                                    TextOverflow
-                                                                        .clip,
+                                                                TextOverflow
+                                                                    .clip,
                                                                 text: TextSpan(
                                                                     text: 'Okay ',
                                                                     style: GoogleFonts.workSans(
                                                                         color: color ==
-                                                                                Color(
-                                                                                    0xff00C673)
+                                                                            Color(
+                                                                                0xff00C673)
                                                                             ? Colors
-                                                                                .white
+                                                                            .white
                                                                             : Color(
-                                                                                0xff4D5DDD),
+                                                                            0xff4D5DDD),
                                                                         fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
+                                                                        FontWeight
+                                                                            .w500,
                                                                         fontSize:
-                                                                            15.sp),
+                                                                        15.sp),
                                                                     children: []),
                                                               ),
                                                             ),
@@ -1734,8 +1631,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                   displayHeight(context) * .04),
                                           child: StatefulBuilder(
                                               builder: (context, setState) {
-                                            return color == Color(0xff00C673)
-                                                ? Container(
+                                            return  Container(
                                                     alignment:
                                                         Alignment.centerLeft,
                                                     width:
@@ -1751,7 +1647,8 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                                 displayWidth(
                                                                         context) *
                                                                     .12)),
-                                                    child: TextButton(
+                                                    child:color == Color(0xff00C673)
+                                                        ?  TextButton(
                                                         onPressed: () {},
                                                         child: Padding(
                                                           padding:
@@ -1786,51 +1683,33 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                               ),
                                                             ),
                                                           ),
-                                                        )),
-                                                  )
-                                                : Container(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    width:
-                                                        displayWidth(context) *
-                                                            .62,
-                                                    height:
-                                                        displayHeight(context) *
-                                                            .07,
-                                                    decoration: BoxDecoration(
-                                                        color: color,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                displayWidth(
-                                                                        context) *
-                                                                    .12)),
-                                                    child: TextButton(
+                                                        )) : TextButton(
                                                         onPressed: () {
                                                           setState(() {
                                                             color = Color(
                                                                 0xff00C673);
                                                           });
                                                           int myBal =
-                                                              documentSnapshot.get(
-                                                                  'account_balance');
+                                                          documentSnapshot.get(
+                                                              'account_balance');
                                                           print(
                                                               'My bal $myBal');
                                                           if (myBal < 1200) {
                                                             Future.delayed(
                                                                 Duration(
                                                                     seconds: 1),
-                                                                () => _showDialogWhenAmountLessSavingGoal(
+                                                                    () => _showDialogWhenAmountLessSavingGoal(
                                                                     context));
                                                           } else {
                                                             Future.delayed(
                                                                 Duration(
                                                                     seconds: 2),
-                                                                () =>
+                                                                    () =>
                                                                     showDialog(
                                                                         barrierDismissible:
-                                                                            false,
+                                                                        false,
                                                                         context:
-                                                                            context,
+                                                                        context,
                                                                         builder:
                                                                             (context) {
                                                                           return WillPopScope(
@@ -1838,22 +1717,22 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                                               return Future.value(false);},
                                                                             child: AlertDialog(
                                                                               elevation:
-                                                                                  3.0,
+                                                                              3.0,
                                                                               shape:
-                                                                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(displayWidth(context) * .04)),
+                                                                              RoundedRectangleBorder(borderRadius: BorderRadius.circular(displayWidth(context) * .04)),
                                                                               actionsPadding:
-                                                                                  EdgeInsets.all(8.0),
+                                                                              EdgeInsets.all(8.0),
                                                                               backgroundColor:
-                                                                                  Color(0xff6646E6),
+                                                                              Color(0xff6646E6),
                                                                               content:
-                                                                                  Text(
+                                                                              Text(
                                                                                 'Woohoo! Invites unlocked!  \n\n Invite your friends to play the game and challenge them to beat your score!',
                                                                                 style: GoogleFonts.workSans(color: Colors.white, fontWeight: FontWeight.w600),
                                                                                 textAlign: TextAlign.center,
                                                                               ),
                                                                               actions: [
                                                                                 Row(
-                                                                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                                                   children: [
                                                                                     ElevatedButton(
                                                                                         onPressed: () async {
@@ -1957,33 +1836,33 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                         },
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsets.only(
-                                                                  left: 6.0),
+                                                          EdgeInsets.only(
+                                                              left: 6.0),
                                                           child: Center(
                                                             child: FittedBox(
                                                               child: RichText(
                                                                 textAlign:
-                                                                    TextAlign
-                                                                        .left,
+                                                                TextAlign
+                                                                    .left,
                                                                 overflow:
-                                                                    TextOverflow
-                                                                        .clip,
+                                                                TextOverflow
+                                                                    .clip,
                                                                 text: TextSpan(
                                                                   text:
-                                                                      'Play Next Level',
+                                                                  'Play Next Level',
                                                                   style: GoogleFonts.workSans(
                                                                       color: color ==
-                                                                              Color(
-                                                                                  0xff00C673)
+                                                                          Color(
+                                                                              0xff00C673)
                                                                           ? Colors
-                                                                              .white
+                                                                          .white
                                                                           : Color(
-                                                                              0xff4D5DDD),
+                                                                          0xff4D5DDD),
                                                                       fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
+                                                                      FontWeight
+                                                                          .w500,
                                                                       fontSize:
-                                                                          15.sp),
+                                                                      15.sp),
                                                                 ),
                                                               ),
                                                             ),
@@ -2237,7 +2116,6 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
           ),
         ));
   }
-
   _level2(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .01),
@@ -2301,7 +2179,6 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
           ),
         ));
   }
-
   _level3(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .02),
@@ -2352,7 +2229,6 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
           ),
         ));
   }
-
   _level4(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .02),
@@ -2370,7 +2246,6 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
           ),
         ));
   }
-
   _level5(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .02),

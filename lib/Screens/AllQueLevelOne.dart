@@ -51,7 +51,6 @@ class AllQueLevelOne extends StatefulWidget {
 }
 
 class _AllQueLevelOneState extends State<AllQueLevelOne> {
-
   String level = '';
   var userId;
 
@@ -153,8 +152,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                       child: Column(
                                         children: [
                                           GameScorePage(
-                                              level: level,
-                                              document: document),
+                                              level: level, document: document),
                                           Flexible(
                                               child: Container(
                                             alignment: Alignment.center,
@@ -212,289 +210,281 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                                           top: displayHeight(
                                                                   context) *
                                                               .03),
-                                                      child: list[index]
-                                                                      .isSelected2 ==
-                                                                  true ||
-                                                              list[index]
-                                                                      .isSelected1 ==
-                                                                  true
-                                                          ? Container(
-                                                              alignment:
-                                                                  Alignment
-                                                                      .topRight,
-                                                              width: displayWidth(
-                                                                      context) *
-                                                                  .62,
-                                                              height: displayHeight(
-                                                                      context) *
-                                                                  .07,
-                                                              decoration: BoxDecoration(
-                                                                  color: list[index]
-                                                                              .isSelected1 ==
-                                                                          true
-                                                                      ? Color(
-                                                                          0xff00C673)
-                                                                      : Colors
-                                                                          .white,
-                                                                  borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          displayWidth(context) *
-                                                                              .12)),
-                                                              child: TextButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  child: Center(
+                                                      child: StatefulBuilder(
+                                                          builder: (context,
+                                                              _setState1) {
+                                                        return Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          width: displayWidth(
+                                                                  context) *
+                                                              .62,
+                                                          height: displayHeight(
+                                                                  context) *
+                                                              .07,
+                                                          decoration: BoxDecoration(
+                                                              color: list[index]
+                                                                          .isSelected1 ==
+                                                                      true
+                                                                  ? Color(
+                                                                      0xff00C673)
+                                                                  : Colors
+                                                                      .white,
+                                                              borderRadius:
+                                                                  BorderRadius.circular(
+                                                                      displayWidth(
+                                                                              context) *
+                                                                          .12)),
+                                                          child: SizedBox(
+                                                            height: displayHeight(
+                                                                    context) *
+                                                                .07,
+                                                            width: displayWidth(
+                                                                    context) *
+                                                                .62,
+                                                            child: list[index]
+                                                                            .isSelected2 ==
+                                                                        true ||
+                                                                    list[index]
+                                                                            .isSelected1 ==
+                                                                        true
+                                                                ? TextButton(
+                                                                    style: ButtonStyle(
+                                                                        alignment:
+                                                                            Alignment
+                                                                                .centerLeft),
+                                                                    onPressed:
+                                                                        () {},
                                                                     child:
-                                                                        FittedBox(
+                                                                        Center(
                                                                       child:
-                                                                          RichText(
-                                                                        overflow:
-                                                                            TextOverflow.clip,
-                                                                        text:
-                                                                            TextSpan(
-                                                                          text:
-                                                                              document['option_1'],
-                                                                          style: GoogleFonts.workSans(
-                                                                              color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500),
-                                                                              fontWeight: FontWeight.w500,
-                                                                              fontSize: 15.sp),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  )),
-                                                            )
-                                                          : StatefulBuilder(
-                                                              builder: (context,
-                                                                  _setState1) {
-                                                              return Container(
-                                                                alignment:
-                                                                    Alignment
-                                                                        .center,
-                                                                width: displayWidth(
-                                                                        context) *
-                                                                    .62,
-                                                                height: displayHeight(
-                                                                        context) *
-                                                                    .07,
-                                                                decoration: BoxDecoration(
-                                                                    color: list[index].isSelected1 ==
-                                                                            true
-                                                                        ? Color(
-                                                                            0xff00C673)
-                                                                        : Colors
-                                                                            .white,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(displayWidth(context) *
-                                                                            .12)),
-                                                                child: SizedBox(
-                                                                  height: displayHeight(
-                                                                          context) *
-                                                                      .07,
-                                                                  width: displayWidth(
-                                                                          context) *
-                                                                      .62,
-                                                                  child: TextButton(
-                                                                      style: ButtonStyle(alignment: Alignment.centerLeft),
-                                                                      onPressed: () async {
-                                                                        _setState1(
-                                                                            () {
-                                                                          flag1 =
-                                                                              true;
-                                                                        });
-
-                                                                        if (flag2 ==
-                                                                            false) {
-                                                                          list[index].isSelected1 =
-                                                                              true;
-                                                                          int qol1 =
-                                                                              document['quality_of_life_1'];
-                                                                          balance =
-                                                                              ((balance - document['option_1_price']) as int?)!;
-                                                                          qualityOfLife =
-                                                                              qualityOfLife + qol1;
-                                                                          var category =
-                                                                              document['category'];
-                                                                          int price =
-                                                                              document['option_1_price'];
-
-                                                                          _optionSelect(
-                                                                              index,
-                                                                              qol1,
-                                                                              balance,
-                                                                              qualityOfLife,
-                                                                              snapshot,
-                                                                              document,
-                                                                              category,
-                                                                              price);
-                                                                        } else {
-                                                                          Fluttertoast.showToast(
-                                                                              msg: 'Sorry, you already selected option');
-                                                                        }
-                                                                      },
-                                                                      child: Center(
+                                                                          FittedBox(
                                                                         child:
-                                                                            FittedBox(
-                                                                          child:
-                                                                              RichText(
-                                                                            overflow:
-                                                                                TextOverflow.clip,
+                                                                            RichText(
+                                                                          overflow:
+                                                                              TextOverflow.clip,
+                                                                          text:
+                                                                              TextSpan(
                                                                             text:
-                                                                                TextSpan(
-                                                                              text: document['option_1'],
-                                                                              style: GoogleFonts.workSans(color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
-                                                                            ),
+                                                                                document['option_1'],
+                                                                            style: GoogleFonts.workSans(
+                                                                                color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500),
+                                                                                fontWeight: FontWeight.w500,
+                                                                                fontSize: 15.sp),
                                                                           ),
                                                                         ),
-                                                                      )),
-                                                                ),
-                                                              );
-                                                            }),
+                                                                      ),
+                                                                    ))
+                                                                : TextButton(
+                                                                    style: ButtonStyle(
+                                                                        alignment:
+                                                                            Alignment
+                                                                                .centerLeft),
+                                                                    onPressed:
+                                                                        () async {
+                                                                      _setState1(
+                                                                          () {
+                                                                        flag1 =
+                                                                            true;
+                                                                      });
+
+                                                                      if (flag2 ==
+                                                                          false) {
+                                                                        list[index].isSelected1 =
+                                                                            true;
+                                                                        int qol1 =
+                                                                            document['quality_of_life_1'];
+                                                                        balance =
+                                                                            ((balance - document['option_1_price'])
+                                                                                as int?)!;
+                                                                        qualityOfLife =
+                                                                            qualityOfLife +
+                                                                                qol1;
+                                                                        var category =
+                                                                            document['category'];
+                                                                        int price =
+                                                                            document['option_1_price'];
+
+                                                                        _optionSelect(
+                                                                            index,
+                                                                            qol1,
+                                                                            balance,
+                                                                            qualityOfLife,
+                                                                            snapshot,
+                                                                            document,
+                                                                            category,
+                                                                            price);
+                                                                      } else {
+                                                                        Fluttertoast.showToast(
+                                                                            msg:
+                                                                                'Sorry, you already selected option');
+                                                                      }
+                                                                    },
+                                                                    child:
+                                                                        Center(
+                                                                      child:
+                                                                          FittedBox(
+                                                                        child:
+                                                                            RichText(
+                                                                          overflow:
+                                                                              TextOverflow.clip,
+                                                                          text:
+                                                                              TextSpan(
+                                                                            text:
+                                                                                document['option_1'],
+                                                                            style: GoogleFonts.workSans(
+                                                                                color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500),
+                                                                                fontWeight: FontWeight.w500,
+                                                                                fontSize: 15.sp),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    )),
+                                                          ),
+                                                        );
+                                                      }),
                                                     ),
                                                     Padding(
                                                       padding: EdgeInsets.only(
                                                           top: displayHeight(
                                                                   context) *
                                                               .02),
-                                                      child: list[index]
-                                                                      .isSelected2 ==
-                                                                  true ||
-                                                              list[index]
-                                                                      .isSelected1 ==
-                                                                  true
-                                                          ? Container(
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
-                                                              width: displayWidth(
-                                                                      context) *
-                                                                  .62,
-                                                              height: displayHeight(
-                                                                      context) *
-                                                                  .07,
-                                                              decoration: BoxDecoration(
-                                                                  color: list[index]
-                                                                              .isSelected2 ==
-                                                                          true
-                                                                      ? Color(
-                                                                          0xff00C673)
-                                                                      : Colors
-                                                                          .white,
-                                                                  borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          displayWidth(context) *
-                                                                              .12)),
-                                                              child: TextButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  child: Center(
+                                                      child: StatefulBuilder(
+                                                          builder: (context,
+                                                              _setState2) {
+                                                        return Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          width: displayWidth(
+                                                                  context) *
+                                                              .62,
+                                                          height: displayHeight(
+                                                                  context) *
+                                                              .07,
+                                                          decoration: BoxDecoration(
+                                                              color: list[index]
+                                                                          .isSelected2 ==
+                                                                      true
+                                                                  ? Color(
+                                                                      0xff00C673)
+                                                                  : Colors
+                                                                      .white,
+                                                              borderRadius:
+                                                                  BorderRadius.circular(
+                                                                      displayWidth(
+                                                                              context) *
+                                                                          .12)),
+                                                          child: SizedBox(
+                                                            height: displayHeight(
+                                                                    context) *
+                                                                .07,
+                                                            width: displayWidth(
+                                                                    context) *
+                                                                .62,
+                                                            child: list[index]
+                                                                            .isSelected2 ==
+                                                                        true ||
+                                                                    list[index]
+                                                                            .isSelected1 ==
+                                                                        true
+                                                                ? TextButton(
+                                                                    style: ButtonStyle(
+                                                                        alignment:
+                                                                            Alignment
+                                                                                .centerLeft),
+                                                                    onPressed:
+                                                                        () {},
                                                                     child:
-                                                                        FittedBox(
+                                                                        Center(
                                                                       child:
-                                                                          RichText(
-                                                                        overflow:
-                                                                            TextOverflow.clip,
-                                                                        textAlign:
-                                                                            TextAlign.left,
-                                                                        text:
-                                                                            TextSpan(
-                                                                          text:
-                                                                              document['option_2'],
-                                                                          style: GoogleFonts.workSans(
-                                                                              color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500),
-                                                                              fontWeight: FontWeight.w500,
-                                                                              fontSize: 15.sp),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  )),
-                                                            )
-                                                          : StatefulBuilder(
-                                                              builder: (context,
-                                                                  _setState2) {
-                                                              return Container(
-                                                                alignment:
-                                                                    Alignment
-                                                                        .center,
-                                                                width: displayWidth(
-                                                                        context) *
-                                                                    .62,
-                                                                height: displayHeight(
-                                                                        context) *
-                                                                    .07,
-                                                                decoration: BoxDecoration(
-                                                                    color: list[index].isSelected2 ==
-                                                                            true
-                                                                        ? Color(
-                                                                            0xff00C673)
-                                                                        : Colors
-                                                                            .white,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(displayWidth(context) *
-                                                                            .12)),
-                                                                child: SizedBox(
-                                                                  height: displayHeight(
-                                                                          context) *
-                                                                      .07,
-                                                                  width: displayWidth(
-                                                                          context) *
-                                                                      .62,
-                                                                  child: TextButton(
-                                                                      style: ButtonStyle(alignment: Alignment.centerLeft),
-                                                                      onPressed: () async {
-                                                                        _setState2(
-                                                                            () {
-                                                                          flag2 =
-                                                                              true;
-                                                                        });
-
-                                                                        if (flag1 ==
-                                                                            false) {
-                                                                          list[index].isSelected2 =
-                                                                              true;
-                                                                          int qol2 =
-                                                                              document['quality_of_life_2'];
-                                                                          balance =
-                                                                              ((balance - document['option_2_price']) as int?)!;
-                                                                          qualityOfLife =
-                                                                              qualityOfLife + qol2;
-                                                                          var category =
-                                                                              document['category'];
-                                                                          int price =
-                                                                              document['option_2_price'];
-                                                                          _optionSelect(
-                                                                              index,
-                                                                              qol2,
-                                                                              balance,
-                                                                              qualityOfLife,
-                                                                              snapshot,
-                                                                              document,
-                                                                              category,
-                                                                              price);
-                                                                        } else {
-                                                                          Fluttertoast.showToast(
-                                                                              msg: 'Sorry, you already selected option');
-                                                                        }
-                                                                      },
-                                                                      child: Center(
+                                                                          FittedBox(
                                                                         child:
-                                                                            FittedBox(
-                                                                          child:
-                                                                              RichText(
-                                                                            overflow:
-                                                                                TextOverflow.clip,
-                                                                            textAlign:
-                                                                                TextAlign.left,
+                                                                            RichText(
+                                                                          overflow:
+                                                                              TextOverflow.clip,
+                                                                          textAlign:
+                                                                              TextAlign.left,
+                                                                          text:
+                                                                              TextSpan(
                                                                             text:
-                                                                                TextSpan(
-                                                                              text: document['option_2'],
-                                                                              style: GoogleFonts.workSans(color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
-                                                                            ),
+                                                                                document['option_2'],
+                                                                            style: GoogleFonts.workSans(
+                                                                                color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500),
+                                                                                fontWeight: FontWeight.w500,
+                                                                                fontSize: 15.sp),
                                                                           ),
                                                                         ),
-                                                                      )),
-                                                                ),
-                                                              );
-                                                            }),
+                                                                      ),
+                                                                    ))
+                                                                : TextButton(
+                                                                    style: ButtonStyle(
+                                                                        alignment:
+                                                                            Alignment
+                                                                                .centerLeft),
+                                                                    onPressed:
+                                                                        () async {
+                                                                      _setState2(
+                                                                          () {
+                                                                        flag2 =
+                                                                            true;
+                                                                      });
+
+                                                                      if (flag1 ==
+                                                                          false) {
+                                                                        list[index].isSelected2 =
+                                                                            true;
+                                                                        int qol2 =
+                                                                            document['quality_of_life_2'];
+                                                                        balance =
+                                                                            ((balance - document['option_2_price'])
+                                                                                as int?)!;
+                                                                        qualityOfLife =
+                                                                            qualityOfLife +
+                                                                                qol2;
+                                                                        var category =
+                                                                            document['category'];
+                                                                        int price =
+                                                                            document['option_2_price'];
+                                                                        _optionSelect(
+                                                                            index,
+                                                                            qol2,
+                                                                            balance,
+                                                                            qualityOfLife,
+                                                                            snapshot,
+                                                                            document,
+                                                                            category,
+                                                                            price);
+                                                                      } else {
+                                                                        Fluttertoast.showToast(
+                                                                            msg:
+                                                                                'Sorry, you already selected option');
+                                                                      }
+                                                                    },
+                                                                    child:
+                                                                        Center(
+                                                                      child:
+                                                                          FittedBox(
+                                                                        child:
+                                                                            RichText(
+                                                                          overflow:
+                                                                              TextOverflow.clip,
+                                                                          textAlign:
+                                                                              TextAlign.left,
+                                                                          text:
+                                                                              TextSpan(
+                                                                            text:
+                                                                                document['option_2'],
+                                                                            style: GoogleFonts.workSans(
+                                                                                color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500),
+                                                                                fontWeight: FontWeight.w500,
+                                                                                fontSize: 15.sp),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    )),
+                                                          ),
+                                                        );
+                                                      }),
                                                     ),
                                                     SizedBox(
                                                       height: displayHeight(
@@ -509,10 +499,8 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                         ],
                                       ),
                                     ),
-                                    previewChild: PreviewOfBottomDrawer(
-                                    ),
-                                    expandedChild: ExpandedBottomDrawer(
-                                    ),
+                                    previewChild: PreviewOfBottomDrawer(),
+                                    expandedChild: ExpandedBottomDrawer(),
                                     minExtent: displayHeight(context) * .14,
                                     maxExtent: level == 'Level_3'
                                         ? displayHeight(context) * .33
@@ -627,68 +615,41 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                   height: forPortrait * .06,
                 ),
                 StatefulBuilder(builder: (context, setState) {
-                  return flagForKnow
-                      ? GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            height: displayHeight(context) * .08,
-                            width: displayWidth(context) * .75,
-                            decoration: BoxDecoration(
+                  return GestureDetector(
+                      onTap: () async {
+                        setState(() {
+                          flagForKnow = true;
+                        });
+                        if (index == snapshot.data!.docs.length - 1) {
+                          Future.delayed(Duration(seconds: 1),
+                              () => _levelCompleteSummary());
+                        } else {
+                          controller.nextPage(
+                              duration: Duration(seconds: 1),
+                              curve: Curves.easeIn);
+                        }
+                      },
+                      child: Container(
+                        height: displayHeight(context) * .08,
+                        width: displayWidth(context) * .75,
+                        decoration: BoxDecoration(
+                            color:
+                                flagForKnow ? Color(0xff00C673) : Colors.white,
+                            borderRadius: BorderRadius.circular(
+                                displayWidth(context) * .12)),
+                        child: Center(
+                          child: Text(
+                            'Continue',
+                            style: GoogleFonts.workSans(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w500,
                                 color: flagForKnow
-                                    ? Color(0xff00C673)
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(
-                                    displayWidth(context) * .12)),
-                            child: Center(
-                              child: Text(
-                                'Continue',
-                                style: GoogleFonts.workSans(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: flagForKnow
-                                        ? Colors.white
-                                        : Color(0xff6D00C2)),
-                              ),
-                            ),
+                                    ? Colors.white
+                                    : Color(0xff6D00C2)),
                           ),
-                        )
-                      : GestureDetector(
-                          onTap: () async {
-                            setState(() {
-                              flagForKnow = true;
-                            });
-                            if (index == snapshot.data!.docs.length - 1) {
-                              Future.delayed(Duration(seconds: 1),
-                                  () => _levelCompleteSummary());
-                            } else {
-                              controller.nextPage(
-                                  duration: Duration(seconds: 1),
-                                  curve: Curves.easeIn);
-                            }
-                          },
-                          child: Container(
-                            height: displayHeight(context) * .08,
-                            width: displayWidth(context) * .75,
-                            decoration: BoxDecoration(
-                                color: flagForKnow
-                                    ? Color(0xff00C673)
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(
-                                    displayWidth(context) * .12)),
-                            child: Center(
-                              child: Text(
-                                'Continue',
-                                style: GoogleFonts.workSans(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: flagForKnow
-                                        ? Colors.white
-                                        : Color(0xff6D00C2)),
-                              ),
-                            ),
-                          ));
+                        ),
+                      ));
                 }),
-
                 SizedBox(
                   height: forPortrait * .08,
                 ),
@@ -704,8 +665,9 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
         context: context,
         builder: (context) {
           return WillPopScope(
-              onWillPop: () {
-                return Future.value(false);},
+            onWillPop: () {
+              return Future.value(false);
+            },
             child: AlertDialog(
               elevation: 3.0,
               shape: RoundedRectangleBorder(
@@ -727,20 +689,22 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                 textAlign: TextAlign.center,
               ),
               contentPadding: EdgeInsets.all(displayWidth(context) * .04),
-              buttonPadding: EdgeInsets.only(right: displayWidth(context) * .04),
+              buttonPadding:
+                  EdgeInsets.only(right: displayWidth(context) * .04),
               actions: [
                 ElevatedButton(
                     onPressed: () {
                       Navigator.pushReplacement(
                           context,
                           PageTransition(
-                              child:
-                                  LevelOneSetUpPage(controller: PageController()),
+                              child: LevelOneSetUpPage(
+                                  controller: PageController()),
                               type: PageTransitionType.bottomToTop,
                               duration: Duration(milliseconds: 500)));
                     },
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.white)),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.white)),
                     child: Text(
                       'Restart level',
                       style: GoogleFonts.workSans(
@@ -803,7 +767,8 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
         builder: (BuildContext context) {
           return WillPopScope(
             onWillPop: () {
-              return Future.value(false);},
+              return Future.value(false);
+            },
             child: Container(
               width: displayWidth(context),
               height: displayHeight(context),
@@ -951,20 +916,19 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                                     text: '\$',
                                                     style: GoogleFonts.workSans(
                                                         color:
-                                                        Color(0xffFEBE16),
+                                                            Color(0xffFEBE16),
                                                         fontWeight:
-                                                        FontWeight.w500,
+                                                            FontWeight.w500,
                                                         fontSize: 16.sp),
                                                   ),
                                                   TextSpan(
-                                                    text: (need +
-                                                        want)
+                                                    text: (need + want)
                                                         .toString(),
                                                     style: GoogleFonts.workSans(
                                                         color:
-                                                        Color(0xffFEBE16),
+                                                            Color(0xffFEBE16),
                                                         fontWeight:
-                                                        FontWeight.w500,
+                                                            FontWeight.w500,
                                                         fontSize: 16.sp),
                                                   ),
                                                 ]),
@@ -977,233 +941,254 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                                   displayHeight(context) * .04),
                                           child: StatefulBuilder(
                                               builder: (context, setState) {
-                                            return color == Color(0xff00C673)
-                                                ? Container(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    width:
-                                                        displayWidth(context) *
-                                                            .62,
-                                                    height:
-                                                        displayHeight(context) *
-                                                            .07,
-                                                    decoration: BoxDecoration(
-                                                        color: color,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                displayWidth(
-                                                                        context) *
-                                                                    .12)),
-                                                    child: TextButton(
-                                                        onPressed: () {},
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: 6.0),
-                                                          child: Center(
-                                                            child: FittedBox(
-                                                              child: RichText(
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .clip,
-                                                                text: TextSpan(
-                                                                    text:
-                                                                        'Play Next Level',
-                                                                    style: GoogleFonts.workSans(
-                                                                        color: color == Color(0xff00C673)
-                                                                            ? Colors
-                                                                                .white
-                                                                            : Color(
-                                                                                0xff4D5DDD),
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
-                                                                        fontSize:
-                                                                            15.sp),
-                                                                ),
+                                            return Container(
+                                              alignment: Alignment.centerLeft,
+                                              width:
+                                                  displayWidth(context) * .62,
+                                              height:
+                                                  displayHeight(context) * .07,
+                                              decoration: BoxDecoration(
+                                                  color: color,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          displayWidth(
+                                                                  context) *
+                                                              .12)),
+                                              child: color == Color(0xff00C673)
+                                                  ? TextButton(
+                                                      onPressed: () async {},
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 6.0),
+                                                        child: Center(
+                                                          child: FittedBox(
+                                                            child: RichText(
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .clip,
+                                                              text: TextSpan(
+                                                                text:
+                                                                    'Play Next Level',
+                                                                style: GoogleFonts.workSans(
+                                                                    color: color ==
+                                                                            Color(
+                                                                                0xff00C673)
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Color(
+                                                                            0xff4D5DDD),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontSize:
+                                                                        15.sp),
                                                               ),
                                                             ),
                                                           ),
-                                                        )),
-                                                  )
-                                                : Container(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    width:
-                                                        displayWidth(context) *
-                                                            .62,
-                                                    height:
-                                                        displayHeight(context) *
-                                                            .07,
-                                                    decoration: BoxDecoration(
-                                                        color: color,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                displayWidth(
-                                                                        context) *
-                                                                    .12)),
-                                                    child: TextButton(
-                                                        onPressed: () async {
-                                                          setState(() {
-                                                            color = Color(
-                                                                0xff00C673);
-                                                          });
+                                                        ),
+                                                      ))
+                                                  : TextButton(
+                                                      onPressed: () async {
+                                                        setState(() {
+                                                          color =
+                                                              Color(0xff00C673);
+                                                        });
 
-                                                          bool value =
-                                                              documentSnapshot.get(
-                                                                  'replay_level');
-                                                          level = documentSnapshot
-                                                              .get(
-                                                                  'last_level');
-                                                          gameScore =
-                                                              documentSnapshot.get(
-                                                                  'game_score');
-                                                          print('level $level');
-                                                          level = level
-                                                              .toString()
-                                                              .substring(6, 7);
-                                                          int lev =
-                                                              int.parse(level);
-                                                          print('levv $lev');
-                                                          if (lev != 1 &&
-                                                              value == true) {
-                                                            Future.delayed(
-                                                                Duration(
-                                                                    seconds: 1),
-                                                                () =>
-                                                                    showDialog(
-                                                                        context:
-                                                                            context,
-                                                                        builder:
-                                                                            (context) {
-                                                                          return WillPopScope(
-                                                                            onWillPop: () {
-                                                                              return Future.value(false);},
-                                                                            child: AlertDialog(
-                                                                              elevation:
-                                                                                  3.0,
-                                                                              shape:
-                                                                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(displayWidth(context) * .04)),
-                                                                              titlePadding:
-                                                                                  EdgeInsets.zero,
-                                                                              title:
-                                                                                  Container(
-                                                                                width: displayWidth(context),
-                                                                                child: Padding(
-                                                                                  padding: EdgeInsets.all(8.0),
-                                                                                  child: Text(
-                                                                                    'Congratulations! You have completed this level successfully',
-                                                                                    textAlign: TextAlign.center,
-                                                                                    style: GoogleFonts.workSans(fontSize: 14.sp, color: Colors.black, fontWeight: FontWeight.w500),
-                                                                                  ),
-                                                                                ),
-                                                                                decoration: BoxDecoration(
-                                                                                    borderRadius: BorderRadius.only(
-                                                                                      topRight: Radius.circular(displayWidth(context) * .04),
-                                                                                      topLeft: Radius.circular(displayWidth(context) * .04),
-                                                                                    ),
-                                                                                    color: Color(0xffE9E5FF)),
+                                                        bool value =
+                                                            documentSnapshot.get(
+                                                                'replay_level');
+                                                        level = documentSnapshot
+                                                            .get('last_level');
+                                                        gameScore =
+                                                            documentSnapshot.get(
+                                                                'game_score');
+                                                        print('level $level');
+                                                        level = level
+                                                            .toString()
+                                                            .substring(6, 7);
+                                                        int lev =
+                                                            int.parse(level);
+                                                        print('levv $lev');
+                                                        if (lev != 1 &&
+                                                            value == true) {
+                                                          Future.delayed(
+                                                              Duration(
+                                                                  seconds: 1),
+                                                              () => showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return WillPopScope(
+                                                                      onWillPop:
+                                                                          () {
+                                                                        return Future.value(
+                                                                            false);
+                                                                      },
+                                                                      child:
+                                                                          AlertDialog(
+                                                                        elevation:
+                                                                            3.0,
+                                                                        shape: RoundedRectangleBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(displayWidth(context) * .04)),
+                                                                        titlePadding:
+                                                                            EdgeInsets.zero,
+                                                                        title:
+                                                                            Container(
+                                                                          width:
+                                                                              displayWidth(context),
+                                                                          child:
+                                                                              Padding(
+                                                                            padding:
+                                                                                EdgeInsets.all(8.0),
+                                                                            child:
+                                                                                Text(
+                                                                              'Congratulations! You have completed this level successfully',
+                                                                              textAlign: TextAlign.center,
+                                                                              style: GoogleFonts.workSans(fontSize: 14.sp, color: Colors.black, fontWeight: FontWeight.w500),
+                                                                            ),
+                                                                          ),
+                                                                          decoration: BoxDecoration(
+                                                                              borderRadius: BorderRadius.only(
+                                                                                topRight: Radius.circular(displayWidth(context) * .04),
+                                                                                topLeft: Radius.circular(displayWidth(context) * .04),
                                                                               ),
-                                                                              content:
-                                                                                  Column(
-                                                                                mainAxisSize: MainAxisSize.min,
-                                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                children: [
-                                                                                  if (lev > 1)
-                                                                                    Text(
-                                                                                      'Which level you want play ?',
-                                                                                      style: GoogleFonts.workSans(fontSize: 12.sp, color: Colors.black, fontWeight: FontWeight.w400),
-                                                                                    ),
-                                                                                  if (lev > 1) _level1(lev),
-                                                                                  if (lev > 2) _level2(lev),
-                                                                                  if (lev > 3) _level3(lev),
-                                                                                  if (lev > 4) _level4(lev),
-                                                                                  if (lev > 5) _level5(lev),
-                                                                                  Padding(
-                                                                                    padding: EdgeInsets.only(top: displayHeight(context) * .03),
-                                                                                    child: Text(
-                                                                                      'Want to play current level ?',
-                                                                                      style: GoogleFonts.workSans(fontSize: 12.sp, color: Colors.black, fontWeight: FontWeight.w400),
-                                                                                    ),
-                                                                                  ),
-                                                                                  if (lev == 1) _level1(lev),
-                                                                                  if (lev == 2) _level2(lev),
-                                                                                  if (lev == 3) _level3(lev),
-                                                                                  if (lev == 4) _level4(lev),
-                                                                                  if (lev == 5) _level5(lev),
-                                                                                ],
+                                                                              color: Color(0xffE9E5FF)),
+                                                                        ),
+                                                                        content:
+                                                                            Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.min,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.start,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.center,
+                                                                          children: [
+                                                                            if (lev >
+                                                                                1)
+                                                                              Text(
+                                                                                'Which level you want play ?',
+                                                                                style: GoogleFonts.workSans(fontSize: 12.sp, color: Colors.black, fontWeight: FontWeight.w400),
+                                                                              ),
+                                                                            if (lev >
+                                                                                1)
+                                                                              _level1(lev),
+                                                                            if (lev >
+                                                                                2)
+                                                                              _level2(lev),
+                                                                            if (lev >
+                                                                                3)
+                                                                              _level3(lev),
+                                                                            if (lev >
+                                                                                4)
+                                                                              _level4(lev),
+                                                                            if (lev >
+                                                                                5)
+                                                                              _level5(lev),
+                                                                            Padding(
+                                                                              padding: EdgeInsets.only(top: displayHeight(context) * .03),
+                                                                              child: Text(
+                                                                                'Want to play current level ?',
+                                                                                style: GoogleFonts.workSans(fontSize: 12.sp, color: Colors.black, fontWeight: FontWeight.w400),
                                                                               ),
                                                                             ),
-                                                                          );
-                                                                        }));
-                                                          } else {
-                                                            firestore
-                                                                .collection(
-                                                                    'User')
-                                                                .doc(userId)
-                                                                .update({
-                                                              'previous_session_info': 'Level_2_setUp_page',
-                                                              'level_id': 0,
-                                                              'bill_payment': 0,
-                                                              'credit_card_balance': 0,
-                                                              'credit_card_bill': 0,
-                                                              'credit_score': 0,
-                                                              'payable_bill': 0,
-                                                              'score': 0,
-                                                              'replay_level': false,
-                                                              'last_level': 'Level_2_setUp_page',
-                                                              'need': 0,
-                                                              'want': 0,
-                                                            });
-                                                            Future.delayed(
-                                                                Duration(
-                                                                    seconds: 3),
-                                                                () => Navigator
-                                                                    .pushReplacement(
-                                                                        context,
-                                                                        MaterialPageRoute(
-                                                                          builder: (context) =>
-                                                                              LevelTwoSetUpPage(controller: PageController()),
-                                                                        )));
-                                                          }
-                                                        },
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: 6.0),
-                                                          child: Center(
-                                                            child: FittedBox(
-                                                              child: RichText(
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .clip,
-                                                                text: TextSpan(
-                                                                    text:
-                                                                        'Play Next Level',
-                                                                    style: GoogleFonts.workSans(
-                                                                        color: color == Color(0xff00C673)
-                                                                            ? Colors
-                                                                                .white
-                                                                            : Color(
-                                                                                0xff4D5DDD),
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
-                                                                        fontSize:
-                                                                            15.sp),
-                                                                ),
+                                                                            if (lev ==
+                                                                                1)
+                                                                              _level1(lev),
+                                                                            if (lev ==
+                                                                                2)
+                                                                              _level2(lev),
+                                                                            if (lev ==
+                                                                                3)
+                                                                              _level3(lev),
+                                                                            if (lev ==
+                                                                                4)
+                                                                              _level4(lev),
+                                                                            if (lev ==
+                                                                                5)
+                                                                              _level5(lev),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  }));
+                                                        } else {
+                                                          firestore
+                                                              .collection(
+                                                                  'User')
+                                                              .doc(userId)
+                                                              .update({
+                                                            'previous_session_info':
+                                                                'Level_2_setUp_page',
+                                                            'level_id': 0,
+                                                            'bill_payment': 0,
+                                                            'credit_card_balance':
+                                                                0,
+                                                            'credit_card_bill':
+                                                                0,
+                                                            'credit_score': 0,
+                                                            'payable_bill': 0,
+                                                            'score': 0,
+                                                            'replay_level':
+                                                                false,
+                                                            'last_level':
+                                                                'Level_2_setUp_page',
+                                                            'need': 0,
+                                                            'want': 0,
+                                                          });
+                                                          Future.delayed(
+                                                              Duration(
+                                                                  seconds: 3),
+                                                              () => Navigator
+                                                                  .pushReplacement(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                        builder:
+                                                                            (context) =>
+                                                                                LevelTwoSetUpPage(controller: PageController()),
+                                                                      )));
+                                                        }
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 6.0),
+                                                        child: Center(
+                                                          child: FittedBox(
+                                                            child: RichText(
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .clip,
+                                                              text: TextSpan(
+                                                                text:
+                                                                    'Play Next Level',
+                                                                style: GoogleFonts.workSans(
+                                                                    color: color ==
+                                                                            Color(
+                                                                                0xff00C673)
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Color(
+                                                                            0xff4D5DDD),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontSize:
+                                                                        15.sp),
                                                               ),
                                                             ),
                                                           ),
-                                                        )),
-                                                  );
+                                                        ),
+                                                      )),
+                                            );
                                           })),
                                       SizedBox(
                                         height: displayHeight(context) * .02,
@@ -1217,10 +1202,8 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                         ],
                       ),
                     ),
-                    previewChild: PreviewOfBottomDrawer(
-                    ),
-                    expandedChild: ExpandedBottomDrawer(
-                    ),
+                    previewChild: PreviewOfBottomDrawer(),
+                    expandedChild: ExpandedBottomDrawer(),
                     minExtent: displayHeight(context) * .14,
                     maxExtent: level == 'Level_3'
                         ? displayHeight(context) * .33
@@ -1231,6 +1214,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
           );
         });
   }
+
   _level1(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .03),
@@ -1294,6 +1278,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
           ),
         ));
   }
+
   _level2(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .01),
@@ -1357,6 +1342,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
           ),
         ));
   }
+
   _level3(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .02),
@@ -1407,6 +1393,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
           ),
         ));
   }
+
   _level4(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .02),
@@ -1424,6 +1411,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
           ),
         ));
   }
+
   _level5(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .02),

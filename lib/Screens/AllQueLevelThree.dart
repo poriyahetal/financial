@@ -6,6 +6,7 @@ import 'package:financial/Screens/LevelOneSetUpPage.dart';
 import 'package:financial/Screens/LevelThreeSetUpPage.dart';
 import 'package:financial/ReusableScreen/PreviewOfBottomDrawer.dart';
 import 'package:financial/Screens/LevelTwoSetUpPage.dart';
+import 'package:financial/Screens/PopQuiz.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -275,63 +276,7 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                               top: displayHeight(
                                                                       context) *
                                                                   .03),
-                                                          child: list[index]
-                                                                          .isSelected2 ==
-                                                                      true ||
-                                                                  list[index]
-                                                                          .isSelected1 ==
-                                                                      true
-                                                              ? Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .centerLeft,
-                                                                  width: displayWidth(
-                                                                          context) *
-                                                                      .62,
-                                                                  height: displayHeight(
-                                                                          context) *
-                                                                      .07,
-                                                                  decoration: BoxDecoration(
-                                                                      color: list[index].isSelected1 ==
-                                                                              true
-                                                                          ? Color(
-                                                                              0xff00C673)
-                                                                          : Colors
-                                                                              .white,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(displayWidth(context) *
-                                                                              .12)),
-                                                                  child:
-                                                                      TextButton(
-                                                                          onPressed:
-                                                                              () {},
-                                                                          child:
-                                                                              Center(
-                                                                            child:
-                                                                                FittedBox(
-                                                                              child: RichText(
-                                                                                textAlign: TextAlign.left,
-                                                                                overflow: TextOverflow.clip,
-                                                                                text: TextSpan(
-                                                                                  text: document['option_1'],
-                                                                                  style: GoogleFonts.workSans(color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
-                                                                                  // children: [
-                                                                                  //   TextSpan(
-                                                                                  //     text:
-                                                                                  //         ' - Walk In',
-                                                                                  //     style: GoogleFonts.workSans(
-                                                                                  //         color:
-                                                                                  //             Color(0xffA6AEEE),
-                                                                                  //         fontWeight: FontWeight.w500,
-                                                                                  //         fontSize: 16.sp),
-                                                                                  //   )
-                                                                                  // ]
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          )),
-                                                                )
-                                                              : StatefulBuilder(
+                                                          child:  StatefulBuilder(
                                                                   builder: (context,
                                                                       _setState1) {
                                                                   return Container(
@@ -362,7 +307,29 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                                       width: displayWidth(
                                                                               context) *
                                                                           .62,
-                                                                      child: TextButton(
+                                                                      child:list[index]
+                                                                          .isSelected2 ==
+                                                                          true ||
+                                                                          list[index]
+                                                                              .isSelected1 ==
+                                                                              true
+                                                                          ? TextButton(
+                                                                          style: ButtonStyle(alignment: Alignment.centerLeft),
+                                                                          onPressed: ()  {
+                                                                          },
+                                                                          child: Center(
+                                                                            child:
+                                                                                FittedBox(
+                                                                              child: RichText(
+                                                                                textAlign: TextAlign.left,
+                                                                                overflow: TextOverflow.clip,
+                                                                                text: TextSpan(
+                                                                                  text: document['option_1'],
+                                                                                  style: GoogleFonts.workSans(color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          )) : TextButton(
                                                                           style: ButtonStyle(alignment: Alignment.centerLeft),
                                                                           onPressed: () async {
                                                                             _setState1(() {
@@ -384,7 +351,7 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                                           },
                                                                           child: Center(
                                                                             child:
-                                                                                FittedBox(
+                                                                            FittedBox(
                                                                               child: RichText(
                                                                                 textAlign: TextAlign.left,
                                                                                 overflow: TextOverflow.clip,
@@ -404,52 +371,7 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                               top: displayHeight(
                                                                       context) *
                                                                   .02),
-                                                          child: list[index]
-                                                                          .isSelected2 ==
-                                                                      true ||
-                                                                  list[index]
-                                                                          .isSelected1 ==
-                                                                      true
-                                                              ? Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .centerLeft,
-                                                                  width: displayWidth(
-                                                                          context) *
-                                                                      .62,
-                                                                  height: displayHeight(
-                                                                          context) *
-                                                                      .07,
-                                                                  decoration: BoxDecoration(
-                                                                      color: list[index].isSelected2 ==
-                                                                              true
-                                                                          ? Color(
-                                                                              0xff00C673)
-                                                                          : Colors
-                                                                              .white,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(displayWidth(context) *
-                                                                              .12)),
-                                                                  child:
-                                                                      TextButton(
-                                                                          onPressed:
-                                                                              () {},
-                                                                          child:
-                                                                              Center(
-                                                                            child:
-                                                                                FittedBox(
-                                                                              child: RichText(
-                                                                                overflow: TextOverflow.clip,
-                                                                                textAlign: TextAlign.left,
-                                                                                text: TextSpan(
-                                                                                  text: document['option_2'],
-                                                                                  style: GoogleFonts.workSans(color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          )),
-                                                                )
-                                                              : StatefulBuilder(
+                                                          child: StatefulBuilder(
                                                                   builder: (context,
                                                                       _setState2) {
                                                                   return Container(
@@ -480,7 +402,29 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                                       width: displayWidth(
                                                                               context) *
                                                                           .62,
-                                                                      child: TextButton(
+                                                                      child:list[index]
+                                                                          .isSelected2 ==
+                                                                          true ||
+                                                                          list[index]
+                                                                              .isSelected1 ==
+                                                                              true
+                                                                          ? TextButton(
+                                                                          style: ButtonStyle(alignment: Alignment.centerLeft),
+                                                                          onPressed: ()  {
+                                                                          },
+                                                                          child: Center(
+                                                                            child:
+                                                                                FittedBox(
+                                                                              child: RichText(
+                                                                                overflow: TextOverflow.clip,
+                                                                                textAlign: TextAlign.left,
+                                                                                text: TextSpan(
+                                                                                  text: document['option_2'],
+                                                                                  style: GoogleFonts.workSans(color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          )) : TextButton(
                                                                           style: ButtonStyle(alignment: Alignment.centerLeft),
                                                                           onPressed: () async {
                                                                             _setState2(() {
@@ -503,7 +447,7 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                                           },
                                                                           child: Center(
                                                                             child:
-                                                                                FittedBox(
+                                                                            FittedBox(
                                                                               child: RichText(
                                                                                 overflow: TextOverflow.clip,
                                                                                 textAlign: TextAlign.left,
@@ -1244,8 +1188,7 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                   displayHeight(context) * .04),
                                           child: StatefulBuilder(
                                               builder: (context, setState) {
-                                            return color == Color(0xff00C673)
-                                                ? Container(
+                                            return  Container(
                                                     alignment:
                                                         Alignment.centerLeft,
                                                     width:
@@ -1261,8 +1204,10 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                                 displayWidth(
                                                                         context) *
                                                                     .12)),
-                                                    child: TextButton(
-                                                        onPressed: () {},
+                                                    child:color == Color(0xff00C673)
+                                                        ? TextButton(
+                                                        onPressed: () {
+                                                        },
                                                         child: Padding(
                                                           padding:
                                                               EdgeInsets.only(
@@ -1315,25 +1260,7 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                               ),
                                                             ),
                                                           ),
-                                                        )),
-                                                  )
-                                                : Container(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    width:
-                                                        displayWidth(context) *
-                                                            .62,
-                                                    height:
-                                                        displayHeight(context) *
-                                                            .07,
-                                                    decoration: BoxDecoration(
-                                                        color: color,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                displayWidth(
-                                                                        context) *
-                                                                    .12)),
-                                                    child: TextButton(
+                                                        )) : TextButton(
                                                         onPressed: () {
                                                           setState(() {
                                                             color = Color(
@@ -1347,63 +1274,63 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                             Future.delayed(
                                                               Duration(
                                                                   milliseconds:
-                                                                      500),
-                                                              () =>
+                                                                  500),
+                                                                  () =>
                                                                   _showDialogForRestartLevel(
                                                                       context),
                                                             );
                                                           } else {
                                                             firestore
                                                                 .collection(
-                                                                    'User')
+                                                                'User')
                                                                 .doc(userId)
                                                                 .update({
                                                               'account_balance':
-                                                                  balance,
+                                                              balance,
                                                               'game_score':
-                                                                  gameScore +
-                                                                      balance +
-                                                                      qualityOfLife,
+                                                              gameScore +
+                                                                  balance +
+                                                                  qualityOfLife,
                                                             });
                                                             Future.delayed(
                                                                 Duration(
                                                                     seconds: 1),
-                                                                () => Navigator
+                                                                    () => Navigator
                                                                     .pop(
-                                                                        context));
+                                                                    context));
                                                           }
                                                         },
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsets.only(
-                                                                  left: 6.0),
+                                                          EdgeInsets.only(
+                                                              left: 6.0),
                                                           child: Center(
                                                             child: FittedBox(
                                                               child: RichText(
                                                                 textAlign:
-                                                                    TextAlign
-                                                                        .left,
+                                                                TextAlign
+                                                                    .left,
                                                                 overflow:
-                                                                    TextOverflow
-                                                                        .clip,
+                                                                TextOverflow
+                                                                    .clip,
                                                                 text: TextSpan(
                                                                     text:
-                                                                        'Pay now ',
+                                                                    'Pay now ',
                                                                     style: GoogleFonts.workSans(
                                                                         color: color == Color(0xff00C673)
                                                                             ? Colors
-                                                                                .white
+                                                                            .white
                                                                             : Color(
-                                                                                0xff4D5DDD),
+                                                                            0xff4D5DDD),
                                                                         fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
+                                                                        FontWeight
+                                                                            .w500,
                                                                         fontSize:
-                                                                            15.sp),
+                                                                        15.sp),
                                                                     children: [
                                                                       TextSpan(
                                                                         text:
-                                                                            '\$',
+                                                                        '\$',
                                                                         style: GoogleFonts.workSans(
                                                                             color: color == Color(0xff00C673)
                                                                                 ? Colors.white
@@ -1539,8 +1466,7 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                               top: displayHeight(context) * .04),
                                           child: StatefulBuilder(
                                               builder: (context, setState) {
-                                            return color == Color(0xff00C673)
-                                                ? Container(
+                                            return  Container(
                                                     alignment: Alignment.centerLeft,
                                                     width:
                                                         displayWidth(context) * .62,
@@ -1553,8 +1479,10 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                                 displayWidth(
                                                                         context) *
                                                                     .12)),
-                                                    child: TextButton(
-                                                        onPressed: () {},
+                                                    child:  color == Color(0xff00C673)
+                                                        ?TextButton(
+                                                        onPressed: () {
+                                                        },
                                                         child: Padding(
                                                           padding: EdgeInsets.only(
                                                               left: 6.0),
@@ -1585,22 +1513,7 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                               ),
                                                             ),
                                                           ),
-                                                        )),
-                                                  )
-                                                : Container(
-                                                    alignment: Alignment.centerLeft,
-                                                    width:
-                                                        displayWidth(context) * .62,
-                                                    height: displayHeight(context) *
-                                                        .07,
-                                                    decoration: BoxDecoration(
-                                                        color: color,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                displayWidth(
-                                                                        context) *
-                                                                    .12)),
-                                                    child: TextButton(
+                                                        )) : TextButton(
                                                         onPressed: () {
                                                           setState(() {
                                                             color =
@@ -1612,15 +1525,15 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                               .doc(userId)
                                                               .update({
                                                             'account_balance':
-                                                                balance,
+                                                            balance,
                                                             'game_score':
-                                                                gameScore +
-                                                                    balance +
-                                                                    qualityOfLife,
+                                                            gameScore +
+                                                                balance +
+                                                                qualityOfLife,
                                                           });
                                                           Future.delayed(
                                                               Duration(seconds: 1),
-                                                              () => Navigator.pop(
+                                                                  () => Navigator.pop(
                                                                   context));
                                                         },
                                                         child: Padding(
@@ -1630,25 +1543,25 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                             child: FittedBox(
                                                               child: RichText(
                                                                 textAlign:
-                                                                    TextAlign.left,
+                                                                TextAlign.left,
                                                                 overflow:
-                                                                    TextOverflow
-                                                                        .clip,
+                                                                TextOverflow
+                                                                    .clip,
                                                                 text: TextSpan(
                                                                     text: 'Okay ',
                                                                     style: GoogleFonts.workSans(
                                                                         color: color ==
-                                                                                Color(
-                                                                                    0xff00C673)
+                                                                            Color(
+                                                                                0xff00C673)
                                                                             ? Colors
-                                                                                .white
+                                                                            .white
                                                                             : Color(
-                                                                                0xff4D5DDD),
+                                                                            0xff4D5DDD),
                                                                         fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
+                                                                        FontWeight
+                                                                            .w500,
                                                                         fontSize:
-                                                                            15.sp),
+                                                                        15.sp),
                                                                     children: []),
                                                               ),
                                                             ),
@@ -1891,8 +1804,7 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                               top: displayHeight(context) * .04),
                                           child: StatefulBuilder(
                                               builder: (context, setState) {
-                                            return color == Color(0xff00C673)
-                                                ? Container(
+                                            return  Container(
                                                     alignment: Alignment.centerLeft,
                                                     width:
                                                         displayWidth(context) * .62,
@@ -1905,131 +1817,9 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                                 displayWidth(
                                                                         context) *
                                                                     .12)),
-                                                    child: TextButton(
-                                                        onPressed: () {},
-                                                        child: Padding(
-                                                          padding: EdgeInsets.only(
-                                                              left: 6.0),
-                                                          child: Center(
-                                                            child: FittedBox(
-                                                              child: RichText(
-                                                                textAlign:
-                                                                    TextAlign.left,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .clip,
-                                                                text: TextSpan(
-                                                                    text:
-                                                                        'Pay full ',
-                                                                    style: GoogleFonts.workSans(
-                                                                        color: color ==
-                                                                                Color(
-                                                                                    0xff00C673)
-                                                                            ? Colors
-                                                                                .white
-                                                                            : Color(
-                                                                                0xff4D5DDD),
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
-                                                                        fontSize:
-                                                                            15.sp),
-                                                                    children: [
-                                                                      TextSpan(
-                                                                        text: '\$',
-                                                                        style: GoogleFonts.workSans(
-                                                                            color: color == Color(0xff00C673)
-                                                                                ? Colors
-                                                                                    .white
-                                                                                : Color(
-                                                                                    0xffFEBE16),
-                                                                            fontWeight:
-                                                                                FontWeight
-                                                                                    .w500,
-                                                                            fontSize:
-                                                                                15.sp),
-                                                                      ),
-                                                                      TextSpan(
-                                                                        text: totalAmount
-                                                                            .toString(),
-                                                                        style: GoogleFonts.workSans(
-                                                                            color: color == Color(0xff00C673)
-                                                                                ? Colors
-                                                                                    .white
-                                                                                : Color(
-                                                                                    0xffFEBE16),
-                                                                            fontWeight:
-                                                                                FontWeight
-                                                                                    .w500,
-                                                                            fontSize:
-                                                                                15.sp),
-                                                                      ),
-                                                                    ]),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        )),
-                                                  )
-                                                : Container(
-                                                    alignment: Alignment.centerLeft,
-                                                    width:
-                                                        displayWidth(context) * .62,
-                                                    height: displayHeight(context) *
-                                                        .07,
-                                                    decoration: BoxDecoration(
-                                                        color: color,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                displayWidth(
-                                                                        context) *
-                                                                    .12)),
-                                                    child: TextButton(
-                                                        onPressed: () async {
-                                                          setState(() {
-                                                            color =
-                                                                Color(0xff00C673);
-                                                          });
-                                                          if (totalAmount.ceil() != 0 && balance >=
-                                                              totalAmount.ceil()) {
-                                                            balance = balance -
-                                                                totalAmount.ceil();
-                                                            score =
-                                                                snap.get('score');
-                                                            firestore
-                                                                .collection('User')
-                                                                .doc(userId)
-                                                                .update({
-                                                              'account_balance':
-                                                                  balance,
-                                                              'credit_card_bill': 0,
-                                                              'payable_bill': 0,
-                                                              'game_score':
-                                                                  gameScore +
-                                                                      balance +
-                                                                      qualityOfLife,
-                                                              'score': FieldValue
-                                                                  .increment(40),
-                                                              'credit_score':
-                                                                  (score + 200 + 40)
-                                                            });
-                                                            Future.delayed(
-                                                                Duration(
-                                                                    seconds: 1),
-                                                                () => Navigator.pop(
-                                                                    context));
-                                                          } else {
-                                                           if(totalAmount.ceil() == 0){
-                                                             Future.delayed(
-                                                                 Duration(
-                                                                     seconds: 1),
-                                                                     () => Navigator.pop(
-                                                                     context));
-                                                           }else{
-                                                             _showDialogForRestartLevel(
-                                                                 context);
-                                                           }
-                                                          }
-                                                          // }
+                                                    child:color == Color(0xff00C673)
+                                                        ? TextButton(
+                                                        onPressed: ()  {
                                                         },
                                                         child: Padding(
                                                           padding: EdgeInsets.only(
@@ -2092,6 +1882,115 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                               ),
                                                             ),
                                                           ),
+                                                        )) : TextButton(
+                                                        onPressed: () async {
+                                                          setState(() {
+                                                            color =
+                                                                Color(0xff00C673);
+                                                          });
+                                                          if (totalAmount.ceil() != 0 && balance >=
+                                                              totalAmount.ceil()) {
+                                                            balance = balance -
+                                                                totalAmount.ceil();
+                                                            score =
+                                                                snap.get('score');
+                                                            firestore
+                                                                .collection('User')
+                                                                .doc(userId)
+                                                                .update({
+                                                              'account_balance':
+                                                              balance,
+                                                              'credit_card_bill': 0,
+                                                              'payable_bill': 0,
+                                                              'game_score':
+                                                              gameScore +
+                                                                  balance +
+                                                                  qualityOfLife,
+                                                              'score': FieldValue
+                                                                  .increment(40),
+                                                              'credit_score':
+                                                              (score + 200 + 40)
+                                                            });
+                                                            Future.delayed(
+                                                                Duration(
+                                                                    seconds: 1),
+                                                                    () => Navigator.pop(
+                                                                    context));
+                                                          } else {
+                                                            if(totalAmount.ceil() == 0){
+                                                              Future.delayed(
+                                                                  Duration(
+                                                                      seconds: 1),
+                                                                      () => Navigator.pop(
+                                                                      context));
+                                                            }else{
+                                                              _showDialogForRestartLevel(
+                                                                  context);
+                                                            }
+                                                          }
+                                                          // }
+                                                        },
+                                                        child: Padding(
+                                                          padding: EdgeInsets.only(
+                                                              left: 6.0),
+                                                          child: Center(
+                                                            child: FittedBox(
+                                                              child: RichText(
+                                                                textAlign:
+                                                                TextAlign.left,
+                                                                overflow:
+                                                                TextOverflow
+                                                                    .clip,
+                                                                text: TextSpan(
+                                                                    text:
+                                                                    'Pay full ',
+                                                                    style: GoogleFonts.workSans(
+                                                                        color: color ==
+                                                                            Color(
+                                                                                0xff00C673)
+                                                                            ? Colors
+                                                                            .white
+                                                                            : Color(
+                                                                            0xff4D5DDD),
+                                                                        fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                        fontSize:
+                                                                        15.sp),
+                                                                    children: [
+                                                                      TextSpan(
+                                                                        text: '\$',
+                                                                        style: GoogleFonts.workSans(
+                                                                            color: color == Color(0xff00C673)
+                                                                                ? Colors
+                                                                                .white
+                                                                                : Color(
+                                                                                0xffFEBE16),
+                                                                            fontWeight:
+                                                                            FontWeight
+                                                                                .w500,
+                                                                            fontSize:
+                                                                            15.sp),
+                                                                      ),
+                                                                      TextSpan(
+                                                                        text: totalAmount
+                                                                            .toString(),
+                                                                        style: GoogleFonts.workSans(
+                                                                            color: color == Color(0xff00C673)
+                                                                                ? Colors
+                                                                                .white
+                                                                                : Color(
+                                                                                0xffFEBE16),
+                                                                            fontWeight:
+                                                                            FontWeight
+                                                                                .w500,
+                                                                            fontSize:
+                                                                            15.sp),
+                                                                      ),
+                                                                    ]),
+                                                              ),
+                                                            ),
+                                                          ),
                                                         )),
                                                   );
                                           })),
@@ -2100,8 +1999,7 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                               top: displayHeight(context) * .02),
                                           child: StatefulBuilder(
                                               builder: (context, setState) {
-                                            return color == Color(0xff00C673)
-                                                ? Container(
+                                            return Container(
                                                     alignment: Alignment.centerLeft,
                                                     width:
                                                         displayWidth(context) * .62,
@@ -2114,8 +2012,11 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                                 displayWidth(
                                                                         context) *
                                                                     .12)),
-                                                    child: TextButton(
-                                                        onPressed: () {},
+                                                    child: color == Color(0xff00C673)
+                                                        ? TextButton(
+                                                        onPressed: ()  {
+
+                                                        },
                                                         child: Padding(
                                                           padding: EdgeInsets.only(
                                                               left: 6.0),
@@ -2181,30 +2082,15 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                               ),
                                                             ),
                                                           ),
-                                                        )),
-                                                  )
-                                                : Container(
-                                                    alignment: Alignment.centerLeft,
-                                                    width:
-                                                        displayWidth(context) * .62,
-                                                    height: displayHeight(context) *
-                                                        .07,
-                                                    decoration: BoxDecoration(
-                                                        color: color,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                displayWidth(
-                                                                        context) *
-                                                                    .12)),
-                                                    child: TextButton(
+                                                        )) : TextButton(
                                                         onPressed: () async {
                                                           setState(() {
                                                             color =
                                                                 Color(0xff00C673);
                                                           });
                                                           int pay = (totalAmount *
-                                                                  10 ~/
-                                                                  100)
+                                                              10 ~/
+                                                              100)
                                                               .toInt()
                                                               .ceil();
                                                           score = snap.get('score');
@@ -2220,24 +2106,24 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                                 .doc(userId)
                                                                 .update({
                                                               'account_balance':
-                                                                  balance,
+                                                              balance,
                                                               'payable_bill': bal,
                                                               'credit_card_bill': 0,
                                                               'game_score':
-                                                                  gameScore +
-                                                                      balance +
-                                                                      qualityOfLife,
+                                                              gameScore +
+                                                                  balance +
+                                                                  qualityOfLife,
                                                               'score': FieldValue
                                                                   .increment(40),
                                                               'credit_score':
-                                                                  (score +
-                                                                      value.ceil() +
-                                                                      40)
+                                                              (score +
+                                                                  value.ceil() +
+                                                                  40)
                                                             });
                                                             Future.delayed(
                                                                 Duration(
                                                                     seconds: 1),
-                                                                () => Navigator.pop(
+                                                                    () => Navigator.pop(
                                                                     context));
                                                           } else {
                                                             if(totalAmount.ceil() == 0){
@@ -2259,59 +2145,59 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                             child: FittedBox(
                                                               child: RichText(
                                                                 textAlign:
-                                                                    TextAlign.left,
+                                                                TextAlign.left,
                                                                 overflow:
-                                                                    TextOverflow
-                                                                        .clip,
+                                                                TextOverflow
+                                                                    .clip,
                                                                 text: TextSpan(
                                                                     text:
-                                                                        'Pay minimum ',
+                                                                    'Pay minimum ',
                                                                     style: GoogleFonts.workSans(
                                                                         color: color ==
-                                                                                Color(
-                                                                                    0xff00C673)
+                                                                            Color(
+                                                                                0xff00C673)
                                                                             ? Colors
-                                                                                .white
+                                                                            .white
                                                                             : Color(
-                                                                                0xff4D5DDD),
+                                                                            0xff4D5DDD),
                                                                         fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
+                                                                        FontWeight
+                                                                            .w500,
                                                                         fontSize:
-                                                                            15.sp),
+                                                                        15.sp),
                                                                     children: [
                                                                       TextSpan(
                                                                         text: '\$',
                                                                         style: GoogleFonts.workSans(
                                                                             color: color == Color(0xff00C673)
                                                                                 ? Colors
-                                                                                    .white
+                                                                                .white
                                                                                 : Color(
-                                                                                    0xffFEBE16),
+                                                                                0xffFEBE16),
                                                                             fontWeight:
-                                                                                FontWeight
-                                                                                    .w500,
+                                                                            FontWeight
+                                                                                .w500,
                                                                             fontSize:
-                                                                                15.sp),
+                                                                            15.sp),
                                                                       ),
                                                                       TextSpan(
                                                                         text: (totalAmount *
-                                                                                10 ~/
-                                                                                100)
+                                                                            10 ~/
+                                                                            100)
                                                                             .toInt()
                                                                             .ceil()
                                                                             .toString(),
                                                                         style: GoogleFonts.workSans(
                                                                             color: color == Color(0xff00C673)
                                                                                 ? Colors
-                                                                                    .white
+                                                                                .white
                                                                                 : Color(
-                                                                                    0xffFEBE16),
+                                                                                0xffFEBE16),
                                                                             fontWeight:
-                                                                                FontWeight
-                                                                                    .w500,
+                                                                            FontWeight
+                                                                                .w500,
                                                                             fontSize:
-                                                                                15.sp),
+                                                                            15.sp),
                                                                       ),
                                                                     ]),
                                                               ),
@@ -2614,8 +2500,7 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                   displayHeight(context) * .04),
                                           child: StatefulBuilder(
                                               builder: (context, setState) {
-                                            return color == Color(0xff00C673)
-                                                ? Container(
+                                            return  Container(
                                                     alignment:
                                                         Alignment.centerLeft,
                                                     width:
@@ -2631,8 +2516,11 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                                 displayWidth(
                                                                         context) *
                                                                     .12)),
-                                                    child: TextButton(
-                                                        onPressed: () {},
+                                                    child:color == Color(0xff00C673)
+                                                        ? TextButton(
+                                                        onPressed: ()  {
+
+                                                        },
                                                         child: Padding(
                                                           padding:
                                                               EdgeInsets.only(
@@ -2659,37 +2547,20 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                                             FontWeight
                                                                                 .w500,
                                                                         fontSize:
-                                                                            15.sp),),
+                                                                            15.sp),
+                                                                   ),
                                                               ),
                                                             ),
                                                           ),
-                                                        )),
-                                                  )
-                                                : Container(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    width:
-                                                        displayWidth(context) *
-                                                            .62,
-                                                    height:
-                                                        displayHeight(context) *
-                                                            .07,
-                                                    decoration: BoxDecoration(
-                                                        color: color,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                displayWidth(
-                                                                        context) *
-                                                                    .12)),
-                                                    child: TextButton(
+                                                        )) : TextButton(
                                                         onPressed: () async {
                                                           setState(() {
                                                             color = Color(
                                                                 0xff00C673);
                                                           });
                                                           int _creditScore =
-                                                              documentSnapshot.get(
-                                                                  'credit_score');
+                                                          documentSnapshot.get(
+                                                              'credit_score');
                                                           if (_creditScore <
                                                               750) {
                                                             Future.delayed(  Duration(
@@ -2703,8 +2574,8 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                                         (context) {
                                                                       return WillPopScope(
                                                                         onWillPop: () {
-                                                                        return Future.value(false);
-                                                                      },
+                                                                          return Future.value(false);
+                                                                        },
                                                                         child: AlertDialog(
                                                                           elevation:
                                                                           3.0,
@@ -2879,7 +2750,7 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                                                             color: Color(0xff6646E6),
                                                                                           ),
                                                                                         )),
-                                                                                    GestureDetector(child: Text('Skip',style: GoogleFonts.workSans(color: Colors.white, fontWeight: FontWeight.w600, decoration: TextDecoration.underline,),),onTap: (){
+                                                                              GestureDetector(child: Text('Skip',style: GoogleFonts.workSans(color: Colors.white, fontWeight: FontWeight.w600, decoration: TextDecoration.underline,),),onTap: (){
                                                                                       Navigator.pop(context);
                                                                                       Future.delayed(Duration(seconds: 1), () =>  _playLevelOrPopQuiz());
                                                                                     },),
@@ -2895,32 +2766,32 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                                                         },
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsets.only(
-                                                                  left: 6.0),
+                                                          EdgeInsets.only(
+                                                              left: 6.0),
                                                           child: Center(
                                                             child: FittedBox(
                                                               child: RichText(
                                                                 textAlign:
-                                                                    TextAlign
-                                                                        .left,
+                                                                TextAlign
+                                                                    .left,
                                                                 overflow:
-                                                                    TextOverflow
-                                                                        .clip,
+                                                                TextOverflow
+                                                                    .clip,
                                                                 text: TextSpan(
-                                                                    text:
-                                                                        'Play Next Level',
-                                                                    style: GoogleFonts.workSans(
-                                                                        color: color == Color(0xff00C673)
-                                                                            ? Colors
-                                                                                .white
-                                                                            : Color(
-                                                                                0xff4D5DDD),
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
-                                                                        fontSize:
-                                                                            15.sp),
-                                                                   ),
+                                                                  text:
+                                                                  'Play Next Level',
+                                                                  style: GoogleFonts.workSans(
+                                                                      color: color == Color(0xff00C673)
+                                                                          ? Colors
+                                                                          .white
+                                                                          : Color(
+                                                                          0xff4D5DDD),
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                      fontSize:
+                                                                      15.sp),
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
@@ -2993,25 +2864,25 @@ class _AllQueLevelThreeState extends State<AllQueLevelThree> {
                 children: [
                   ElevatedButton(
                       onPressed: () {
-                        // Future.delayed(Duration(seconds: 2), () {
-                        //   firestore.collection("User").doc(userId).update({
-                        //     'bill_payment': 0,
-                        //     'credit_card_bill': 0,
-                        //     'previous_session_info': 'Level_2_Pop_Quiz',
-                        //     'last_level': 'Level_2_Pop_Quiz',
-                        //     'game_score': gameScore,
-                        //     'credit_card_balance': 0,
-                        //     'account_balance': 0,
-                        //     'level_id': 0,
-                        //     'credit_score': 0,
-                        //     'payable_bill': 0,
-                        //     'score': 0,
-                        //     'need': 0,
-                        //     'want': 0,
-                        //   });
-                        //   Navigator.pushReplacement(context,
-                        //       MaterialPageRoute(builder: (context) => PopQuiz()));
-                        // });
+                        Future.delayed(Duration(seconds: 2), () {
+                          firestore.collection("User").doc(userId).update({
+                            'bill_payment': 0,
+                            'credit_card_bill': 0,
+                            'previous_session_info': 'Level_3_Pop_Quiz',
+                            'last_level': 'Level_3_Pop_Quiz',
+                            'game_score': gameScore,
+                            'credit_card_balance': 0,
+                            'account_balance': 0,
+                            'level_id': 0,
+                            'credit_score': 0,
+                            'payable_bill': 0,
+                            'score': 0,
+                            'need': 0,
+                            'want': 0,
+                          });
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => PopQuiz()));
+                        });
                       },
                       child: Text('Play Pop Quiz')),
                   ElevatedButton(
