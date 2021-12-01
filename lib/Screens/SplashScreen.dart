@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:financial/Screens/AllQueLevelOne.dart';
 import 'package:financial/Screens/AllQueLevelThree.dart';
 import 'package:financial/Screens/AllQueLevelTwo.dart';
-import 'package:financial/ReusableScreen/ExpandedBottomDrawer.dart';
-import 'package:financial/ReusableScreen/GameScorePage.dart';
 import 'package:financial/ReusableScreen/GlobleVariable.dart';
 import 'package:financial/Screens/IntroScreen.dart';
 import 'package:financial/Screens/LevelThreeSetUpPage.dart';
@@ -15,7 +13,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:financial/Screens/LevelOneSetUpPage.dart';
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -153,7 +150,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (level == 'Level_3_Pop_Quiz') {
           Future.delayed(
               Duration(seconds: 6),
-                  () => Navigator.pushReplacement(
+              () => Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (context) => PopQuiz())));
         }
       });
@@ -190,4 +187,5 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
+
 }

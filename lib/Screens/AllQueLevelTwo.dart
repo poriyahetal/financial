@@ -467,11 +467,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                       previewChild: PreviewOfBottomDrawer(),
                                       expandedChild: ExpandedBottomDrawer(),
                                       minExtent: displayHeight(context) * .14,
-                                      maxExtent: level == 'Level_3'
-                                          ? displayHeight(context) * .33
-                                          : displayHeight(context) * .26,
-                                      expansionExtent:
-                                          level == 'Level_3' ? 90 : 50,
+                                      maxExtent: displayHeight(context) * .55,
                                     ),
                                   ),
                                 )
@@ -1044,10 +1040,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                     previewChild: PreviewOfBottomDrawer(),
                     expandedChild: ExpandedBottomDrawer(),
                     minExtent: displayHeight(context) * .14,
-                    maxExtent: level == 'Level_3'
-                        ? displayHeight(context) * .33
-                        : displayHeight(context) * .26,
-                    expansionExtent: level == 'Level_3' ? 90 : 50,
+                    maxExtent: displayHeight(context) * .55,
                   )),
             ),
           );
@@ -1258,10 +1251,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                     previewChild: PreviewOfBottomDrawer(),
                     expandedChild: ExpandedBottomDrawer(),
                     minExtent: displayHeight(context) * .14,
-                    maxExtent: level == 'Level_3'
-                        ? displayHeight(context) * .33
-                        : displayHeight(context) * .26,
-                    expansionExtent: level == 'Level_3' ? 90 : 50,
+                    maxExtent: displayHeight(context) * .55,
                   )),
             ),
           );
@@ -1885,10 +1875,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                     previewChild: PreviewOfBottomDrawer(),
                     expandedChild: ExpandedBottomDrawer(),
                     minExtent: displayHeight(context) * .14,
-                    maxExtent: level == 'Level_3'
-                        ? displayHeight(context) * .33
-                        : displayHeight(context) * .26,
-                    expansionExtent: level == 'Level_3' ? 90 : 50,
+                    maxExtent: displayHeight(context) * .55,
                   )),
             ),
           );

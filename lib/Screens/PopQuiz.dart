@@ -830,54 +830,56 @@ class _PopQuizState extends State with SingleTickerProviderStateMixin {
                                                   displayWidth(context) * .06,
                                                 ),
                                                 color: Colors.white),
-                                            child: SingleChildScrollView(
-                                              child: Column(
-                                                children: [
-                                                  Transform(
-                                                      alignment:
-                                                          FractionalOffset
-                                                              .center,
-                                                      transform: Matrix4
-                                                          .identity()
-                                                        ..setEntry(3, 2, 0.001)
-                                                        ..rotateY(pi *
-                                                            _animation.value),
-                                                      child: Center(
-                                                        child: Column(
-                                                          children: [
-                                                            Padding(
-                                                              padding: EdgeInsets.only(
-                                                                  left: displayWidth(
-                                                                          context) *
-                                                                      .06,
-                                                                  right: displayWidth(
-                                                                          context) *
-                                                                      .06,
-                                                                  top: displayWidth(
-                                                                          context) *
-                                                                      .08,
-                                                                  bottom: displayWidth(
-                                                                          context) *
-                                                                      .03),
-                                                              child: Text(
-                                                                document[
-                                                                    'answer_exp'],
-                                                                style: GoogleFonts
-                                                                    .workSans(
-                                                                  fontSize:
-                                                                      14.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  color: Colors
-                                                                      .black,
+                                            child: Center(
+                                              child: SingleChildScrollView(
+                                                child: Column(
+                                                  children: [
+                                                    Transform(
+                                                        alignment:
+                                                            FractionalOffset
+                                                                .center,
+                                                        transform: Matrix4
+                                                            .identity()
+                                                          ..setEntry(3, 2, 0.001)
+                                                          ..rotateY(pi *
+                                                              _animation.value),
+                                                        child: Center(
+                                                          child: Column(
+                                                            children: [
+                                                              Padding(
+                                                                padding: EdgeInsets.only(
+                                                                    left: displayWidth(
+                                                                            context) *
+                                                                        .06,
+                                                                    right: displayWidth(
+                                                                            context) *
+                                                                        .06,
+                                                                    top: displayWidth(
+                                                                            context) *
+                                                                        .08,
+                                                                    bottom: displayWidth(
+                                                                            context) *
+                                                                        .03),
+                                                                child: Text(
+                                                                  document[
+                                                                      'answer_exp'],
+                                                                  style: GoogleFonts
+                                                                      .workSans(
+                                                                    fontSize:
+                                                                        14.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    color: Colors
+                                                                        .black,
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ))
-                                                ],
+                                                            ],
+                                                          ),
+                                                        ))
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),

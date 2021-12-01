@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'package:sizer/sizer.dart';
 import 'dart:math' as math;
 
@@ -27,7 +28,7 @@ class _GameScorePageState extends State<GameScorePage> {
   var userId;
   String? level;
 
-  int _gameSco = 0;
+  int? _gameSco ;
 
   getUserValue() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -42,6 +43,7 @@ class _GameScorePageState extends State<GameScorePage> {
 
   @override
   void initState() {
+
     getUserValue();
     //  level = widget.level;
     super.initState();
@@ -100,16 +102,7 @@ class _GameScorePageState extends State<GameScorePage> {
                                   fontSize: 12.sp,
                                   color: Color(0xff3D2F91))),
                           Spacer(),
-                          GestureDetector(
-                            onTap: () async {
-                              FirebaseAuth _auth = FirebaseAuth.instance;
-                              await _auth.signOut();
-                              SharedPreferences preferences =
-                                  await SharedPreferences.getInstance();
-                              await preferences.remove('uId');
-                            },
-                            child: _gameScore(),
-                          ),
+                          _gameScore(),
                           Spacer(),
                         ],
                       ),
@@ -127,11 +120,12 @@ class _GameScorePageState extends State<GameScorePage> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => ProfilePage()));
                   },
-                  child: Image.asset(
+                  child:  Image.asset(
                     'assets/fish.png',
                     width: displayWidth(context) * .10,
                     fit: BoxFit.contain,
-                  ),
+                  )
+
                 ),
               ),
             ],

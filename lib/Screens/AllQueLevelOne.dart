@@ -18,6 +18,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'package:sizer/sizer.dart';
 import 'package:financial/Screens/LevelOneSetUpPage.dart';
 
@@ -68,6 +69,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
   QueModel? queModel;
   List<QueModel> list = [];
 
+
   Future<QueModel?> getLevelId() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     userId = pref.getString('uId');
@@ -86,6 +88,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
   @override
   void initState() {
     super.initState();
+
     getLevelId();
     gameScore = widget.gameScore;
     balance = widget.savingBalance;
@@ -152,7 +155,9 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                       child: Column(
                                         children: [
                                           GameScorePage(
-                                              level: level, document: document),
+                                            level: level,
+                                            document: document,
+                                          ),
                                           Flexible(
                                               child: Container(
                                             alignment: Alignment.center,
@@ -502,11 +507,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                     previewChild: PreviewOfBottomDrawer(),
                                     expandedChild: ExpandedBottomDrawer(),
                                     minExtent: displayHeight(context) * .14,
-                                    maxExtent: level == 'Level_3'
-                                        ? displayHeight(context) * .33
-                                        : displayHeight(context) * .26,
-                                    expansionExtent:
-                                        level == 'Level_3' ? 90 : 50,
+                                    maxExtent: displayHeight(context) * .55,
                                   ),
                                 ))
                             : _insightsPage(index, snapshot, document);
@@ -1205,10 +1206,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                     previewChild: PreviewOfBottomDrawer(),
                     expandedChild: ExpandedBottomDrawer(),
                     minExtent: displayHeight(context) * .14,
-                    maxExtent: level == 'Level_3'
-                        ? displayHeight(context) * .33
-                        : displayHeight(context) * .26,
-                    expansionExtent: level == 'Level_3' ? 90 : 50,
+                    maxExtent: displayHeight(context) * .55,
                   )),
             ),
           );
