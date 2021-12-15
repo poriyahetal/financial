@@ -3,16 +3,17 @@ import 'package:financial/Screens/AllQueLevelOne.dart';
 import 'package:financial/Screens/AllQueLevelThree.dart';
 import 'package:financial/Screens/AllQueLevelTwo.dart';
 import 'package:financial/ReusableScreen/GlobleVariable.dart';
-import 'package:financial/Screens/IntroScreen.dart';
+import 'package:financial/Screens/ComingSoon.dart';
 import 'package:financial/Screens/LevelThreeSetUpPage.dart';
 import 'package:financial/Screens/LevelTwoSetUpPage.dart';
+import 'package:financial/Screens/LoginPage.dart';
 import 'package:financial/Screens/PopQuiz.dart';
 import 'package:financial/Screens/devicesSizePage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'package:financial/Screens/LevelOneSetUpPage.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -59,15 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 gameScore = doc.get("game_score"),
               })
           .then((value) {
-        if (level == '') {
-          Future.delayed(
-              Duration(seconds: 6),
-              () => Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          LevelOneSetUpPage(controller: PageController()))));
-        }
+
 
         if (level == 'Level_1')
           Future.delayed(
@@ -112,12 +105,11 @@ class _SplashScreenState extends State<SplashScreen> {
                           creditCardBill: creditCardBill,
                           payableBill: payableBill,
                           gameScore: gameScore))));
-
         if (level == 'Level_2_Pop_Quiz') {
           Future.delayed(
               Duration(seconds: 6),
               () => Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => PopQuiz())));
+                  context, MaterialPageRoute(builder: (context) => PopQuiz(levelId : levelId))));
         }
         if (level == 'Level_3_setUp_page') {
           Future.delayed(
@@ -128,7 +120,6 @@ class _SplashScreenState extends State<SplashScreen> {
                       builder: (context) =>
                           LevelThreeSetUpPage(controller: PageController()))));
         }
-
         if (level == 'Level_3') {
           Future.delayed(
               Duration(seconds: 6),
@@ -146,12 +137,70 @@ class _SplashScreenState extends State<SplashScreen> {
                           payableBill: payableBill,
                           gameScore: gameScore))));
         }
-
+        if (level == 'Level_4') {
+          Future.delayed(
+              Duration(seconds: 6),
+                  () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AllQueLevelThree(
+                          level: level,
+                          levelId: levelId,
+                          billPayment: billPayment,
+                          qOl: qualityOfLife,
+                          savingBalance: balance,
+                          creditCardBalance: creditCardBalance,
+                          creditCardBill: creditCardBill,
+                          payableBill: payableBill,
+                          gameScore: gameScore))));
+        }
+        if (level == 'Level_5') {
+          Future.delayed(
+              Duration(seconds: 6),
+                  () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AllQueLevelThree(
+                          level: level,
+                          levelId: levelId,
+                          billPayment: billPayment,
+                          qOl: qualityOfLife,
+                          savingBalance: balance,
+                          creditCardBalance: creditCardBalance,
+                          creditCardBill: creditCardBill,
+                          payableBill: payableBill,
+                          gameScore: gameScore))));
+        }
+        if (level == 'Level_6') {
+          Future.delayed(
+              Duration(seconds: 6),
+                  () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AllQueLevelThree(
+                          level: level,
+                          levelId: levelId,
+                          billPayment: billPayment,
+                          qOl: qualityOfLife,
+                          savingBalance: balance,
+                          creditCardBalance: creditCardBalance,
+                          creditCardBill: creditCardBill,
+                          payableBill: payableBill,
+                          gameScore: gameScore))));
+        }
         if (level == 'Level_3_Pop_Quiz') {
           Future.delayed(
               Duration(seconds: 6),
               () => Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => PopQuiz())));
+                  context, MaterialPageRoute(builder: (context) => PopQuiz(levelId : levelId,))));
+        }
+        if(level == 'Coming_soon') {
+          Future.delayed(
+              Duration(seconds: 6),
+                  () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ComingSoon())));
         }
       });
     } else {
@@ -159,7 +208,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Future.delayed(
           Duration(seconds: 6),
           () => Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => IntroScreen())));
+              context, MaterialPageRoute(builder: (context) => LoginPage())));
     }
   }
 

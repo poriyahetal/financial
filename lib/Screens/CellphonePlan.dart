@@ -80,12 +80,12 @@ class _CellphonePlanState extends State<CellphonePlan>
                                 ),
                                 child: Center(
                                     child: Text(
-                                  'Step 4',
-                                  style: GoogleFonts.workSans(
-                                      color: Colors.white,
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w600),
-                                )),
+                                      'Step 4',
+                                      style: GoogleFonts.workSans(
+                                          color: Colors.white,
+                                          fontSize: 20.sp,
+                                          fontWeight: FontWeight.w600),
+                                    )),
                               ),
                             ),
                             SizedBox(
@@ -123,9 +123,9 @@ class _CellphonePlanState extends State<CellphonePlan>
                                     gradient: LinearGradient(
                                         colors: isSelected1
                                             ? [
-                                                Color(0xff2DDA91),
-                                                Color(0xff0DA867)
-                                              ]
+                                          Color(0xff2DDA91),
+                                          Color(0xff0DA867)
+                                        ]
                                             : [Colors.white, Colors.white],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter),
@@ -142,7 +142,7 @@ class _CellphonePlanState extends State<CellphonePlan>
                                             'assets/level_4_first_image.png',
                                             width: displayWidth(context) * .20,
                                             height:
-                                                displayHeight(context) * .12,
+                                            displayHeight(context) * .12,
                                             fit: BoxFit.contain,
                                             color: isSelected1
                                                 ? Colors.white
@@ -157,9 +157,9 @@ class _CellphonePlanState extends State<CellphonePlan>
                                             padding: EdgeInsets.all(8.0),
                                             child: Column(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              MainAxisAlignment.center,
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   '1MB DATA AND 100 CALL MINUTES AND TEXTS',
@@ -169,38 +169,38 @@ class _CellphonePlanState extends State<CellphonePlan>
                                                           ? Colors.white
                                                           : Color(0xff3D3D3D),
                                                       fontWeight:
-                                                          FontWeight.w500,
+                                                      FontWeight.w500,
                                                       fontSize: 12.sp),
                                                 ),
                                                 SizedBox(
                                                   height:
-                                                      displayHeight(context) *
-                                                          .01,
+                                                  displayHeight(context) *
+                                                      .01,
                                                 ),
                                                 RichText(
                                                     text: TextSpan(
                                                         text: '${'\$50\/'}',
                                                         style: GoogleFonts.workSans(
                                                             fontWeight:
-                                                                FontWeight.w600,
+                                                            FontWeight.w600,
                                                             color: isSelected1
                                                                 ? Colors.white
                                                                 : Color(
-                                                                    0xff4D5DDD),
+                                                                0xff4D5DDD),
                                                             fontSize: 14.sp),
                                                         children: [
-                                                      TextSpan(
-                                                        text: 'month',
-                                                        style: GoogleFonts.workSans(
-                                                            fontWeight:
+                                                          TextSpan(
+                                                            text: 'month',
+                                                            style: GoogleFonts.workSans(
+                                                                fontWeight:
                                                                 FontWeight.w400,
-                                                            color: isSelected1
-                                                                ? Colors.white
-                                                                : Color(
+                                                                color: isSelected1
+                                                                    ? Colors.white
+                                                                    : Color(
                                                                     0xff4D5DDD),
-                                                            fontSize: 14.sp),
-                                                      )
-                                                    ])),
+                                                                fontSize: 14.sp),
+                                                          )
+                                                        ])),
                                               ],
                                             ),
                                           ),
@@ -232,9 +232,9 @@ class _CellphonePlanState extends State<CellphonePlan>
                                     gradient: LinearGradient(
                                         colors: isSelected2
                                             ? [
-                                                Color(0xff2DDA91),
-                                                Color(0xff0DA867)
-                                              ]
+                                          Color(0xff2DDA91),
+                                          Color(0xff0DA867)
+                                        ]
                                             : [Colors.white, Colors.white],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter),
@@ -251,7 +251,7 @@ class _CellphonePlanState extends State<CellphonePlan>
                                             'assets/level_4_second_image.png',
                                             width: displayWidth(context) * .20,
                                             height:
-                                                displayHeight(context) * .12,
+                                            displayHeight(context) * .12,
                                             fit: BoxFit.contain,
                                             color: isSelected2
                                                 ? Colors.white
@@ -266,9 +266,9 @@ class _CellphonePlanState extends State<CellphonePlan>
                                             padding: EdgeInsets.all(8.0),
                                             child: Column(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              MainAxisAlignment.center,
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   '5 GB DATA, UNLIMITED TEXT AND CALL',
@@ -278,38 +278,38 @@ class _CellphonePlanState extends State<CellphonePlan>
                                                           ? Colors.white
                                                           : Color(0xff3D3D3D),
                                                       fontWeight:
-                                                          FontWeight.w500,
+                                                      FontWeight.w500,
                                                       fontSize: 12.sp),
                                                 ),
                                                 SizedBox(
                                                   height:
-                                                      displayHeight(context) *
-                                                          .01,
+                                                  displayHeight(context) *
+                                                      .01,
                                                 ),
                                                 RichText(
                                                     text: TextSpan(
                                                         text: '${'\$80\/'}',
                                                         style: GoogleFonts.workSans(
                                                             fontWeight:
-                                                                FontWeight.w600,
+                                                            FontWeight.w600,
                                                             color: isSelected2
                                                                 ? Colors.white
                                                                 : Color(
-                                                                    0xff4D5DDD),
+                                                                0xff4D5DDD),
                                                             fontSize: 14.sp),
                                                         children: [
-                                                      TextSpan(
-                                                        text: 'month',
-                                                        style: GoogleFonts.workSans(
-                                                            fontWeight:
+                                                          TextSpan(
+                                                            text: 'month',
+                                                            style: GoogleFonts.workSans(
+                                                                fontWeight:
                                                                 FontWeight.w400,
-                                                            color: isSelected2
-                                                                ? Colors.white
-                                                                : Color(
+                                                                color: isSelected2
+                                                                    ? Colors.white
+                                                                    : Color(
                                                                     0xff4D5DDD),
-                                                            fontSize: 14.sp),
-                                                      )
-                                                    ])),
+                                                                fontSize: 14.sp),
+                                                          )
+                                                        ])),
                                               ],
                                             ),
                                           ),
@@ -341,9 +341,9 @@ class _CellphonePlanState extends State<CellphonePlan>
                                     gradient: LinearGradient(
                                         colors: isSelected3
                                             ? [
-                                                Color(0xff2DDA91),
-                                                Color(0xff0DA867)
-                                              ]
+                                          Color(0xff2DDA91),
+                                          Color(0xff0DA867)
+                                        ]
                                             : [Colors.white, Colors.white],
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter),
@@ -360,7 +360,7 @@ class _CellphonePlanState extends State<CellphonePlan>
                                             'assets/level_4_third_image.png',
                                             width: displayWidth(context) * .20,
                                             height:
-                                                displayHeight(context) * .12,
+                                            displayHeight(context) * .12,
                                             fit: BoxFit.contain,
                                             color: isSelected3
                                                 ? Colors.white
@@ -375,9 +375,9 @@ class _CellphonePlanState extends State<CellphonePlan>
                                             padding: EdgeInsets.all(8.0),
                                             child: Column(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              MainAxisAlignment.center,
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   'UNLIMITED DATA, TEXTING AND CALLING',
@@ -387,38 +387,38 @@ class _CellphonePlanState extends State<CellphonePlan>
                                                           ? Colors.white
                                                           : Color(0xff3D3D3D),
                                                       fontWeight:
-                                                          FontWeight.w500,
+                                                      FontWeight.w500,
                                                       fontSize: 12.sp),
                                                 ),
                                                 SizedBox(
                                                   height:
-                                                      displayHeight(context) *
-                                                          .01,
+                                                  displayHeight(context) *
+                                                      .01,
                                                 ),
                                                 RichText(
                                                     text: TextSpan(
                                                         text: '${'\$120\/'}',
                                                         style: GoogleFonts.workSans(
                                                             fontWeight:
-                                                                FontWeight.w600,
+                                                            FontWeight.w600,
                                                             color: isSelected3
                                                                 ? Colors.white
                                                                 : Color(
-                                                                    0xff4D5DDD),
+                                                                0xff4D5DDD),
                                                             fontSize: 14.sp),
                                                         children: [
-                                                      TextSpan(
-                                                        text: 'month',
-                                                        style: GoogleFonts.workSans(
-                                                            fontWeight:
+                                                          TextSpan(
+                                                            text: 'month',
+                                                            style: GoogleFonts.workSans(
+                                                                fontWeight:
                                                                 FontWeight.w400,
-                                                            color: isSelected3
-                                                                ? Colors.white
-                                                                : Color(
+                                                                color: isSelected3
+                                                                    ? Colors.white
+                                                                    : Color(
                                                                     0xff4D5DDD),
-                                                            fontSize: 14.sp),
-                                                      )
-                                                    ])),
+                                                                fontSize: 14.sp),
+                                                          )
+                                                        ])),
                                               ],
                                             ),
                                           ),
@@ -437,16 +437,16 @@ class _CellphonePlanState extends State<CellphonePlan>
                               height: displayHeight(context) * .02,
                             ),
                             isSelected1 == true ||
-                                    isSelected2 == true ||
-                                    isSelected3 == true
+                                isSelected2 == true ||
+                                isSelected3 == true
                                 ? Text('')
                                 : Text(
-                                    'Please, choose one option',
-                                    style: GoogleFonts.workSans(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12.sp),
-                                  ),
+                              'Please, choose one option',
+                              style: GoogleFonts.workSans(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12.sp),
+                            ),
                             SizedBox(
                               height: displayHeight(context) * .02,
                             ),
@@ -486,14 +486,14 @@ class _CellphonePlanState extends State<CellphonePlan>
                                           )),
                                       child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        MainAxisAlignment.center,
                                         children: [
                                           Container(
                                               child: Icon(
-                                            Icons.arrow_back_ios_outlined,
-                                            size: 18.0,
-                                            color: Color(0xff6D00C2),
-                                          )),
+                                                Icons.arrow_back_ios_outlined,
+                                                size: 18.0,
+                                                color: Color(0xff6D00C2),
+                                              )),
                                           SizedBox(
                                             width: displayWidth(context) * .03,
                                           ),
@@ -522,7 +522,7 @@ class _CellphonePlanState extends State<CellphonePlan>
                               child: GestureDetector(
                                 onTap: () async {
                                   SharedPreferences pref =
-                                      await SharedPreferences.getInstance();
+                                  await SharedPreferences.getInstance();
                                   if (isSelected1 == true) {
                                     forPlan4 = 50;
                                     globalVar = globalVar + forPlan4;
@@ -570,7 +570,7 @@ class _CellphonePlanState extends State<CellphonePlan>
                                             left: displayWidth(context) * .04),
                                         child: Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                           children: [
                                             GradientText(
                                                 text: 'Next',
@@ -587,14 +587,14 @@ class _CellphonePlanState extends State<CellphonePlan>
                                                         math.pi / 2))),
                                             SizedBox(
                                               width:
-                                                  displayWidth(context) * .03,
+                                              displayWidth(context) * .03,
                                             ),
                                             Container(
                                                 child: Icon(
-                                              Icons.arrow_forward_ios_outlined,
-                                              size: 18.0,
-                                              color: Color(0xff6D00C2),
-                                            )),
+                                                  Icons.arrow_forward_ios_outlined,
+                                                  size: 18.0,
+                                                  color: Color(0xff6D00C2),
+                                                )),
                                           ],
                                         ),
                                       ),

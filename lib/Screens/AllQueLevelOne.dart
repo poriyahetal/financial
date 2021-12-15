@@ -11,16 +11,13 @@ import 'package:financial/ReusableScreen/PreviewOfBottomDrawer.dart';
 import 'package:financial/Screens/devicesSizePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:draggable_bottom_sheet/draggable_bottom_sheet.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:showcaseview/showcaseview.dart';
 import 'package:sizer/sizer.dart';
-import 'package:financial/Screens/LevelOneSetUpPage.dart';
 
 //ignore: must_be_immutable
 class AllQueLevelOne extends StatefulWidget {
@@ -55,8 +52,9 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
   String level = '';
   var userId;
 
-  // page contoller
+  // page controller
   PageController controller = PageController();
+  //store streambuilder value
   var document;
 
   // for option selection
@@ -68,7 +66,6 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
   //for model
   QueModel? queModel;
   List<QueModel> list = [];
-
 
   Future<QueModel?> getLevelId() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -112,7 +109,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
       child: list.isEmpty
           ? Center(
               child: CircularProgressIndicator(
-              backgroundColor: Colors.black,
+                  backgroundColor: Color(0xff4D6EF2)
             ))
           : StreamBuilder<QuerySnapshot>(
               stream: firestore.collection('Level_1').orderBy('id').snapshots(),
@@ -124,7 +121,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                   case ConnectionState.waiting:
                     return Center(
                       child: CircularProgressIndicator(
-                        backgroundColor: Colors.black,
+                          backgroundColor: Color(0xff4D6EF2)
                       ),
                     );
                   default:
@@ -265,18 +262,15 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                                                       child:
                                                                           FittedBox(
                                                                         child:
-                                                                            RichText(
+                                                                            Text(
+                                                                          document[
+                                                                              'option_1'],
+                                                                          style: GoogleFonts.workSans(
+                                                                              color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500),
+                                                                              fontWeight: FontWeight.w500,
+                                                                              fontSize: 15.sp),
                                                                           overflow:
                                                                               TextOverflow.clip,
-                                                                          text:
-                                                                              TextSpan(
-                                                                            text:
-                                                                                document['option_1'],
-                                                                            style: GoogleFonts.workSans(
-                                                                                color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500),
-                                                                                fontWeight: FontWeight.w500,
-                                                                                fontSize: 15.sp),
-                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ))
@@ -330,18 +324,15 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                                                       child:
                                                                           FittedBox(
                                                                         child:
-                                                                            RichText(
+                                                                            Text(
+                                                                          document[
+                                                                              'option_1'],
+                                                                          style: GoogleFonts.workSans(
+                                                                              color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500),
+                                                                              fontWeight: FontWeight.w500,
+                                                                              fontSize: 15.sp),
                                                                           overflow:
                                                                               TextOverflow.clip,
-                                                                          text:
-                                                                              TextSpan(
-                                                                            text:
-                                                                                document['option_1'],
-                                                                            style: GoogleFonts.workSans(
-                                                                                color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500),
-                                                                                fontWeight: FontWeight.w500,
-                                                                                fontSize: 15.sp),
-                                                                          ),
                                                                         ),
                                                                       ),
                                                                     )),
@@ -404,20 +395,17 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                                                       child:
                                                                           FittedBox(
                                                                         child:
-                                                                            RichText(
+                                                                            Text(
+                                                                          document[
+                                                                              'option_2'],
+                                                                          style: GoogleFonts.workSans(
+                                                                              color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500),
+                                                                              fontWeight: FontWeight.w500,
+                                                                              fontSize: 15.sp),
                                                                           overflow:
                                                                               TextOverflow.clip,
                                                                           textAlign:
                                                                               TextAlign.left,
-                                                                          text:
-                                                                              TextSpan(
-                                                                            text:
-                                                                                document['option_2'],
-                                                                            style: GoogleFonts.workSans(
-                                                                                color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500),
-                                                                                fontWeight: FontWeight.w500,
-                                                                                fontSize: 15.sp),
-                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ))
@@ -470,20 +458,17 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                                                       child:
                                                                           FittedBox(
                                                                         child:
-                                                                            RichText(
+                                                                            Text(
+                                                                          document[
+                                                                              'option_2'],
+                                                                          style: GoogleFonts.workSans(
+                                                                              color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500),
+                                                                              fontWeight: FontWeight.w500,
+                                                                              fontSize: 15.sp),
                                                                           overflow:
                                                                               TextOverflow.clip,
                                                                           textAlign:
                                                                               TextAlign.left,
-                                                                          text:
-                                                                              TextSpan(
-                                                                            text:
-                                                                                document['option_2'],
-                                                                            style: GoogleFonts.workSans(
-                                                                                color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500),
-                                                                                fontWeight: FontWeight.w500,
-                                                                                fontSize: 15.sp),
-                                                                          ),
                                                                         ),
                                                                       ),
                                                                     )),
@@ -622,8 +607,12 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                           flagForKnow = true;
                         });
                         if (index == snapshot.data!.docs.length - 1) {
-                          Future.delayed(Duration(seconds: 1),
-                              () => _levelCompleteSummary());
+                          firestore.collection('User').doc(userId).update({
+                            'level_id' : index + 1 ,
+                            'level_1_id' : index + 1 ,
+                          });
+                            Future.delayed(Duration(seconds: 1),
+                                    () => _levelCompleteSummary());
                         } else {
                           controller.nextPage(
                               duration: Duration(seconds: 1),
@@ -660,7 +649,10 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
         ));
   }
 
-  _showDialogForRestartLevel(BuildContext context) {
+  _showDialogForRestartLevel(BuildContext context) async {
+    DocumentSnapshot document =
+        await firestore.collection('User').doc(userId).get();
+    gameScore = document.get('game_score');
     showDialog(
         barrierDismissible: false,
         context: context,
@@ -698,8 +690,17 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                       Navigator.pushReplacement(
                           context,
                           PageTransition(
-                              child: LevelOneSetUpPage(
-                                  controller: PageController()),
+                              child: AllQueLevelOne(
+                                billPayment: 0,
+                                gameScore: gameScore,
+                                level: 'Level_1',
+                                levelId: 0,
+                                qOl: 0,
+                                savingBalance: 200,
+                                creditCardBalance: 0,
+                                creditCardBill: 0,
+                                payableBill: 0,
+                              ),
                               type: PageTransitionType.bottomToTop,
                               duration: Duration(milliseconds: 500)));
                     },
@@ -717,7 +718,6 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
           );
         });
   }
-
   _optionSelect(
       int index,
       int qol2,
@@ -728,7 +728,12 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
       category,
       int price) async {
     if (index == snapshot.data!.docs.length - 1) {
-      Future.delayed(Duration(seconds: 1), () => _levelCompleteSummary());
+      firestore.collection('User').doc(userId).update({
+        'level_id' : index + 1,
+        'level_1_id' : index + 1,
+      });
+        Future.delayed(Duration(seconds: 1),
+                () => _levelCompleteSummary());
     }
     if (balance >= 0 || balance == 0) {
       firestore.collection('User').doc(userId).update({
@@ -736,6 +741,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
         'quality_of_life': FieldValue.increment(qol2),
         'game_score': gameScore + balance + qualityOfLife,
         'level_id': index + 1,
+        'level_1_id': index + 1,
         'need': category == 'Need'
             ? FieldValue.increment(price)
             : FieldValue.increment(0),
@@ -751,7 +757,6 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
       _showDialogForRestartLevel(context);
     }
   }
-
   _levelCompleteSummary() async {
     var forPortrait = displayHeight(context);
     var bottomHeightPotrait = displayHeight(context) * .14;
@@ -760,6 +765,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
         await firestore.collection('User').doc(userId).get();
     int need = documentSnapshot['need'];
     int want = documentSnapshot['want'];
+    int accountBalance = documentSnapshot['account_balance'];
 
     Color color = Colors.white;
     return showDialog(
@@ -833,23 +839,15 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                             textAlign: TextAlign.left,
                                             overflow: TextOverflow.clip,
                                             text: TextSpan(
-                                                text: 'Need : ',
+                                                text: 'Total Cash : ',
                                                 style: GoogleFonts.workSans(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 16.sp),
                                                 children: [
                                                   TextSpan(
-                                                    text: '\$',
-                                                    style: GoogleFonts.workSans(
-                                                        color:
-                                                            Color(0xffFEBE16),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16.sp),
-                                                  ),
-                                                  TextSpan(
-                                                    text: need.toString(),
+                                                    text:
+                                                        '\$' + (200.toString()),
                                                     style: GoogleFonts.workSans(
                                                         color:
                                                             Color(0xffFEBE16),
@@ -870,23 +868,16 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                             textAlign: TextAlign.left,
                                             overflow: TextOverflow.clip,
                                             text: TextSpan(
-                                                text: 'Want : ',
+                                                text: 'Spent on Needs : ',
                                                 style: GoogleFonts.workSans(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 16.sp),
                                                 children: [
                                                   TextSpan(
-                                                    text: '\$',
-                                                    style: GoogleFonts.workSans(
-                                                        color:
-                                                            Color(0xffFEBE16),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16.sp),
-                                                  ),
-                                                  TextSpan(
-                                                    text: want.toString(),
+                                                    text:
+                                                        '${((need / 200) * 100).floor()}' +
+                                                            '%',
                                                     style: GoogleFonts.workSans(
                                                         color:
                                                             Color(0xffFEBE16),
@@ -907,14 +898,16 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                             textAlign: TextAlign.left,
                                             overflow: TextOverflow.clip,
                                             text: TextSpan(
-                                                text: 'Total Saving : ',
+                                                text: 'Spent on Wants : ',
                                                 style: GoogleFonts.workSans(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 16.sp),
                                                 children: [
                                                   TextSpan(
-                                                    text: '\$',
+                                                    text:
+                                                        '${((want / 200) * 100).floor()}' +
+                                                            '%',
                                                     style: GoogleFonts.workSans(
                                                         color:
                                                             Color(0xffFEBE16),
@@ -922,9 +915,29 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                                             FontWeight.w500,
                                                         fontSize: 16.sp),
                                                   ),
+                                                ]),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: displayHeight(context) * .01,
+                                        ),
+                                        child: Center(
+                                          child: RichText(
+                                            textAlign: TextAlign.left,
+                                            overflow: TextOverflow.clip,
+                                            text: TextSpan(
+                                                text: 'Money Saved : ',
+                                                style: GoogleFonts.workSans(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 16.sp),
+                                                children: [
                                                   TextSpan(
-                                                    text: (need + want)
-                                                        .toString(),
+                                                    text:
+                                                        '${((accountBalance / 200) * 100).floor()}' +
+                                                            '%',
                                                     style: GoogleFonts.workSans(
                                                         color:
                                                             Color(0xffFEBE16),
@@ -964,32 +977,27 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                                                 left: 6.0),
                                                         child: Center(
                                                           child: FittedBox(
-                                                            child: RichText(
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .left,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .clip,
-                                                              text: TextSpan(
-                                                                text:
-                                                                    'Play Next Level',
-                                                                style: GoogleFonts.workSans(
-                                                                    color: color ==
-                                                                            Color(
-                                                                                0xff00C673)
-                                                                        ? Colors
-                                                                            .white
-                                                                        : Color(
-                                                                            0xff4D5DDD),
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontSize:
-                                                                        15.sp),
-                                                              ),
-                                                            ),
-                                                          ),
+                                                              child: Text(
+                                                            'Play Next Level',
+                                                            style: GoogleFonts.workSans(
+                                                                color: color ==
+                                                                        Color(
+                                                                            0xff00C673)
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Color(
+                                                                        0xff4D5DDD),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize:
+                                                                    15.sp),
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .clip,
+                                                          )),
                                                         ),
                                                       ))
                                                   : TextButton(
@@ -1016,6 +1024,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                                         print('levv $lev');
                                                         if (lev != 1 &&
                                                             value == true) {
+
                                                           Future.delayed(
                                                               Duration(
                                                                   seconds: 1),
@@ -1137,7 +1146,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                                             'score': 0,
                                                             'replay_level':
                                                                 false,
-                                                            'last_level':
+                                                           if(value != true) 'last_level':
                                                                 'Level_2_setUp_page',
                                                             'need': 0,
                                                             'want': 0,
@@ -1161,30 +1170,27 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                                                                 left: 6.0),
                                                         child: Center(
                                                           child: FittedBox(
-                                                            child: RichText(
+                                                            child: Text(
+                                                              'Play Next Level',
+                                                              style: GoogleFonts.workSans(
+                                                                  color: color ==
+                                                                          Color(
+                                                                              0xff00C673)
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Color(
+                                                                          0xff4D5DDD),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize:
+                                                                      15.sp),
                                                               textAlign:
                                                                   TextAlign
                                                                       .left,
                                                               overflow:
                                                                   TextOverflow
                                                                       .clip,
-                                                              text: TextSpan(
-                                                                text:
-                                                                    'Play Next Level',
-                                                                style: GoogleFonts.workSans(
-                                                                    color: color ==
-                                                                            Color(
-                                                                                0xff00C673)
-                                                                        ? Colors
-                                                                            .white
-                                                                        : Color(
-                                                                            0xff4D5DDD),
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontSize:
-                                                                        15.sp),
-                                                              ),
                                                             ),
                                                           ),
                                                         ),
@@ -1221,11 +1227,14 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(displayWidth(context) * .12)),
           child: ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
+              DocumentSnapshot document =
+                  await firestore.collection('User').doc(userId).get();
+              gameScore = document.get('game_score');
               if (lev == 1) {
                 firestore.collection('User').doc(userId).update({
                   'replay_level': false,
-                  'previous_session_info': 'Level_1_setUp_page',
+                  'previous_session_info': 'Level_1',
                   'account_balance': 0,
                   'bill_payment': 0,
                   'credit_card_balance': 0,
@@ -1235,19 +1244,27 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                   'payable_bill': 0,
                   'quality_of_life': 0,
                   'score': 0,
-                  'last_level': 'Level_1_setUp_page',
+                 // 'last_level': 'Level_1',
                 });
                 Navigator.pushReplacement(
                     context,
                     PageTransition(
-                        child: LevelOneSetUpPage(
-                          controller: PageController(),
+                        child: AllQueLevelOne(
+                          billPayment: 0,
+                          gameScore: gameScore,
+                          level: 'Level_1',
+                          levelId: 0,
+                          qOl: 0,
+                          savingBalance: 200,
+                          creditCardBalance: 0,
+                          creditCardBill: 0,
+                          payableBill: 0,
                         ),
                         duration: Duration(milliseconds: 500),
                         type: PageTransitionType.bottomToTop));
               } else {
                 firestore.collection('User').doc(userId).update({
-                  'previous_session_info': 'Level_1_setUp_page',
+                  'previous_session_info': 'Level_1',
                   'account_balance': 0,
                   'bill_payment': 0,
                   'credit_card_balance': 0,
@@ -1261,8 +1278,16 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                 Navigator.pushReplacement(
                     context,
                     PageTransition(
-                        child: LevelOneSetUpPage(
-                          controller: PageController(),
+                        child: AllQueLevelOne(
+                          billPayment: 0,
+                          gameScore: gameScore,
+                          level: 'Level_1',
+                          levelId: 0,
+                          qOl: 0,
+                          savingBalance: 200,
+                          creditCardBalance: 0,
+                          creditCardBill: 0,
+                          payableBill: 0,
                         ),
                         duration: Duration(milliseconds: 500),
                         type: PageTransitionType.bottomToTop));
@@ -1276,7 +1301,6 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
           ),
         ));
   }
-
   _level2(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .01),
@@ -1290,7 +1314,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                 firestore.collection('User').doc(userId).update({
                   'replay_level': false,
                   'previous_session_info': 'Level_2_setUp_page',
-                  'last_level': 'Level_2_setUp_page',
+                  //'last_level': 'Level_2_setUp_page',
                   'account_balance': 0,
                   'bill_payment': 0,
                   'credit_card_balance': 0,
@@ -1340,7 +1364,6 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
           ),
         ));
   }
-
   _level3(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .02),
@@ -1354,7 +1377,7 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
                 firestore.collection('User').doc(userId).update({
                   'replay_level': false,
                   'previous_session_info': 'Level_3_setUp_page',
-                  'last_level': 'Level_3_setUp_page',
+                  //'last_level': 'Level_3_setUp_page',
                   'account_balance': 0,
                   'bill_payment': 0,
                   'credit_card_balance': 0,
@@ -1391,7 +1414,6 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
           ),
         ));
   }
-
   _level4(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .02),
@@ -1409,7 +1431,6 @@ class _AllQueLevelOneState extends State<AllQueLevelOne> {
           ),
         ));
   }
-
   _level5(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .02),

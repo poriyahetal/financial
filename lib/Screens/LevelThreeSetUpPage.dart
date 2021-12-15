@@ -76,7 +76,7 @@ class _LevelThreeSetUpPageState extends State<LevelThreeSetUpPage> {
                   height: displayHeight(context) * .04,
                 ),
                 Text(
-                  'Building up',
+                  'Credit Karma',
                   style: GoogleFonts.workSans(
                       fontSize: 28.sp,
                       fontWeight: FontWeight.w600,

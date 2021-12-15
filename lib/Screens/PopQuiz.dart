@@ -309,7 +309,8 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:financial/Model/QueModel.dart';
 import 'package:financial/ReusableScreen/GameScorePage.dart';
 import 'package:financial/ReusableScreen/GlobleVariable.dart';
-import 'package:financial/Screens/LevelOneSetUpPage.dart';
+import 'package:financial/Screens/AllQueLevelOne.dart';
+import 'package:financial/Screens/ComingSoon.dart';
 import 'package:financial/Screens/LevelThreeSetUpPage.dart';
 import 'package:financial/Screens/LevelTwoSetUpPage.dart';
 import 'package:financial/Screens/devicesSizePage.dart';
@@ -322,13 +323,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 class PopQuiz extends StatefulWidget {
-  const PopQuiz({Key? key}) : super(key: key);
+  int levelId = 0;
+
+  PopQuiz({
+    Key? key,
+    required this.levelId,
+  }) : super(key: key);
 
   @override
   _PopQuizState createState() => _PopQuizState();
 }
 
-class _PopQuizState extends State with SingleTickerProviderStateMixin {
+class _PopQuizState extends State<PopQuiz> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation _animation;
   AnimationStatus _status = AnimationStatus.dismissed;
@@ -344,7 +350,8 @@ class _PopQuizState extends State with SingleTickerProviderStateMixin {
   //for model
   QueModel? queModel;
   List<QueModel> list = [];
-  String? popQuiz ;
+  String? popQuiz;
+
   //page controller
   PageController controller = PageController();
 
@@ -358,8 +365,7 @@ class _PopQuizState extends State with SingleTickerProviderStateMixin {
     QuerySnapshot querySnapshot;
     if (popQuiz == 'Level_2_Pop_Quiz') {
       querySnapshot = await firestore.collection("Level_2_Pop_Quiz").get();
-    }
-    else {
+    } else {
       querySnapshot = await firestore.collection("Level_3_Pop_Quiz").get();
     }
     for (int i = 0; i < querySnapshot.docs.length; i++) {
@@ -376,9 +382,15 @@ class _PopQuizState extends State with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    myIndex = widget.levelId;
+    if (myIndex == null) {
+      myIndex = 0;
+    } else {
+      controller = PageController(initialPage: myIndex);
+    }
     getLevelId();
     _controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 1));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
     _animation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -393,467 +405,479 @@ class _PopQuizState extends State with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: list.isEmpty
-          ? Center(
-              child: CircularProgressIndicator(
-              backgroundColor: Colors.black,
-            ))
-          : StreamBuilder<QuerySnapshot>(
-              stream: popQuiz == 'Level_2_Pop_Quiz' ? firestore
-                  .collection('Level_2_Pop_Quiz')
-                  .orderBy('id')
-                  .snapshots() : firestore
-                  .collection('Level_3_Pop_Quiz')
-                  .orderBy('id')
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Text('It\'s Error!');
-                }
-                if (!snapshot.hasData)
-                  return Container(
-                    decoration: boxDecoration,
-                    child: Center(
-                      child: SizedBox(
-                        child: CircularProgressIndicator(
-                          color: Colors.black,
+    return Container(
+      decoration: boxDecoration,
+      child: SafeArea(
+        child: list.isEmpty
+            ? Center(
+                child: CircularProgressIndicator(
+                    backgroundColor: Color(0xff4D6EF2)
+              ))
+            : StreamBuilder<QuerySnapshot>(
+                stream: popQuiz == 'Level_2_Pop_Quiz'
+                    ? firestore
+                        .collection('Level_2_Pop_Quiz')
+                        .orderBy('id')
+                        .snapshots()
+                    : firestore
+                        .collection('Level_3_Pop_Quiz')
+                        .orderBy('id')
+                        .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('It\'s Error!');
+                  }
+                  if (!snapshot.hasData)
+                    return Container(
+                      decoration: boxDecoration,
+                      child: Center(
+                        child: SizedBox(
+                          child: CircularProgressIndicator(
+                              backgroundColor: Color(0xff4D6EF2)
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                // switch (snapshot.connectionState) {
-                //   case ConnectionState.waiting:
-                //   // return Container(
-                //   //   decoration: boxDecoration,
-                //   //   child: Center(
-                //   //     child: SizedBox(
-                //   //       child: CircularProgressIndicator(
-                //   //         color: Colors.black,
-                //   //       ),
-                //   //     ),
-                //   //   ),
-                //   // );
-                //   default:
-                return PageView.builder(
-                    itemCount: snapshot.data?.docs.length,
-                    controller: controller,
-                    scrollDirection: Axis.vertical,
-                    physics: AlwaysScrollableScrollPhysics(),
-                    onPageChanged: (value) {},
-                    itemBuilder: (context, index) {
-                      myIndex = index;
-                      document = snapshot.data?.docs[myIndex];
-                      return Scaffold(
-                          backgroundColor: Colors.transparent,
-                          body: DoubleBackToCloseApp(
-                            snackBar: const SnackBar(
-                              content: Text('Tap back again to leave'),
-                            ),
-                            child: Container(
-                              width: displayWidth(context),
-                              height: displayHeight(context),
-                              decoration: boxDecoration,
-                              child: Column(
-                                children: [
-                                  GameScorePage(level: level),
-                                  SizedBox(
-                                    height: displayHeight(context) * .03,
-                                  ),
-                                  Transform(
-                                    alignment: FractionalOffset.center,
-                                    transform: Matrix4.identity()
-                                      ..setEntry(3, 2, 0.001)
-                                      ..rotateY(pi * _animation.value),
-                                    child: _animation.value <= 0.5
-                                        ? Container(
-                                            alignment: Alignment.center,
-                                            width: displayWidth(context) * .80,
-                                            height:
-                                                displayHeight(context) * .62,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  displayWidth(context) * .06,
-                                                ),
-                                                color: Colors.white),
-                                            child: SingleChildScrollView(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                      top: displayHeight(
-                                                              context) *
-                                                          .01,
-                                                      left: displayWidth(
-                                                              context) *
-                                                          .05,
-                                                      right: displayWidth(
-                                                              context) *
-                                                          .05,
-                                                    ),
-                                                    child: Center(
-                                                      child: Text(
-                                                        document['description'],
-                                                        style: GoogleFonts
-                                                            .workSans(
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Colors.black,
-                                                        ),
-                                                        textAlign:
-                                                            TextAlign.justify,
-                                                      ),
-                                                    ),
+                    );
+                  // switch (snapshot.connectionState) {
+                  //   case ConnectionState.waiting:
+                  //   // return Container(
+                  //   //   decoration: boxDecoration,
+                  //   //   child: Center(
+                  //   //     child: SizedBox(
+                  //   //       child: CircularProgressIndicator(
+                  //   //         color: Colors.black,
+                  //   //       ),
+                  //   //     ),
+                  //   //   ),
+                  //   // );
+                  //   default:
+                  return PageView.builder(
+                      itemCount: snapshot.data?.docs.length,
+                      controller: controller,
+                      scrollDirection: Axis.vertical,
+                      physics: NeverScrollableScrollPhysics(),
+                      onPageChanged: (value) {},
+                      itemBuilder: (context, index) {
+                        myIndex = index;
+                        document = snapshot.data?.docs[myIndex];
+                        return Scaffold(
+                            backgroundColor: Colors.transparent,
+                            body: DoubleBackToCloseApp(
+                              snackBar: const SnackBar(
+                                content: Text('Tap back again to leave'),
+                              ),
+                              child: Container(
+                                width: displayWidth(context),
+                                height: displayHeight(context),
+                                decoration: boxDecoration,
+                                child: Column(
+                                  children: [
+                                    GameScorePage(level: level),
+                                    SizedBox(
+                                      height: displayHeight(context) * .03,
+                                    ),
+                                    Transform(
+                                      alignment: FractionalOffset.center,
+                                      transform: Matrix4.identity()
+                                        ..setEntry(3, 2, 0.001)
+                                        ..rotateY(pi * _animation.value),
+                                      child: _animation.value <= 0.5
+                                          ? Container(
+                                              alignment: Alignment.center,
+                                              width:
+                                                  displayWidth(context) * .80,
+                                              height:
+                                                  displayHeight(context) * .62,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    displayWidth(context) * .06,
                                                   ),
-                                                  StatefulBuilder(builder:
-                                                      (context, setState) {
-                                                    String ans = '';
-                                                    return Column(
-                                                      children: [
-                                                        Padding(
-                                                            padding: EdgeInsets.only(
-                                                                top: displayHeight(
-                                                                        context) *
-                                                                    .03),
-                                                            child:
-                                                                GestureDetector(
-                                                              onTap: () {
-                                                                setState(() {
-                                                                  ans = document[
-                                                                      'correct_ans'];
-                                                                });
-                                                                list[index].isSelected1 == true ||
-                                                                        list[index].isSelected2 ==
-                                                                            true ||
-                                                                        list[index].isSelected3 ==
-                                                                            true ||
-                                                                        list[index].isSelected4 ==
-                                                                            true
-                                                                    ? _flipCard()
-                                                                    : _checkCorrectAnswer(
-                                                                        ans,
-                                                                        setState,
-                                                                        index,
-                                                                        1);
-                                                              },
-                                                              child: Container(
-                                                                alignment: Alignment
-                                                                    .centerLeft,
-                                                                width: displayWidth(
-                                                                        context) *
-                                                                    .70,
-                                                                height: displayHeight(
-                                                                        context) *
-                                                                    .07,
-                                                                decoration: BoxDecoration(
-                                                                    color: list[index].isSelected1 ==
-                                                                            true
-                                                                        ? color1
-                                                                        : Color(
-                                                                            0xffEBEBEB),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(displayWidth(context) *
-                                                                            .03)),
-                                                                child:
-                                                                    SingleChildScrollView(
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            displayWidth(context) *
-                                                                                .04,
-                                                                        vertical:
-                                                                            displayWidth(context) *
-                                                                                .02),
-                                                                    child: Text(
-                                                                      document[
-                                                                          'option_1'],
-                                                                      style: GoogleFonts.workSans(
-                                                                          color: list[index].isSelected1 == true
-                                                                              ? Colors
-                                                                                  .white
-                                                                              : Color(
-                                                                                  0xff3D2F91),
-                                                                          fontWeight: FontWeight
-                                                                              .w500,
-                                                                          fontSize:
-                                                                              14.sp),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            )),
-                                                        Padding(
-                                                            padding: EdgeInsets.only(
-                                                                top: displayHeight(
-                                                                        context) *
-                                                                    .01),
-                                                            child:
-                                                                GestureDetector(
-                                                              onTap: () {
-                                                                setState(() {
-                                                                  ans = document[
-                                                                      'correct_ans'];
-                                                                });
-                                                                list[index].isSelected1 == true ||
-                                                                        list[index].isSelected2 ==
-                                                                            true ||
-                                                                        list[index].isSelected3 ==
-                                                                            true ||
-                                                                        list[index].isSelected4 ==
-                                                                            true
-                                                                    ? _flipCard()
-                                                                    : _checkCorrectAnswer(
-                                                                        ans,
-                                                                        setState,
-                                                                        index,
-                                                                        2);
-                                                              },
-                                                              child: Container(
-                                                                alignment: Alignment
-                                                                    .centerLeft,
-                                                                width: displayWidth(
-                                                                        context) *
-                                                                    .70,
-                                                                height: displayHeight(
-                                                                        context) *
-                                                                    .07,
-                                                                decoration: BoxDecoration(
-                                                                    color: list[index].isSelected2 ==
-                                                                            true
-                                                                        ? color2
-                                                                        : Color(
-                                                                            0xffEBEBEB),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(displayWidth(context) *
-                                                                            .03)),
-                                                                child:
-                                                                    SingleChildScrollView(
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            displayWidth(context) *
-                                                                                .04,
-                                                                        vertical:
-                                                                            displayWidth(context) *
-                                                                                .02),
-                                                                    child: Text(
-                                                                      document[
-                                                                          'option_2'],
-                                                                      style: GoogleFonts.workSans(
-                                                                          color: list[index].isSelected2 == true
-                                                                              ? Colors
-                                                                                  .white
-                                                                              : Color(
-                                                                                  0xff3D2F91),
-                                                                          fontWeight: FontWeight
-                                                                              .w500,
-                                                                          fontSize:
-                                                                              14.sp),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            )),
-                                                        Padding(
-                                                            padding: EdgeInsets.only(
-                                                                top: displayHeight(
-                                                                        context) *
-                                                                    .01),
-                                                            child:
-                                                                GestureDetector(
-                                                              onTap: () {
-                                                                setState(() {
-                                                                  ans = document[
-                                                                      'correct_ans'];
-                                                                });
-                                                                list[index].isSelected1 == true ||
-                                                                        list[index].isSelected2 ==
-                                                                            true ||
-                                                                        list[index].isSelected3 ==
-                                                                            true ||
-                                                                        list[index].isSelected4 ==
-                                                                            true
-                                                                    ? _flipCard()
-                                                                    : _checkCorrectAnswer(
-                                                                        ans,
-                                                                        setState,
-                                                                        index,
-                                                                        3);
-                                                              },
-                                                              child: Container(
-                                                                alignment: Alignment
-                                                                    .centerLeft,
-                                                                width: displayWidth(
-                                                                        context) *
-                                                                    .70,
-                                                                height: displayHeight(
-                                                                        context) *
-                                                                    .07,
-                                                                decoration: BoxDecoration(
-                                                                    color: list[index].isSelected3 ==
-                                                                            true
-                                                                        ? color3
-                                                                        : Color(
-                                                                            0xffEBEBEB),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(displayWidth(context) *
-                                                                            .03)),
-                                                                child:
-                                                                    SingleChildScrollView(
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            displayWidth(context) *
-                                                                                .04,
-                                                                        vertical:
-                                                                            displayWidth(context) *
-                                                                                .02),
-                                                                    child: Text(
-                                                                      document[
-                                                                          'option_3'],
-                                                                      style: GoogleFonts.workSans(
-                                                                          color: list[index].isSelected3 == true
-                                                                              ? Colors
-                                                                                  .white
-                                                                              : Color(
-                                                                                  0xff3D2F91),
-                                                                          fontWeight: FontWeight
-                                                                              .w500,
-                                                                          fontSize:
-                                                                              14.sp),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            )),
-                                                        Padding(
-                                                            padding: EdgeInsets.only(
-                                                                top: displayHeight(
-                                                                        context) *
-                                                                    .01),
-                                                            child:
-                                                                GestureDetector(
-                                                              onTap: () {
-                                                                setState(() {
-                                                                  ans = document[
-                                                                      'correct_ans'];
-                                                                });
-                                                                list[index].isSelected1 == true ||
-                                                                        list[index].isSelected2 ==
-                                                                            true ||
-                                                                        list[index].isSelected3 ==
-                                                                            true ||
-                                                                        list[index].isSelected4 ==
-                                                                            true
-                                                                    ? _flipCard()
-                                                                    : _checkCorrectAnswer(
-                                                                        ans,
-                                                                        setState,
-                                                                        index,
-                                                                        4);
-                                                              },
-                                                              child: Container(
-                                                                alignment: Alignment
-                                                                    .centerLeft,
-                                                                width: displayWidth(
-                                                                        context) *
-                                                                    .70,
-                                                                height: displayHeight(
-                                                                        context) *
-                                                                    .07,
-                                                                decoration: BoxDecoration(
-                                                                    color: list[index].isSelected4 ==
-                                                                            true
-                                                                        ? color4
-                                                                        : Color(
-                                                                            0xffEBEBEB),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(displayWidth(context) *
-                                                                            .03)),
-                                                                child:
-                                                                    SingleChildScrollView(
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            displayWidth(context) *
-                                                                                .04,
-                                                                        vertical:
-                                                                            displayWidth(context) *
-                                                                                .02),
-                                                                    child: Text(
-                                                                      document[
-                                                                          'option_4'],
-                                                                      style: GoogleFonts.workSans(
-                                                                          color: list[index].isSelected4 == true
-                                                                              ? Colors
-                                                                                  .white
-                                                                              : Color(
-                                                                                  0xff3D2F91),
-                                                                          fontWeight: FontWeight
-                                                                              .w500,
-                                                                          fontSize:
-                                                                              14.sp),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            )),
-                                                      ],
-                                                    );
-                                                  }),
-                                                  SizedBox(
-                                                    height:
-                                                        displayHeight(context) *
-                                                            .01,
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          )
-                                        : Container(
-                                            width: displayWidth(context) * .80,
-                                            height:
-                                                displayHeight(context) * .62,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  displayWidth(context) * .06,
-                                                ),
-                                                color: Colors.white),
-                                            child: Center(
+                                                  color: Colors.white),
                                               child: SingleChildScrollView(
                                                 child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                        top: displayHeight(
+                                                                context) *
+                                                            .01,
+                                                        left: displayWidth(
+                                                                context) *
+                                                            .05,
+                                                        right: displayWidth(
+                                                                context) *
+                                                            .05,
+                                                      ),
+                                                      child: Center(
+                                                        child: Text(
+                                                          document[
+                                                              'description'],
+                                                          style: GoogleFonts
+                                                              .workSans(
+                                                            fontSize: 16.sp,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: Colors.black,
+                                                          ),
+                                                          textAlign:
+                                                              TextAlign.justify,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    StatefulBuilder(builder:
+                                                        (context, setState) {
+                                                      String ans = '';
+                                                      return Column(
+                                                        children: [
+                                                          Padding(
+                                                              padding: EdgeInsets.only(
+                                                                  top: displayHeight(
+                                                                          context) *
+                                                                      .03),
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () {
+                                                                  setState(() {
+                                                                    ans = document[
+                                                                        'correct_ans'];
+                                                                  });
+                                                                  list[index].isSelected1 == true ||
+                                                                          list[index].isSelected2 ==
+                                                                              true ||
+                                                                          list[index].isSelected3 ==
+                                                                              true ||
+                                                                          list[index].isSelected4 ==
+                                                                              true
+                                                                      ? _flipCard()
+                                                                      : _checkCorrectAnswer(
+                                                                          ans,
+                                                                          setState,
+                                                                          index,
+                                                                          1);
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerLeft,
+                                                                  width: displayWidth(
+                                                                          context) *
+                                                                      .70,
+                                                                  height: displayHeight(
+                                                                          context) *
+                                                                      .07,
+                                                                  decoration: BoxDecoration(
+                                                                      color: list[index].isSelected1 ==
+                                                                              true
+                                                                          ? color1
+                                                                          : Color(
+                                                                              0xffEBEBEB),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(displayWidth(context) *
+                                                                              .03)),
+                                                                  child:
+                                                                      SingleChildScrollView(
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsets.symmetric(
+                                                                          horizontal: displayWidth(context) *
+                                                                              .04,
+                                                                          vertical:
+                                                                              displayWidth(context) * .01),
+                                                                      child:
+                                                                          Text(
+                                                                        document[
+                                                                            'option_1'],
+                                                                        style: GoogleFonts.workSans(
+                                                                            color: list[index].isSelected1 == true
+                                                                                ? Colors.white
+                                                                                : Color(0xff3D2F91),
+                                                                            fontWeight: FontWeight.w500,
+                                                                            fontSize: 14.sp),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )),
+                                                          Padding(
+                                                              padding: EdgeInsets.only(
+                                                                  top: displayHeight(
+                                                                          context) *
+                                                                      .01),
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () {
+                                                                  setState(() {
+                                                                    ans = document[
+                                                                        'correct_ans'];
+                                                                  });
+                                                                  list[index].isSelected1 == true ||
+                                                                          list[index].isSelected2 ==
+                                                                              true ||
+                                                                          list[index].isSelected3 ==
+                                                                              true ||
+                                                                          list[index].isSelected4 ==
+                                                                              true
+                                                                      ? _flipCard()
+                                                                      : _checkCorrectAnswer(
+                                                                          ans,
+                                                                          setState,
+                                                                          index,
+                                                                          2);
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerLeft,
+                                                                  width: displayWidth(
+                                                                          context) *
+                                                                      .70,
+                                                                  height: displayHeight(
+                                                                          context) *
+                                                                      .07,
+                                                                  decoration: BoxDecoration(
+                                                                      color: list[index].isSelected2 ==
+                                                                              true
+                                                                          ? color2
+                                                                          : Color(
+                                                                              0xffEBEBEB),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(displayWidth(context) *
+                                                                              .03)),
+                                                                  child:
+                                                                      SingleChildScrollView(
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsets.symmetric(
+                                                                          horizontal: displayWidth(context) *
+                                                                              .04,
+                                                                          vertical:
+                                                                              displayWidth(context) * .01),
+                                                                      child:
+                                                                          Text(
+                                                                        document[
+                                                                            'option_2'],
+                                                                        style: GoogleFonts.workSans(
+                                                                            color: list[index].isSelected2 == true
+                                                                                ? Colors.white
+                                                                                : Color(0xff3D2F91),
+                                                                            fontWeight: FontWeight.w500,
+                                                                            fontSize: 14.sp),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )),
+                                                          Padding(
+                                                              padding: EdgeInsets.only(
+                                                                  top: displayHeight(
+                                                                          context) *
+                                                                      .01),
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () {
+                                                                  setState(() {
+                                                                    ans = document[
+                                                                        'correct_ans'];
+                                                                  });
+                                                                  list[index].isSelected1 == true ||
+                                                                          list[index].isSelected2 ==
+                                                                              true ||
+                                                                          list[index].isSelected3 ==
+                                                                              true ||
+                                                                          list[index].isSelected4 ==
+                                                                              true
+                                                                      ? _flipCard()
+                                                                      : _checkCorrectAnswer(
+                                                                          ans,
+                                                                          setState,
+                                                                          index,
+                                                                          3);
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerLeft,
+                                                                  width: displayWidth(
+                                                                          context) *
+                                                                      .70,
+                                                                  height: displayHeight(
+                                                                          context) *
+                                                                      .07,
+                                                                  decoration: BoxDecoration(
+                                                                      color: list[index].isSelected3 ==
+                                                                              true
+                                                                          ? color3
+                                                                          : Color(
+                                                                              0xffEBEBEB),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(displayWidth(context) *
+                                                                              .03)),
+                                                                  child:
+                                                                      SingleChildScrollView(
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsets.symmetric(
+                                                                          horizontal: displayWidth(context) *
+                                                                              .04,
+                                                                          vertical:
+                                                                              displayWidth(context) * .01),
+                                                                      child:
+                                                                          Text(
+                                                                        document[
+                                                                            'option_3'],
+                                                                        style: GoogleFonts.workSans(
+                                                                            color: list[index].isSelected3 == true
+                                                                                ? Colors.white
+                                                                                : Color(0xff3D2F91),
+                                                                            fontWeight: FontWeight.w500,
+                                                                            fontSize: 14.sp),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )),
+                                                          Padding(
+                                                              padding: EdgeInsets.only(
+                                                                  top: displayHeight(
+                                                                          context) *
+                                                                      .01),
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () {
+                                                                  setState(() {
+                                                                    ans = document[
+                                                                        'correct_ans'];
+                                                                  });
+                                                                  list[index].isSelected1 == true ||
+                                                                          list[index].isSelected2 ==
+                                                                              true ||
+                                                                          list[index].isSelected3 ==
+                                                                              true ||
+                                                                          list[index].isSelected4 ==
+                                                                              true
+                                                                      ? _flipCard()
+                                                                      : _checkCorrectAnswer(
+                                                                          ans,
+                                                                          setState,
+                                                                          index,
+                                                                          4);
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerLeft,
+                                                                  width: displayWidth(
+                                                                          context) *
+                                                                      .70,
+                                                                  height: displayHeight(
+                                                                          context) *
+                                                                      .07,
+                                                                  decoration: BoxDecoration(
+                                                                      color: list[index].isSelected4 ==
+                                                                              true
+                                                                          ? color4
+                                                                          : Color(
+                                                                              0xffEBEBEB),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(displayWidth(context) *
+                                                                              .03)),
+                                                                  child:
+                                                                      SingleChildScrollView(
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsets.symmetric(
+                                                                          horizontal: displayWidth(context) *
+                                                                              .04,
+                                                                          vertical:
+                                                                              displayWidth(context) * .01),
+                                                                      child:
+                                                                          Text(
+                                                                        document[
+                                                                            'option_4'],
+                                                                        style: GoogleFonts.workSans(
+                                                                            color: list[index].isSelected4 == true
+                                                                                ? Colors.white
+                                                                                : Color(0xff3D2F91),
+                                                                            fontWeight: FontWeight.w500,
+                                                                            fontSize: 14.sp),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )),
+                                                        ],
+                                                      );
+                                                    }),
+                                                    SizedBox(
+                                                      height: displayHeight(
+                                                              context) *
+                                                          .01,
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                          : Container(
+                                              width:
+                                                  displayWidth(context) * .80,
+                                              height:
+                                                  displayHeight(context) * .62,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    displayWidth(context) * .06,
+                                                  ),
+                                                  color: Colors.white),
+                                              child: Center(
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
                                                   children: [
                                                     Transform(
                                                         alignment:
                                                             FractionalOffset
                                                                 .center,
-                                                        transform: Matrix4
-                                                            .identity()
-                                                          ..setEntry(3, 2, 0.001)
-                                                          ..rotateY(pi *
-                                                              _animation.value),
+                                                        transform:
+                                                            Matrix4.identity()
+                                                              ..setEntry(
+                                                                  3, 2, 0.001)
+                                                              ..rotateY(pi *
+                                                                  _animation
+                                                                      .value),
                                                         child: Center(
                                                           child: Column(
                                                             children: [
+                                                              Text(
+                                                                'Explanation',
+                                                                style: GoogleFonts
+                                                                    .workSans(
+                                                                  fontSize:
+                                                                      18.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .black,
+                                                                ),
+                                                              ),
                                                               Padding(
                                                                 padding: EdgeInsets.only(
                                                                     left: displayWidth(
                                                                             context) *
                                                                         .06,
-                                                                    right: displayWidth(
-                                                                            context) *
-                                                                        .06,
+                                                                    right:
+                                                                        displayWidth(context) *
+                                                                            .06,
                                                                     top: displayWidth(
                                                                             context) *
                                                                         .08,
@@ -882,271 +906,330 @@ class _PopQuizState extends State with SingleTickerProviderStateMixin {
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                  ),
-                                  SizedBox(
-                                    height: displayHeight(context) * .03,
-                                  ),
-                                  Container(
-                                      width: displayWidth(context) * .76,
-                                      height: displayHeight(context) * .07,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            displayHeight(context) * .08),
-                                      ),
-                                      child: _animation.value >= 0.5
-                                          ? ElevatedButton(
-                                              onPressed: () {
-                                                print('my index $index');
-                                                index = index;
-                                                _flipCard();
-                                              },
-                                              style: ButtonStyle(
-                                                  backgroundColor:
-                                                      MaterialStateProperty.all(
-                                                          Colors.white),
-                                                  shape: MaterialStateProperty.all(
-                                                      RoundedRectangleBorder(
-                                                          side: BorderSide(
-                                                            color: Color(
-                                                                0xff4D6EF2),
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  displayWidth(context) *
-                                                                      .04)))),
-                                              child: Text(
-                                                'Tap To See Question',
-                                                style: GoogleFonts.workSans(
-                                                    color: Color(0xff3D2F91),
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 12.sp),
-                                              ))
-                                          : ElevatedButton(
-                                              onPressed: () async {
-                                                if (index ==
-                                                    snapshot.data!.docs.length -
-                                                        1) {
-                                                  DocumentSnapshot
-                                                      documentSnapshot =
-                                                      await firestore
-                                                          .collection('User')
-                                                          .doc(userId)
-                                                          .get();
+                                    ),
+                                    SizedBox(
+                                      height: displayHeight(context) * .03,
+                                    ),
+                                    Container(
+                                        width: displayWidth(context) * .76,
+                                        height: displayHeight(context) * .07,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                              displayHeight(context) * .08),
+                                        ),
+                                        child: _animation.value >= 0.5
+                                            ? ElevatedButton(
+                                                onPressed: () {
+                                                  print('my index $index');
+                                                  index = index;
+                                                  _flipCard();
+                                                },
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty.all(
+                                                            Colors.white),
+                                                    shape: MaterialStateProperty.all(
+                                                        RoundedRectangleBorder(
+                                                            side: BorderSide(
+                                                              color: Color(
+                                                                  0xff4D6EF2),
+                                                            ),
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                    displayWidth(context) *
+                                                                        .04)))),
+                                                child: Text(
+                                                  'Tap To See Question',
+                                                  style: GoogleFonts.workSans(
+                                                      color: Color(0xff3D2F91),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 12.sp),
+                                                ))
+                                            : ElevatedButton(
+                                                onPressed: () async {
+                                                  SharedPreferences pref =
+                                                      await SharedPreferences
+                                                          .getInstance();
+                                                  userId = pref.get('uId');
+                                                  if (index ==
+                                                      snapshot.data!.docs
+                                                              .length -
+                                                          1) {
+                                                    DocumentSnapshot
+                                                        documentSnapshot =
+                                                        await firestore
+                                                            .collection('User')
+                                                            .doc(userId)
+                                                            .get();
 
-                                                  bool value = documentSnapshot
-                                                      .get('replay_level');
-                                                  level = documentSnapshot
-                                                      .get('last_level');
-                                                  int myBal = documentSnapshot
-                                                      .get('account_balance');
-                                                  print('My bal $myBal');
-                                                  level = level
-                                                      .toString()
-                                                      .substring(6, 7);
-                                                  int lev = int.parse(level);
-
-                                                  if (value == true) {
-                                                    Future.delayed(
-                                                        Duration(seconds: 1),
-                                                        () => showDialog(
-                                                            context: context,
-                                                            barrierDismissible:
-                                                                false,
-                                                            builder: (context) {
-                                                              return WillPopScope(
-                                                                onWillPop: () {
-                                                                  return Future
-                                                                      .value(
-                                                                          false);
-                                                                },
-                                                                child:
-                                                                    AlertDialog(
-                                                                  elevation:
-                                                                      3.0,
-                                                                  shape: RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(displayWidth(context) *
-                                                                              .04)),
-                                                                  titlePadding:
-                                                                      EdgeInsets
-                                                                          .zero,
-                                                                  title:
-                                                                      Container(
-                                                                    width: displayWidth(
-                                                                        context),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding:
-                                                                          EdgeInsets.all(
-                                                                              8.0),
+                                                    bool value =
+                                                        documentSnapshot.get(
+                                                            'replay_level');
+                                                    level = documentSnapshot
+                                                        .get('last_level');
+                                                    int myBal = documentSnapshot
+                                                        .get('account_balance');
+                                                    print('My bal $myBal');
+                                                    level = level
+                                                        .toString()
+                                                        .substring(6, 7);
+                                                    int lev = int.parse(level);
+                                                    if (value == true) {
+                                                      Future.delayed(
+                                                          Duration(seconds: 1),
+                                                          () => showDialog(
+                                                              context: context,
+                                                              barrierDismissible:
+                                                                  false,
+                                                              builder:
+                                                                  (context) {
+                                                                return WillPopScope(
+                                                                  onWillPop:
+                                                                      () {
+                                                                    return Future
+                                                                        .value(
+                                                                            false);
+                                                                  },
+                                                                  child:
+                                                                      AlertDialog(
+                                                                    elevation:
+                                                                        3.0,
+                                                                    shape: RoundedRectangleBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(displayWidth(context) *
+                                                                                .04)),
+                                                                    titlePadding:
+                                                                        EdgeInsets
+                                                                            .zero,
+                                                                    title:
+                                                                        Container(
+                                                                      width: displayWidth(
+                                                                          context),
                                                                       child:
-                                                                          Text(
-                                                                        'Congratulations! You have completed this level successfully',
-                                                                        textAlign:
-                                                                            TextAlign.center,
-                                                                        style: GoogleFonts.workSans(
-                                                                            fontSize:
-                                                                                14.sp,
-                                                                            color: Colors.black,
-                                                                            fontWeight: FontWeight.w500),
-                                                                      ),
-                                                                    ),
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                            borderRadius:
-                                                                                BorderRadius.only(
-                                                                              topRight: Radius.circular(displayWidth(context) * .04),
-                                                                              topLeft: Radius.circular(displayWidth(context) * .04),
-                                                                            ),
-                                                                            color: Color(0xffE9E5FF)),
-                                                                  ),
-                                                                  content:
-                                                                      Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .min,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .start,
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      if (lev >
-                                                                          1)
-                                                                        Text(
-                                                                          'Which level you want play ?',
-                                                                          style: GoogleFonts.workSans(
-                                                                              fontSize: 12.sp,
-                                                                              color: Colors.black,
-                                                                              fontWeight: FontWeight.w400),
-                                                                        ),
-                                                                      if (lev >
-                                                                          1)
-                                                                        _level1(
-                                                                            lev),
-                                                                      if (lev >
-                                                                          2)
-                                                                        _level2(
-                                                                            lev),
-                                                                      if (lev >
-                                                                          3)
-                                                                        _level3(
-                                                                            lev),
-                                                                      if (lev >
-                                                                          4)
-                                                                        _level4(
-                                                                            lev),
-                                                                      if (lev >
-                                                                          5)
-                                                                        _level5(
-                                                                            lev),
-                                                                      Padding(
+                                                                          Padding(
                                                                         padding:
-                                                                            EdgeInsets.only(top: displayHeight(context) * .03),
+                                                                            EdgeInsets.all(8.0),
                                                                         child:
                                                                             Text(
-                                                                          'Want to play current level ?',
+                                                                          'Congratulations! You have completed this level successfully',
+                                                                          textAlign:
+                                                                              TextAlign.center,
                                                                           style: GoogleFonts.workSans(
-                                                                              fontSize: 12.sp,
+                                                                              fontSize: 14.sp,
                                                                               color: Colors.black,
-                                                                              fontWeight: FontWeight.w400),
+                                                                              fontWeight: FontWeight.w500),
                                                                         ),
                                                                       ),
-                                                                      if (lev ==
-                                                                          1)
-                                                                        _level1(
-                                                                            lev),
-                                                                      if (lev ==
-                                                                          2)
-                                                                        _level2(
-                                                                            lev),
-                                                                      if (lev ==
-                                                                          3)
-                                                                        _level3(
-                                                                            lev),
-                                                                      if (lev ==
-                                                                          4)
-                                                                        _level4(
-                                                                            lev),
-                                                                      if (lev ==
-                                                                          5)
-                                                                        _level5(
-                                                                            lev),
-                                                                    ],
+                                                                      decoration: BoxDecoration(
+                                                                          borderRadius: BorderRadius.only(
+                                                                            topRight:
+                                                                                Radius.circular(displayWidth(context) * .04),
+                                                                            topLeft:
+                                                                                Radius.circular(displayWidth(context) * .04),
+                                                                          ),
+                                                                          color: Color(0xffE9E5FF)),
+                                                                    ),
+                                                                    content:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .min,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .start,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        if (lev >
+                                                                            1)
+                                                                          Text(
+                                                                            'Which level you want play ?',
+                                                                            style: GoogleFonts.workSans(
+                                                                                fontSize: 12.sp,
+                                                                                color: Colors.black,
+                                                                                fontWeight: FontWeight.w400),
+                                                                          ),
+                                                                        if (lev >
+                                                                            1)
+                                                                          _level1(
+                                                                              lev),
+                                                                        if (lev >
+                                                                            2)
+                                                                          _level2(
+                                                                              lev),
+                                                                        if (lev >
+                                                                            3)
+                                                                          _level3(
+                                                                              lev),
+                                                                        if (lev >
+                                                                            4)
+                                                                          _level4(
+                                                                              lev),
+                                                                        if (lev >
+                                                                            5)
+                                                                          _level5(
+                                                                              lev),
+                                                                        Padding(
+                                                                          padding:
+                                                                              EdgeInsets.only(top: displayHeight(context) * .03),
+                                                                          child:
+                                                                              Text(
+                                                                            'Want to play current level ?',
+                                                                            style: GoogleFonts.workSans(
+                                                                                fontSize: 12.sp,
+                                                                                color: Colors.black,
+                                                                                fontWeight: FontWeight.w400),
+                                                                          ),
+                                                                        ),
+                                                                        if (lev ==
+                                                                            1)
+                                                                          _level1(
+                                                                              lev),
+                                                                        if (lev ==
+                                                                            2)
+                                                                          _level2(
+                                                                              lev),
+                                                                        if (lev ==
+                                                                            3)
+                                                                          _level3(
+                                                                              lev),
+                                                                        if (lev ==
+                                                                            4)
+                                                                          _level4(
+                                                                              lev),
+                                                                        if (lev ==
+                                                                            5)
+                                                                          _level5(
+                                                                              lev),
+                                                                      ],
+                                                                    ),
                                                                   ),
-                                                                ),
-                                                              );
-                                                            }));
+                                                                );
+                                                              }));
+                                                    } else {
+                                                      firestore
+                                                          .collection('User')
+                                                          .doc(userId)
+                                                          .update({
+                                                        'previous_session_info':
+                                                           popQuiz ==
+                                                               'Level_2_Pop_Quiz' ? 'Level_3_setUp_page' : 'Coming_soon',
+                                                        'level_id': 0,
+                                                        'bill_payment': 0,
+                                                        'credit_card_balance':
+                                                            0,
+                                                        'credit_card_bill': 0,
+                                                        'credit_score': 0,
+                                                        'payable_bill': 0,
+                                                        'score': 0,
+                                                        'replay_level': false,
+                                                        'last_level':
+                                                            'Level_3_setUp_page',
+                                                        'need': 0,
+                                                        'want': 0,
+                                                      });
+                                                      popQuiz ==
+                                                              'Level_2_Pop_Quiz'
+                                                          ? firestore
+                                                              .collection(
+                                                                  'User')
+                                                              .doc(userId)
+                                                              .update({
+                                                              'level_id':
+                                                                  index + 1,
+                                                              'level_2_popQuiz_id':
+                                                                  index + 1,
+                                                            }).then((value) {
+                                                              Future.delayed(
+                                                                  Duration(
+                                                                      seconds:
+                                                                          2),
+                                                                  () => Navigator
+                                                                      .pushReplacement(
+                                                                          context,
+                                                                          MaterialPageRoute(
+                                                                            builder: (context) =>
+                                                                                LevelThreeSetUpPage(controller: PageController()),
+                                                                          )));
+                                                            })
+                                                          : firestore
+                                                              .collection(
+                                                                  'User')
+                                                              .doc(userId)
+                                                              .update({
+                                                              'level_id':
+                                                                  index + 1,
+                                                              'level_3_popQuiz_id':
+                                                                  index + 1,
+                                                            }).then((value) {
+                                                              Future.delayed(
+                                                                  Duration(
+                                                                      seconds:
+                                                                          2),
+                                                                  () => Navigator
+                                                                      .pushReplacement(
+                                                                          context,
+                                                                          MaterialPageRoute(
+                                                                            builder: (context) =>
+                                                                                ComingSoon(),
+                                                                          )));
+                                                            });
+                                                    }
                                                   } else {
                                                     firestore
                                                         .collection('User')
                                                         .doc(userId)
                                                         .update({
-                                                      'previous_session_info':
-                                                          'Level_3_setUp_page',
-                                                      'level_id': 0,
-                                                      'bill_payment': 0,
-                                                      'credit_card_balance': 0,
-                                                      'credit_card_bill': 0,
-                                                      'credit_score': 0,
-                                                      'payable_bill': 0,
-                                                      'score': 0,
-                                                      'replay_level': false,
-                                                      'last_level':
-                                                          'Level_3_setUp_page',
-                                                      'need': 0,
-                                                      'want': 0,
+                                                      'level_id': index + 1,
+                                                      if (popQuiz ==
+                                                          'Level_2_Pop_Quiz')
+                                                        'level_2_popQuiz_id':
+                                                            index + 1,
+                                                      if (popQuiz ==
+                                                          'Level_3_Pop_Quiz')
+                                                        'level_3_popQuiz_id':
+                                                            index + 1,
+                                                    }).then((value) {
+                                                      controller.nextPage(
+                                                          duration: Duration(
+                                                              seconds: 1),
+                                                          curve: Curves.easeIn);
                                                     });
-                                                    Future.delayed(
-                                                        Duration(seconds: 3),
-                                                        () => Navigator
-                                                            .pushReplacement(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                  builder: (context) =>
-                                                                      LevelThreeSetUpPage(
-                                                                          controller:
-                                                                              PageController()),
-                                                                )));
                                                   }
-                                                } else {
-                                                  controller.nextPage(
-                                                      duration:
-                                                          Duration(seconds: 1),
-                                                      curve: Curves.easeIn);
-                                                }
-                                              },
-                                              style: ButtonStyle(
-                                                  backgroundColor:
-                                                      MaterialStateProperty.all(
-                                                          Colors.white),
-                                                  shape: MaterialStateProperty.all(
-                                                      RoundedRectangleBorder(
-                                                          side: BorderSide(
-                                                            color: Color(
-                                                                0xff4D6EF2),
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  displayWidth(context) *
-                                                                      .04)))),
-                                              child: Text(
-                                                'Tap To Move Next Question',
-                                                style: GoogleFonts.workSans(
-                                                    color: Color(0xff3D2F91),
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 12.sp),
-                                              )))
-                                ],
+                                                },
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(Colors.white),
+                                                    shape: MaterialStateProperty.all(
+                                                        RoundedRectangleBorder(
+                                                            side: BorderSide(
+                                                              color: Color(
+                                                                  0xff4D6EF2),
+                                                            ),
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                    displayWidth(context) *
+                                                                        .04)))),
+                                                child: Text(
+                                                  'Tap To Move Next Question',
+                                                  style: GoogleFonts.workSans(
+                                                      color: Color(0xff3D2F91),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 12.sp),
+                                                )))
+                                  ],
+                                ),
                               ),
-                            ),
-                          ));
-                    });
-              }
-              //},
-              ),
+                            ));
+                      });
+                }
+                //},
+                ),
+      ),
     );
   }
 
@@ -1212,11 +1295,14 @@ class _PopQuizState extends State with SingleTickerProviderStateMixin {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(displayWidth(context) * .12)),
           child: ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
+              DocumentSnapshot document =
+                  await firestore.collection('User').doc(userId).get();
+              gameScore = document.get('game_score');
               if (lev == 1) {
                 firestore.collection('User').doc(userId).update({
                   'replay_level': false,
-                  'previous_session_info': 'Level_1_setUp_page',
+                  'previous_session_info': 'Level_1',
                   'account_balance': 0,
                   'bill_payment': 0,
                   'credit_card_balance': 0,
@@ -1226,19 +1312,27 @@ class _PopQuizState extends State with SingleTickerProviderStateMixin {
                   'payable_bill': 0,
                   'quality_of_life': 0,
                   'score': 0,
-                  'last_level': 'Level_1_setUp_page',
+                  'last_level': 'Level_1',
                 });
                 Navigator.pushReplacement(
                     context,
                     PageTransition(
-                        child: LevelOneSetUpPage(
-                          controller: PageController(),
+                        child: AllQueLevelOne(
+                          billPayment: 0,
+                          gameScore: gameScore,
+                          level: 'Level_1',
+                          levelId: 0,
+                          qOl: 0,
+                          savingBalance: 200,
+                          creditCardBalance: 0,
+                          creditCardBill: 0,
+                          payableBill: 0,
                         ),
                         duration: Duration(milliseconds: 500),
                         type: PageTransitionType.bottomToTop));
               } else {
                 firestore.collection('User').doc(userId).update({
-                  'previous_session_info': 'Level_1_setUp_page',
+                  'previous_session_info': 'Level_1',
                   'account_balance': 0,
                   'bill_payment': 0,
                   'credit_card_balance': 0,
@@ -1252,8 +1346,16 @@ class _PopQuizState extends State with SingleTickerProviderStateMixin {
                 Navigator.pushReplacement(
                     context,
                     PageTransition(
-                        child: LevelOneSetUpPage(
-                          controller: PageController(),
+                        child: AllQueLevelOne(
+                          billPayment: 0,
+                          gameScore: gameScore,
+                          level: 'Level_1',
+                          levelId: 0,
+                          qOl: 0,
+                          savingBalance: 200,
+                          creditCardBalance: 0,
+                          creditCardBill: 0,
+                          payableBill: 0,
                         ),
                         duration: Duration(milliseconds: 500),
                         type: PageTransitionType.bottomToTop));

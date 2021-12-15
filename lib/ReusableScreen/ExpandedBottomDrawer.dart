@@ -36,6 +36,39 @@ class _ExpandedBottomDrawerState extends State<ExpandedBottomDrawer> {
     });
   }
 
+  List<BottomDrawer> info = [
+    BottomDrawer(
+        id: 1,
+        image: 'assets/saveMoney.png',
+        info:
+            'This is your bank balance. Every time you make a purchase the corresponding amount will be deducted from here.',
+        text: 'Account Balance'),
+    BottomDrawer(
+        id: 2,
+        image: 'assets/symbol.png',
+        info:
+            'This indicates your standard of living. The more expensive choices in the game earn higher Quality of Life points. ',
+        text: 'Quality Of Life'),
+  BottomDrawer(
+        id: 3,
+        image: 'assets/credit_score.png',
+        info:
+            'This represents how well you use your Credit Card which depends on various factors. Read the Insights Cards to learn how to maximize your Credit Score.',
+        text: 'Credit Score') ,
+    // BottomDrawer(
+    //     id: 4,
+    //     image: 'assets/netWorth.png',
+    //     info:
+    //         'This indicates your overall financial situation. Acquire more assets and keep your liabilities low to earn a high Net Worth Score.',
+    //     text: 'Net Worth'),
+    BottomDrawer(
+        id: 5,
+        image: 'assets/star.png',
+        info:
+            'This is a total of your Account Balance, Quality of life, Credit Score and Net Worth. You need to balance individual score points to maximise your Game Score.',
+        text: 'Game Score'),
+  ];
+
   @override
   void initState() {
     getUserValue();
@@ -45,6 +78,7 @@ class _ExpandedBottomDrawerState extends State<ExpandedBottomDrawer> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: displayWidth(context),
       decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -64,288 +98,93 @@ class _ExpandedBottomDrawerState extends State<ExpandedBottomDrawer> {
             color: Color(0xffC3A7FF),
           ),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    width: displayWidth(context),
-                    height: displayHeight(context) * .09,
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
+            child:  ListView.builder(
+              itemCount:info.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
                       padding: EdgeInsets.only(
                         top: displayHeight(context) * .02,
                         left: displayHeight(context) * .08,
                       ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                      child: index != 2 || level == 'Level_3' ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Image.asset(
-                            'assets/saveMoney.png',
-                            width: displayWidth(context) * .12,
-                            fit: BoxFit.contain,
+                          Expanded(
+                            child: Image.asset(
+                              '${info[index].image}',
+                              width: displayWidth(context) * .12,
+                              fit: BoxFit.contain,
+                            ) ,
+                            flex: 2,
                           ),
                           SizedBox(
-                            width: displayWidth(context) * .07,
+                            width: displayWidth(context) * .06,
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _savingBalance(),
-                              Container(
-                                child: Text(
-                                  'Account Balance',
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (index == 0) _savingBalance(),
+                                if (index == 1) _qualityOfLife(),
+                                if (index == 2) _creditScore()  ,
+                                if (index == 3) _gameScore(),
+                                if (index == 4) _gameScore(),
+                                Text(
+                                  '${info[index].text}',
                                   style: GoogleFonts.workSans(
                                       color: Colors.white,
                                       fontSize: 12.sp,
                                       fontWeight: FontWeight.w400),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
+                            flex: 10,
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: displayHeight(context) * .01,
-                      left: displayHeight(context) * .06,
-                      right: displayHeight(context) * .01,
-                    ),
-                    child: Text(
-                      'This is your bank balance.Every time you make a purchase the corresponding amount will be deducted from here.',
-                      style: GoogleFonts.workSans(
-                          color: Colors.white,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                  SizedBox(
-                    height: displayHeight(context) * .02,
-                  ),
-                  Container(
-                    width: displayWidth(context),
-                    height: displayHeight(context) * .09,
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        top: displayHeight(context) * .02,
-                        left: displayHeight(context) * .08,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/symbol.png',
-                            width: displayWidth(context) * .09,
-                            fit: BoxFit.contain,
-                          ),
-                          SizedBox(
-                            width: displayWidth(context) * .09,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _qualityOfLife(),
-                              Text(
-                                'Quality Of Life',
-                                style: GoogleFonts.workSans(
-                                    color: Colors.white,
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  right: displayWidth(context) * .10),
+                              child: Tooltip(
+                                message: '${info[index].info}',
+                                height: displayHeight(context) * .06,
+                                triggerMode: TooltipTriggerMode.tap,
+                                textStyle: GoogleFonts.workSans(
+                                    color: Color(0xff000072),
                                     fontSize: 12.sp,
                                     fontWeight: FontWeight.w400),
+                                padding:
+                                    EdgeInsets.all(displayWidth(context) * .03),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(
+                                      displayWidth(context) * .04),
+                                ),
+                                preferBelow: false,
+                                verticalOffset: displayHeight(context) * .02,
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: displayWidth(context) * .10),
+                                child: Image.asset(
+                                  'assets/i.png',
+                                  width: displayWidth(context) * .06,
+                                  fit: BoxFit.contain,
+                                ),
                               ),
-                            ],
-                          ),
+                            ),
+                            flex: 3,
+                          )
                         ],
-                      ),
+                      ) :
+                      SizedBox(),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: displayHeight(context) * .01,
-                      left: displayHeight(context) * .06,
-                      right: displayHeight(context) * .01,
-                    ),
-                    child: Text(
-                      'This indicates your standard of living. The more expensive choices in the game earn higher Quality of Life points. ',
-                      style: GoogleFonts.workSans(
-                          color: Colors.white,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                  SizedBox(
-                    height: displayHeight(context) * .01,
-                  ),
-                  Container(
-                    width: displayWidth(context),
-                    height: displayHeight(context) * .09,
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        top: displayHeight(context) * .02,
-                        left: displayHeight(context) * .08,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/credit_score.png',
-                            width: displayWidth(context) * .09,
-                            fit: BoxFit.contain,
-                          ),
-                          SizedBox(
-                            width: displayWidth(context) * .09,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _creditScore(),
-                              Text(
-                                'Credit Score',
-                                style: GoogleFonts.workSans(
-                                    color: Colors.white,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: displayHeight(context) * .01,
-                      left: displayHeight(context) * .06,
-                      right: displayHeight(context) * .01,
-                    ),
-                    child: Text(
-                      'This represents how well you use your Credit Card which depends on various factors. Read the Insights Cards to learn how to maximize your Credit Score.',
-                      style: GoogleFonts.workSans(
-                          color: Colors.white,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                  SizedBox(
-                    height: displayHeight(context) * .01,
-                  ),
-                  Container(
-                    width: displayWidth(context),
-                    height: displayHeight(context) * .09,
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        top: displayHeight(context) * .02,
-                        left: displayHeight(context) * .08,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/netWorth.png',
-                            width: displayWidth(context) * .09,
-                            fit: BoxFit.contain,
-                          ),
-                          SizedBox(
-                            width: displayWidth(context) * .09,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _creditScore(),
-                              Text(
-                                'Net Worth',
-                                style: GoogleFonts.workSans(
-                                    color: Colors.white,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: displayHeight(context) * .01,
-                      left: displayHeight(context) * .06,
-                      right: displayHeight(context) * .01,
-                    ),
-                    child: Text(
-                      'This indicates your overall financial situation. Acquire more assets and keep your liabilities low to earn a high Net Worth Score.',
-                      style: GoogleFonts.workSans(
-                          color: Colors.white,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                  SizedBox(
-                    height: displayHeight(context) * .01,
-                  ),
-                  Container(
-                    width: displayWidth(context),
-                    height: displayHeight(context) * .09,
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        top: displayHeight(context) * .02,
-                        left: displayHeight(context) * .08,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/star.png',
-                            width: displayWidth(context) * .09,
-                            fit: BoxFit.contain,
-                          ),
-                          SizedBox(
-                            width: displayWidth(context) * .09,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _gameScore(),
-                              Text(
-                                'Game Score',
-                                style: GoogleFonts.workSans(
-                                    color: Colors.white,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: displayHeight(context) * .01,
-                      left: displayHeight(context) * .06,
-                      right: displayHeight(context) * .01,
-                    ),
-                    child: Text(
-                      'This is a total of your Account Balance, Quality of life, Credit Score and Net Worth. You need to balance individual score points to maximise your Game Score.',
-                      style: GoogleFonts.workSans(
-                          color: Colors.white,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                  SizedBox(
-                    height: displayHeight(context) * .01,
-                  ),
-                ],
-              ),
+
+                  ],
+                );
+              },
             ),
           ),
           SizedBox(
@@ -355,7 +194,6 @@ class _ExpandedBottomDrawerState extends State<ExpandedBottomDrawer> {
       ),
     );
   }
-
   _qualityOfLife() {
     return _qol.toString().isEmpty
         ? Center(
@@ -406,7 +244,6 @@ class _ExpandedBottomDrawerState extends State<ExpandedBottomDrawer> {
             },
           );
   }
-
   _gameScore() {
     return _gameS.toString().isEmpty
         ? Center(
@@ -457,7 +294,6 @@ class _ExpandedBottomDrawerState extends State<ExpandedBottomDrawer> {
             },
           );
   }
-
   _savingBalance() {
     return _accountBal.toString().isEmpty
         ? Center(
@@ -508,7 +344,6 @@ class _ExpandedBottomDrawerState extends State<ExpandedBottomDrawer> {
             },
           );
   }
-
   _creditScore() {
     return creditScore.toString().isEmpty
         ? Center(
@@ -559,4 +394,27 @@ class _ExpandedBottomDrawerState extends State<ExpandedBottomDrawer> {
             },
           );
   }
+}
+
+class BottomDrawer {
+  int? id;
+  String? image;
+  String? text;
+  String? info;
+
+  BottomDrawer({this.id, this.image, this.text, this.info});
+
+  factory BottomDrawer.fromJson(Map<String, dynamic> json) => BottomDrawer(
+        id: json["id"],
+        image: json["image"],
+        text: json["text"],
+        info: json["info"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "image": image,
+        "text": text,
+        "info": info,
+      };
 }

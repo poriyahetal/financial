@@ -3,11 +3,9 @@ import 'package:financial/ReusableScreen/GlobleVariable.dart';
 import 'package:financial/ReusableScreen/GradientText.dart';
 import 'package:financial/Screens/ProfilePage.dart';
 import 'package:financial/Screens/devicesSizePage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:showcaseview/showcaseview.dart';
 import 'package:sizer/sizer.dart';
 import 'dart:math' as math;
 
@@ -121,11 +119,10 @@ class _GameScorePageState extends State<GameScorePage> {
                         MaterialPageRoute(builder: (context) => ProfilePage()));
                   },
                   child:  Image.asset(
-                    'assets/fish.png',
-                    width: displayWidth(context) * .10,
+                    'assets/profileImage.png',
+                    width: displayWidth(context) * .12,
                     fit: BoxFit.contain,
                   )
-
                 ),
               ),
             ],

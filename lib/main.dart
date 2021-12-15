@@ -1,43 +1,31 @@
 // @dart=2.9
-
 import 'package:country_code_picker/country_localizations.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:financial/ReusableScreen/GameScorePage.dart';
-import 'package:financial/Screens/AllQueLevelOne.dart';
-import 'package:financial/Screens/EmailVerificationPage.dart';
-import 'package:financial/Screens/IntroScreen.dart';
-import 'package:financial/Screens/LevelFourHouseRent.dart';
-import 'package:financial/Screens/LevelTwoSetUpPage.dart';
-import 'package:financial/Screens/PopQuiz.dart';
 import 'package:financial/Screens/SplashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:showcaseview/showcaseview.dart';
 import 'package:sizer/sizer.dart';
-
-import 'Screens/IntroScreen.dart';
 import 'Screens/SplashScreen.dart';
 
+
+//
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
+//   runApp(  DevicePreview(
+//     enabled: !kReleaseMode,
+//     builder: (context) => MyApp(), // Wrap your app
+//   ),);
+// }
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(  DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => MyApp(), // Wrap your app
-  ),);
+  runApp(MyApp());
 }
-
-
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp();
-//   runApp(MyApp());
-// }
 
 
 class MyApp extends StatefulWidget {
@@ -130,19 +118,19 @@ class _MyAppState extends State<MyApp> {
         localizationsDelegates: [
           CountryLocalizations.delegate,
         ],
-        // builder: (BuildContext context, Widget child) {
-        //   return MediaQuery(
-        //     data: MediaQuery.of(context).copyWith(
-        //       textScaleFactor: 1.0,
-        //     ),
-        //     //set desired text scale factor here
-        //     child: child,
-        //   );
-        // },
-        title: 'Finshark',
+        builder: (BuildContext context, Widget child) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              textScaleFactor: 1.0,
+            ),
+            //set desired text scale factor here
+            child: child,
+          );
+        },
+         title: 'Finshark',
         debugShowCheckedModeBanner: false,
-        locale: DevicePreview.locale(context), // Add the locale here
-        builder: DevicePreview.appBuilder, // Add the builder here
+        // locale: DevicePreview.locale(context), // Add the locale here
+        // builder: DevicePreview.appBuilder, // Add the builder here
         home: SplashScreen()
       );
     });

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
-import 'package:financial/Model/QueModel.dart';
 import 'package:financial/Screens/AllQueLevelThree.dart';
 import 'package:financial/Screens/AllQueLevelTwo.dart';
 import 'package:financial/ReusableScreen/GlobleVariable.dart';
@@ -29,7 +28,6 @@ class _AllDoneState extends State<AllDone> {
   getUID() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     userId = pref.getString('uId');
-    print('UserId :$userId');
   }
 
   @override
@@ -93,94 +91,6 @@ class _AllDoneState extends State<AllDone> {
                           BorderRadius.circular(displayWidth(context) * .12)),
                   child: TextButton(
                     onPressed: () {
-                      getUserData() async {
-                        String level;
-                        FirebaseFirestore.instance
-                            .collection('User')
-                            .doc(userId)
-                            .get()
-                            .then((doc) => {
-                                  level = doc.get("previous_session_info"),
-                                  gameScore = doc.get('game_score'),
-                                  if (level == 'Level_2_setUp_page')
-                                    {
-                                      FirebaseFirestore.instance
-                                          .collection('User')
-                                          .doc(userId)
-                                          .update({
-                                        'bill_payment': globalVar,
-                                        'previous_session_info': 'Level_2',
-                                        'last_level': 'Level_2',
-                                        'game_score': gameScore,
-                                        'account_balance': 0,
-                                        'quality_of_life': 0,
-                                        'level_id': 0,
-                                        'credit_card_balance': 0,
-                                        'credit_card_bill': 0,
-                                        'credit_score': 0,
-                                        'payable_bill': 0,
-                                        'replay_level': false,
-                                        'score': 0,
-                                        'need': 0,
-                                        'want': 0,
-                                      }),
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AllQueLevelTwo(
-                                                    savingBalance: 0,
-                                                    qOl: 0,
-                                                    levelId: 0,
-                                                    gameScore: gameScore,
-                                                    billPayment: globalVar,
-                                                    level: 'Level_2',
-                                                    payableBill: 0,
-                                                    creditCardBill: 0,
-                                                    creditCardBalance: 0,
-                                                  ))),
-                                    },
-                                  if (level == 'Level_3_setUp_page')
-                                    {
-                                      FirebaseFirestore.instance
-                                          .collection('User')
-                                          .doc(userId)
-                                          .update({
-                                        'bill_payment': globalVar,
-                                        'credit_card_bill': 0,
-                                        'previous_session_info': 'Level_3',
-                                        'last_level': 'Level_3',
-                                        'game_score': gameScore,
-                                        'credit_card_balance': 2000,
-                                        'account_balance': 0,
-                                        'level_id': 0,
-                                        'credit_score': 350,
-                                        'quality_of_life': 0,
-                                        'payable_bill': 0,
-                                        'score': 350,
-                                        'need': 0,
-                                        'want': 0,
-                                        'replay_level': false,
-                                      }),
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AllQueLevelThree(
-                                                    savingBalance: 0,
-                                                    qOl: 0,
-                                                    levelId: 0,
-                                                    gameScore: gameScore,
-                                                    billPayment: globalVar,
-                                                    level: 'Level_3',
-                                                    creditCardBalance: 500,
-                                                    creditCardBill: 0,
-                                                    payableBill: 0,
-                                                  ))),
-                                    }
-                                });
-                      }
-
                       getUserData();
                     },
                     child: GradientText(
@@ -199,5 +109,97 @@ class _AllDoneState extends State<AllDone> {
             ),
           )),
     );
+  }
+
+  getUserData() async {
+    String level;
+    bool replayLevel;
+    FirebaseFirestore.instance
+        .collection('User')
+        .doc(userId)
+        .get()
+        .then((doc) => {
+      level = doc.get("previous_session_info"),
+      gameScore = doc.get('game_score'),
+      replayLevel = doc.get('replay_level'),
+      if (level == 'Level_2_setUp_page')
+        {
+          FirebaseFirestore.instance
+              .collection('User')
+              .doc(userId)
+              .update({
+            'bill_payment': globalVar,
+            'previous_session_info': 'Level_2',
+            if(replayLevel != true) 'last_level': 'Level_2',
+            'game_score': gameScore,
+            'account_balance': 0,
+            'quality_of_life': 0,
+            'level_id': 0,
+            'credit_card_balance': 0,
+            'credit_card_bill': 0,
+            'credit_score': 0,
+            'payable_bill': 0,
+            'replay_level': false,
+            'score': 0,
+            'need': 0,
+            'want': 0,
+            'level_2_id' : 0,
+          }),
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      AllQueLevelTwo(
+                        savingBalance: 0,
+                        qOl: 0,
+                        levelId: 0,
+                        gameScore: gameScore,
+                        billPayment: globalVar,
+                        level: 'Level_2',
+                        payableBill: 0,
+                        creditCardBill: 0,
+                        creditCardBalance: 0,
+                      ))),
+        },
+      if (level == 'Level_3_setUp_page')
+        {
+          FirebaseFirestore.instance
+              .collection('User')
+              .doc(userId)
+              .update({
+            'bill_payment': globalVar,
+            'credit_card_bill': 0,
+            'previous_session_info': 'Level_3',
+            if(replayLevel != true) 'last_level': 'Level_3',
+            'game_score': gameScore,
+            'credit_card_balance': 2000,
+            'account_balance': 0,
+            'level_id': 0,
+            'credit_score': 350,
+            'quality_of_life': 0,
+            'payable_bill': 0,
+            'score': 350,
+            'need': 0,
+            'want': 0,
+            'level_3_id' : 0,
+            'replay_level': false,
+          }),
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      AllQueLevelThree(
+                        savingBalance: 0,
+                        qOl: 0,
+                        levelId: 0,
+                        gameScore: gameScore,
+                        billPayment: globalVar,
+                        level: 'Level_3',
+                        creditCardBalance: 500,
+                        creditCardBill: 0,
+                        payableBill: 0,
+                      ))),
+        }
+    });
   }
 }

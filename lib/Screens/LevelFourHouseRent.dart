@@ -4,12 +4,10 @@ import 'package:financial/ReusableScreen/GlobleVariable.dart';
 import 'package:financial/ReusableScreen/GradientText.dart';
 import 'package:financial/Screens/LevelFourCarLoan.dart';
 import 'package:financial/Screens/ProfilePage.dart';
-import 'package:financial/Screens/TvAndInternetPlan.dart';
 import 'package:financial/Screens/devicesSizePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'dart:math' as math;
 

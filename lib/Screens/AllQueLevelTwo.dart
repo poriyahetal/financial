@@ -2,7 +2,7 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:financial/ReusableScreen/ExpandedBottomDrawer.dart';
 import 'package:financial/ReusableScreen/GameScorePage.dart';
 import 'package:financial/ReusableScreen/GlobleVariable.dart';
-import 'package:financial/Screens/LevelOneSetUpPage.dart';
+import 'package:financial/Screens/AllQueLevelOne.dart';
 import 'package:financial/Screens/LevelThreeSetUpPage.dart';
 import 'package:financial/Screens/LevelTwoSetUpPage.dart';
 import 'package:financial/ReusableScreen/PreviewOfBottomDrawer.dart';
@@ -145,7 +145,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
       child: list.isEmpty
           ? Center(
               child: CircularProgressIndicator(
-              backgroundColor: Colors.black,
+                  backgroundColor: Color(0xff4D6EF2)
             ))
           : StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
@@ -160,7 +160,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                   case ConnectionState.waiting:
                     return Center(
                       child: CircularProgressIndicator(
-                        backgroundColor: Colors.black,
+                          backgroundColor: Color(0xff4D6EF2)
                       ),
                     );
                   default:
@@ -265,190 +265,235 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                               top: displayHeight(
                                                                       context) *
                                                                   .03),
-                                                          child:  StatefulBuilder(
-                                                                  builder: (context,
-                                                                      _setState1) {
-                                                                  return Container(
-                                                                    alignment:
-                                                                        Alignment
-                                                                            .centerLeft,
-                                                                    width: displayWidth(
-                                                                            context) *
-                                                                        .62,
-                                                                    height:
-                                                                        displayHeight(context) *
-                                                                            .07,
-                                                                    decoration: BoxDecoration(
-                                                                        color: list[index].isSelected1 ==
-                                                                                true
-                                                                            ? Color(
-                                                                                0xff00C673)
-                                                                            : Colors
-                                                                                .white,
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(displayWidth(context) *
-                                                                                .12)),
-                                                                    child:
-                                                                        SizedBox(
-                                                                      height:
-                                                                          displayHeight(context) *
-                                                                              .07,
-                                                                      width: displayWidth(
-                                                                              context) *
-                                                                          .62,
-                                                                      child: list[index]
-                                                                          .isSelected2 ==
-                                                                          true ||
-                                                                          list[index]
+                                                          child: StatefulBuilder(
+                                                              builder: (context,
+                                                                  _setState1) {
+                                                            return Container(
+                                                              alignment: Alignment
+                                                                  .centerLeft,
+                                                              width: displayWidth(
+                                                                      context) *
+                                                                  .62,
+                                                              height: displayHeight(
+                                                                      context) *
+                                                                  .07,
+                                                              decoration: BoxDecoration(
+                                                                  color: list[index]
                                                                               .isSelected1 ==
-                                                                              true
-                                                                          ? TextButton(
-                                                                          style: ButtonStyle(alignment: Alignment.centerLeft),
-                                                                          onPressed: ()  {},
-                                                                          child: Center(
+                                                                          true
+                                                                      ? Color(
+                                                                          0xff00C673)
+                                                                      : Colors
+                                                                          .white,
+                                                                  borderRadius:
+                                                                      BorderRadius.circular(
+                                                                          displayWidth(context) *
+                                                                              .12)),
+                                                              child: SizedBox(
+                                                                height: displayHeight(
+                                                                        context) *
+                                                                    .07,
+                                                                width: displayWidth(
+                                                                        context) *
+                                                                    .62,
+                                                                child: list[index]
+                                                                                .isSelected2 ==
+                                                                            true ||
+                                                                        list[index]
+                                                                                .isSelected1 ==
+                                                                            true
+                                                                    ? TextButton(
+                                                                        style: ButtonStyle(
+                                                                            alignment: Alignment
+                                                                                .centerLeft),
+                                                                        onPressed:
+                                                                            () {},
+                                                                        child:
+                                                                            Center(
+                                                                          child:
+                                                                              FittedBox(
                                                                             child:
-                                                                                FittedBox(
-                                                                              child: RichText(
-                                                                                textAlign: TextAlign.left,
-                                                                                overflow: TextOverflow.clip,
-                                                                                text: TextSpan(
-                                                                                  text: document['option_1'],
-                                                                                  style: GoogleFonts.workSans(color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
-                                                                                ),
-                                                                              ),
+                                                                                Text(
+                                                                              document['option_1'],
+                                                                              style: GoogleFonts.workSans(color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
+                                                                              textAlign: TextAlign.left,
+                                                                              overflow: TextOverflow.clip,
                                                                             ),
-                                                                          )) : TextButton(
-                                                                          style: ButtonStyle(alignment: Alignment.centerLeft),
-                                                                          onPressed: () async {
-                                                                            _setState1(() {
-                                                                              flag1 = true;
-                                                                            });
-                                                                            if (flag2 ==
-                                                                                false) {
-                                                                              list[index].isSelected1 = true;
+                                                                          ),
+                                                                        ))
+                                                                    : TextButton(
+                                                                        style: ButtonStyle(
+                                                                            alignment: Alignment
+                                                                                .centerLeft),
+                                                                        onPressed:
+                                                                            () async {
+                                                                          _setState1(
+                                                                              () {
+                                                                            flag1 =
+                                                                                true;
+                                                                          });
+                                                                          if (flag2 ==
+                                                                              false) {
+                                                                            list[index].isSelected1 =
+                                                                                true;
 
-                                                                              int qol1 = document['quality_of_life_1'];
-                                                                              balance = ((balance - document['option_1_price']) as int?)!;
-                                                                              qualityOfLife = qualityOfLife + qol1;
-                                                                              var category = document['category'];
-                                                                              int price = document['option_1_price'];
-                                                                              _optionSelect(balance, gameScore, qualityOfLife, qol1, index, snapshot, category, price);
-                                                                            } else {
-                                                                              Fluttertoast.showToast(msg: 'Sorry, you already selected option');
-                                                                            }
-                                                                          },
-                                                                          child: Center(
+                                                                            int qol1 =
+                                                                                document['quality_of_life_1'];
+                                                                            balance =
+                                                                                ((balance - document['option_1_price']) as int?)!;
+                                                                            qualityOfLife =
+                                                                                qualityOfLife + qol1;
+                                                                            var category =
+                                                                                document['category'];
+                                                                            int price =
+                                                                                document['option_1_price'];
+                                                                            _optionSelect(
+                                                                                balance,
+                                                                                gameScore,
+                                                                                qualityOfLife,
+                                                                                qol1,
+                                                                                index,
+                                                                                snapshot,
+                                                                                category,
+                                                                                price);
+                                                                          } else {
+                                                                            Fluttertoast.showToast(msg: 'Sorry, you already selected option');
+                                                                          }
+                                                                        },
+                                                                        child:
+                                                                            Center(
+                                                                          child:
+                                                                              FittedBox(
                                                                             child:
-                                                                            FittedBox(
-                                                                              child: RichText(
-                                                                                textAlign: TextAlign.left,
-                                                                                overflow: TextOverflow.clip,
-                                                                                text: TextSpan(
-                                                                                  text: document['option_1'],
-                                                                                  style: GoogleFonts.workSans(color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
-                                                                                ),
-                                                                              ),
+                                                                                Text(
+                                                                              document['option_1'],
+                                                                              style: GoogleFonts.workSans(color: list[index].isSelected1 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
+                                                                              textAlign: TextAlign.left,
+                                                                              overflow: TextOverflow.clip,
                                                                             ),
-                                                                          )),
-                                                                    ),
-                                                                  );
-                                                                }),
+                                                                          ),
+                                                                        )),
+                                                              ),
+                                                            );
+                                                          }),
                                                         ),
                                                         Padding(
                                                           padding: EdgeInsets.only(
                                                               top: displayHeight(
                                                                       context) *
                                                                   .02),
-                                                          child:  StatefulBuilder(
-                                                                  builder: (context,
-                                                                      _setState2) {
-                                                                  return Container(
-                                                                    alignment:
-                                                                        Alignment
-                                                                            .centerLeft,
-                                                                    width: displayWidth(
-                                                                            context) *
-                                                                        .62,
-                                                                    height:
-                                                                        displayHeight(context) *
-                                                                            .07,
-                                                                    decoration: BoxDecoration(
-                                                                        color: list[index].isSelected2 ==
-                                                                                true
-                                                                            ? Color(
-                                                                                0xff00C673)
-                                                                            : Colors
-                                                                                .white,
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(displayWidth(context) *
-                                                                                .12)),
-                                                                    child:
-                                                                        SizedBox(
-                                                                      height:
-                                                                          displayHeight(context) *
-                                                                              .07,
-                                                                      width: displayWidth(
-                                                                              context) *
-                                                                          .62,
-                                                                      child:list[index]
-                                                                          .isSelected2 ==
-                                                                          true ||
-                                                                          list[index]
-                                                                              .isSelected1 ==
-                                                                              true
-                                                                          ? TextButton(
-                                                                          style: ButtonStyle(alignment: Alignment.centerLeft),
-                                                                          onPressed: ()  {
-                                                                          },
-                                                                          child: Center(
+                                                          child: StatefulBuilder(
+                                                              builder: (context,
+                                                                  _setState2) {
+                                                            return Container(
+                                                              alignment: Alignment
+                                                                  .centerLeft,
+                                                              width: displayWidth(
+                                                                      context) *
+                                                                  .62,
+                                                              height: displayHeight(
+                                                                      context) *
+                                                                  .07,
+                                                              decoration: BoxDecoration(
+                                                                  color: list[index]
+                                                                              .isSelected2 ==
+                                                                          true
+                                                                      ? Color(
+                                                                          0xff00C673)
+                                                                      : Colors
+                                                                          .white,
+                                                                  borderRadius:
+                                                                      BorderRadius.circular(
+                                                                          displayWidth(context) *
+                                                                              .12)),
+                                                              child: SizedBox(
+                                                                height: displayHeight(
+                                                                        context) *
+                                                                    .07,
+                                                                width: displayWidth(
+                                                                        context) *
+                                                                    .62,
+                                                                child: list[index]
+                                                                                .isSelected2 ==
+                                                                            true ||
+                                                                        list[index]
+                                                                                .isSelected1 ==
+                                                                            true
+                                                                    ? TextButton(
+                                                                        style: ButtonStyle(
+                                                                            alignment: Alignment
+                                                                                .centerLeft),
+                                                                        onPressed:
+                                                                            () {},
+                                                                        child:
+                                                                            Center(
+                                                                          child:
+                                                                              FittedBox(
                                                                             child:
-                                                                            FittedBox(
-                                                                              child: RichText(
-                                                                                overflow: TextOverflow.clip,
-                                                                                textAlign: TextAlign.left,
-                                                                                text: TextSpan(
-                                                                                  text: document['option_2'],
-                                                                                  style: GoogleFonts.workSans(color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
-                                                                                ),
-                                                                              ),
+                                                                                Text(
+                                                                              document['option_2'],
+                                                                              style: GoogleFonts.workSans(color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
+                                                                              overflow: TextOverflow.clip,
+                                                                              textAlign: TextAlign.left,
                                                                             ),
-                                                                          )) : TextButton(
-                                                                          style: ButtonStyle(alignment: Alignment.centerLeft),
-                                                                          onPressed: () async {
-                                                                            _setState2(() {
-                                                                              flag2 = true;
-                                                                            });
-                                                                            if (flag1 ==
-                                                                                false) {
-                                                                              list[index].isSelected2 = true;
+                                                                          ),
+                                                                        ))
+                                                                    : TextButton(
+                                                                        style: ButtonStyle(
+                                                                            alignment: Alignment
+                                                                                .centerLeft),
+                                                                        onPressed:
+                                                                            () async {
+                                                                          _setState2(
+                                                                              () {
+                                                                            flag2 =
+                                                                                true;
+                                                                          });
+                                                                          if (flag1 ==
+                                                                              false) {
+                                                                            list[index].isSelected2 =
+                                                                                true;
 
-                                                                              int qol2 = document['quality_of_life_2'];
-                                                                              balance = ((balance - document['option_2_price']) as int?)!;
-                                                                              qualityOfLife = qualityOfLife + qol2;
-                                                                              var category = document['category'];
-                                                                              int price = document['option_2_price'];
+                                                                            int qol2 =
+                                                                                document['quality_of_life_2'];
+                                                                            balance =
+                                                                                ((balance - document['option_2_price']) as int?)!;
+                                                                            qualityOfLife =
+                                                                                qualityOfLife + qol2;
+                                                                            var category =
+                                                                                document['category'];
+                                                                            int price =
+                                                                                document['option_2_price'];
 
-                                                                              _optionSelect(balance, gameScore, qualityOfLife, qol2, index, snapshot, category, price);
-                                                                            } else {
-                                                                              Fluttertoast.showToast(msg: 'Sorry, you already selected option');
-                                                                            }
-                                                                          },
-                                                                          child: Center(
+                                                                            _optionSelect(
+                                                                                balance,
+                                                                                gameScore,
+                                                                                qualityOfLife,
+                                                                                qol2,
+                                                                                index,
+                                                                                snapshot,
+                                                                                category,
+                                                                                price);
+                                                                          } else {
+                                                                            Fluttertoast.showToast(msg: 'Sorry, you already selected option');
+                                                                          }
+                                                                        },
+                                                                        child:
+                                                                            Center(
+                                                                          child:
+                                                                              FittedBox(
                                                                             child:
-                                                                                FittedBox(
-                                                                              child: RichText(
-                                                                                overflow: TextOverflow.clip,
-                                                                                textAlign: TextAlign.left,
-                                                                                text: TextSpan(
-                                                                                  text: document['option_2'],
-                                                                                  style: GoogleFonts.workSans(color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
-                                                                                ),
-                                                                              ),
+                                                                                Text(
+                                                                              document['option_2'],
+                                                                              style: GoogleFonts.workSans(color: list[index].isSelected2 == true ? Colors.white : Color(0xffFFA500), fontWeight: FontWeight.w500, fontSize: 15.sp),
+                                                                              overflow: TextOverflow.clip,
+                                                                              textAlign: TextAlign.left,
                                                                             ),
-                                                                          )),
-                                                                    ),
-                                                                  );
-                                                                }),
+                                                                          ),
+                                                                        )),
+                                                              ),
+                                                            );
+                                                          }),
                                                         ),
                                                         SizedBox(
                                                           height: displayHeight(
@@ -576,47 +621,50 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                   height: forPortrait * .06,
                 ),
                 StatefulBuilder(builder: (context, setState) {
-                  return  GestureDetector(
-                          onTap: () async {
-                            setState(() {
-                              flagForKnow = true;
-                              color = Color(0xff00C673);
-                            });
-                            if (index == snapshot.data!.docs.length - 1) {
-                              Future.delayed(
-                                  Duration(seconds: 1),
-                                  () => _levelCompleteSummary(context,
-                                      gameScore, balance, qualityOfLife));
-                            } else {
-                              firestore.collection('User').doc(userId).update({
-                                'level_id': index + 1,
-                              });
-                              controller.nextPage(
-                                  duration: Duration(seconds: 1),
-                                  curve: Curves.easeIn);
-                            }
-                          },
-                          child: Container(
-                            height: displayHeight(context) * .08,
-                            width: displayWidth(context) * .75,
-                            decoration: BoxDecoration(
+                  return GestureDetector(
+                      onTap: () async {
+                        setState(() {
+                          flagForKnow = true;
+                          color = Color(0xff00C673);
+                        });
+                        if (index == snapshot.data!.docs.length - 1) {
+                          firestore.collection('User').doc(userId).update({
+                            'level_id': index + 1,
+                            'level_2_id': index + 1,
+                          }).then((value) => Future.delayed(
+                              Duration(seconds: 1),
+                              () => _levelCompleteSummary(
+                                  context, gameScore, balance, qualityOfLife)));
+                        } else {
+                          firestore.collection('User').doc(userId).update({
+                            'level_id': index + 1,
+                            'level_2_id': index + 1,
+                          });
+                          controller.nextPage(
+                              duration: Duration(seconds: 1),
+                              curve: Curves.easeIn);
+                        }
+                      },
+                      child: Container(
+                        height: displayHeight(context) * .08,
+                        width: displayWidth(context) * .75,
+                        decoration: BoxDecoration(
+                            color:
+                                flagForKnow ? Color(0xff00C673) : Colors.white,
+                            borderRadius: BorderRadius.circular(
+                                displayWidth(context) * .12)),
+                        child: Center(
+                          child: Text(
+                            'Continue',
+                            style: GoogleFonts.workSans(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w500,
                                 color: flagForKnow
-                                    ? Color(0xff00C673)
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(
-                                    displayWidth(context) * .12)),
-                            child: Center(
-                              child: Text(
-                                'Continue',
-                                style: GoogleFonts.workSans(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: flagForKnow
-                                        ? Colors.white
-                                        : Color(0xff6D00C2)),
-                              ),
-                            ),
-                          ));
+                                    ? Colors.white
+                                    : Color(0xff6D00C2)),
+                          ),
+                        ),
+                      ));
                 }),
                 SizedBox(
                   height: forPortrait * .08,
@@ -637,7 +685,8 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
         builder: (BuildContext context) {
           return WillPopScope(
             onWillPop: () {
-              return Future.value(false);},
+              return Future.value(false);
+            },
             child: Container(
               width: displayWidth(context),
               height: displayHeight(context),
@@ -720,16 +769,8 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                     fontSize: 16.sp),
                                                 children: [
                                                   TextSpan(
-                                                    text: '\$',
-                                                    style: GoogleFonts.workSans(
-                                                        color:
-                                                            Color(0xffFEBE16),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16.sp),
-                                                  ),
-                                                  TextSpan(
-                                                    text: forPlan1.toString(),
+                                                    text: '\$' +
+                                                        forPlan1.toString(),
                                                     style: GoogleFonts.workSans(
                                                         color:
                                                             Color(0xffFEBE16),
@@ -757,16 +798,8 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                     fontSize: 16.sp),
                                                 children: [
                                                   TextSpan(
-                                                    text: '\$',
-                                                    style: GoogleFonts.workSans(
-                                                        color:
-                                                            Color(0xffFEBE16),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16.sp),
-                                                  ),
-                                                  TextSpan(
-                                                    text: forPlan2.toString(),
+                                                    text: '\$' +
+                                                        forPlan2.toString(),
                                                     style: GoogleFonts.workSans(
                                                         color:
                                                             Color(0xffFEBE16),
@@ -794,16 +827,8 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                     fontSize: 16.sp),
                                                 children: [
                                                   TextSpan(
-                                                    text: '\$',
-                                                    style: GoogleFonts.workSans(
-                                                        color:
-                                                            Color(0xffFEBE16),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16.sp),
-                                                  ),
-                                                  TextSpan(
-                                                    text: forPlan3.toString(),
+                                                    text: '\$' +
+                                                        forPlan3.toString(),
                                                     style: GoogleFonts.workSans(
                                                         color:
                                                             Color(0xffFEBE16),
@@ -831,16 +856,8 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                     fontSize: 16.sp),
                                                 children: [
                                                   TextSpan(
-                                                    text: '\$',
-                                                    style: GoogleFonts.workSans(
-                                                        color:
-                                                            Color(0xffFEBE16),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16.sp),
-                                                  ),
-                                                  TextSpan(
-                                                    text: forPlan4.toString(),
+                                                    text: '\$' +
+                                                        forPlan4.toString(),
                                                     style: GoogleFonts.workSans(
                                                         color:
                                                             Color(0xffFEBE16),
@@ -858,172 +875,163 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                   displayHeight(context) * .04),
                                           child: StatefulBuilder(
                                               builder: (context, setState) {
-                                            return  Container(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    width:
-                                                        displayWidth(context) *
-                                                            .62,
-                                                    height:
-                                                        displayHeight(context) *
-                                                            .07,
-                                                    decoration: BoxDecoration(
-                                                        color: color,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                displayWidth(
-                                                                        context) *
-                                                                    .12)),
-                                                    child:color == Color(0xff00C673)
-                                                        ?  TextButton(
-                                                        onPressed: () {
-                                                        },
-                                                        child: Padding(
-                                                          padding:
-                                                          EdgeInsets.only(
-                                                              left: 6.0),
-                                                          child: Center(
-                                                            child: FittedBox(
-                                                              child: RichText(
-                                                                textAlign:
-                                                                TextAlign
-                                                                    .left,
-                                                                overflow:
-                                                                TextOverflow
-                                                                    .clip,
-                                                                text: TextSpan(
-                                                                    text:
-                                                                    'Pay now ',
-                                                                    style: GoogleFonts.workSans(
-                                                                        color: color == Color(0xff00C673)
-                                                                            ? Colors
-                                                                            .white
-                                                                            : Color(
-                                                                            0xff4D5DDD),
-                                                                        fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                        fontSize:
-                                                                        15.sp),
-                                                                    children: [
-                                                                      TextSpan(
-                                                                        text:
-                                                                        '\$',
-                                                                        style: GoogleFonts.workSans(
-                                                                            color: color == Color(0xff00C673)
-                                                                                ? Colors.white
-                                                                                : Color(0xffFEBE16),
-                                                                            fontWeight: FontWeight.w500,
-                                                                            fontSize: 15.sp),
-                                                                      ),
-                                                                      TextSpan(
-                                                                        text: billPayment
-                                                                            .toString(),
-                                                                        style: GoogleFonts.workSans(
-                                                                            color: color == Color(0xff00C673)
-                                                                                ? Colors.white
-                                                                                : Color(0xffFEBE16),
-                                                                            fontWeight: FontWeight.w500,
-                                                                            fontSize: 15.sp),
-                                                                      ),
-                                                                    ]),
-                                                              ),
+                                            return Container(
+                                              alignment: Alignment.centerLeft,
+                                              width:
+                                                  displayWidth(context) * .62,
+                                              height:
+                                                  displayHeight(context) * .07,
+                                              decoration: BoxDecoration(
+                                                  color: color,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          displayWidth(
+                                                                  context) *
+                                                              .12)),
+                                              child: color == Color(0xff00C673)
+                                                  ? TextButton(
+                                                      onPressed: () {},
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 6.0),
+                                                        child: Center(
+                                                          child: FittedBox(
+                                                            child: RichText(
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .clip,
+                                                              text: TextSpan(
+                                                                  text:
+                                                                      'Pay now ',
+                                                                  style: GoogleFonts.workSans(
+                                                                      color: color ==
+                                                                              Color(
+                                                                                  0xff00C673)
+                                                                          ? Colors
+                                                                              .white
+                                                                          : Color(
+                                                                              0xff4D5DDD),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      fontSize:
+                                                                          15.sp),
+                                                                  children: [
+                                                                    TextSpan(
+                                                                      text: '\$' +
+                                                                          billPayment
+                                                                              .toString(),
+                                                                      style: GoogleFonts.workSans(
+                                                                          color: color == Color(0xff00C673)
+                                                                              ? Colors
+                                                                                  .white
+                                                                              : Color(
+                                                                                  0xffFEBE16),
+                                                                          fontWeight: FontWeight
+                                                                              .w500,
+                                                                          fontSize:
+                                                                              15.sp),
+                                                                    ),
+                                                                  ]),
                                                             ),
                                                           ),
-                                                        )) : TextButton(
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            color = Color(
-                                                                0xff00C673);
+                                                        ),
+                                                      ))
+                                                  : TextButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          color =
+                                                              Color(0xff00C673);
+                                                        });
+                                                        payArray
+                                                            .add(currentIndex);
+                                                        balance = balance -
+                                                            billPayment;
+                                                        if (balance < 0) {
+                                                          Future.delayed(
+                                                            Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                            () =>
+                                                                _showDialogForRestartLevel(
+                                                                    context),
+                                                          );
+                                                        } else {
+                                                          firestore
+                                                              .collection(
+                                                                  'User')
+                                                              .doc(userId)
+                                                              .update({
+                                                            'account_balance':
+                                                                balance,
+                                                            'game_score':
+                                                                gameScore +
+                                                                    balance +
+                                                                    qualityOfLife,
                                                           });
-                                                          payArray.add(
-                                                              currentIndex);
-                                                          balance = balance -
-                                                              billPayment;
-                                                          if (balance < 0) {
-                                                            Future.delayed(
+                                                          Future.delayed(
                                                               Duration(
-                                                                  milliseconds:
-                                                                      500),
+                                                                  seconds: 1),
                                                               () =>
-                                                                  _showDialogForRestartLevel(
-                                                                      context),
-                                                            );
-                                                          } else {
-                                                            firestore
-                                                                .collection(
-                                                                    'User')
-                                                                .doc(userId)
-                                                                .update({
-                                                              'account_balance':
-                                                                  balance,
-                                                              'game_score':
-                                                                  gameScore +
-                                                                      balance +
-                                                                      qualityOfLife,
-                                                            });
-                                                            Future.delayed(
-                                                                Duration(
-                                                                    seconds: 1),
-                                                                () => Navigator
-                                                                    .pop(
-                                                                        context));
-                                                          }
-                                                        },
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: 6.0),
-                                                          child: Center(
-                                                            child: FittedBox(
-                                                              child: RichText(
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .clip,
-                                                                text: TextSpan(
-                                                                    text:
-                                                                        'Pay now ',
-                                                                    style: GoogleFonts.workSans(
-                                                                        color: color == Color(0xff00C673)
-                                                                            ? Colors
-                                                                                .white
-                                                                            : Color(
-                                                                                0xff4D5DDD),
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
-                                                                        fontSize:
-                                                                            15.sp),
-                                                                    children: [
-                                                                      TextSpan(
-                                                                        text:
-                                                                            '\$',
-                                                                        style: GoogleFonts.workSans(
-                                                                            color: color == Color(0xff00C673)
-                                                                                ? Colors.white
-                                                                                : Color(0xffFEBE16),
-                                                                            fontWeight: FontWeight.w500,
-                                                                            fontSize: 15.sp),
-                                                                      ),
-                                                                      TextSpan(
-                                                                        text: billPayment
-                                                                            .toString(),
-                                                                        style: GoogleFonts.workSans(
-                                                                            color: color == Color(0xff00C673)
-                                                                                ? Colors.white
-                                                                                : Color(0xffFEBE16),
-                                                                            fontWeight: FontWeight.w500,
-                                                                            fontSize: 15.sp),
-                                                                      ),
-                                                                    ]),
-                                                              ),
+                                                                  Navigator.pop(
+                                                                      context));
+                                                        }
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 6.0),
+                                                        child: Center(
+                                                          child: FittedBox(
+                                                            child: RichText(
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .clip,
+                                                              text: TextSpan(
+                                                                  text:
+                                                                      'Pay now ',
+                                                                  style: GoogleFonts.workSans(
+                                                                      color: color ==
+                                                                              Color(
+                                                                                  0xff00C673)
+                                                                          ? Colors
+                                                                              .white
+                                                                          : Color(
+                                                                              0xff4D5DDD),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      fontSize:
+                                                                          15.sp),
+                                                                  children: [
+                                                                    TextSpan(
+                                                                      text: '\$' +
+                                                                          billPayment
+                                                                              .toString(),
+                                                                      style: GoogleFonts.workSans(
+                                                                          color: color == Color(0xff00C673)
+                                                                              ? Colors
+                                                                                  .white
+                                                                              : Color(
+                                                                                  0xffFEBE16),
+                                                                          fontWeight: FontWeight
+                                                                              .w500,
+                                                                          fontSize:
+                                                                              15.sp),
+                                                                    ),
+                                                                  ]),
                                                             ),
                                                           ),
-                                                        )),
-                                                  );
+                                                        ),
+                                                      )),
+                                            );
                                           })),
                                       SizedBox(
                                         height: displayHeight(context) * .02,
@@ -1057,7 +1065,8 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
         builder: (BuildContext context) {
           return WillPopScope(
             onWillPop: () {
-              return Future.value(false);},
+              return Future.value(false);
+            },
             child: Container(
               width: displayWidth(context),
               height: displayHeight(context),
@@ -1096,7 +1105,8 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                 child: SingleChildScrollView(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(
@@ -1130,111 +1140,114 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                       ),
                                       Padding(
                                           padding: EdgeInsets.only(
-                                              top: displayHeight(context) * .04),
+                                              top:
+                                                  displayHeight(context) * .04),
                                           child: StatefulBuilder(
                                               builder: (context, setState) {
-                                            return  Container(
-                                                    alignment: Alignment.centerLeft,
-                                                    width:
-                                                        displayWidth(context) * .62,
-                                                    height: displayHeight(context) *
-                                                        .07,
-                                                    decoration: BoxDecoration(
-                                                        color: color,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                displayWidth(
-                                                                        context) *
-                                                                    .12)),
-                                                    child: color == Color(0xff00C673)
-                                                        ? TextButton(
-                                                        onPressed: () {
-                                                        },
-                                                        child: Padding(
-                                                          padding: EdgeInsets.only(
-                                                              left: 6.0),
-                                                          child: Center(
-                                                            child: FittedBox(
-                                                              child: RichText(
-                                                                textAlign:
-                                                                    TextAlign.left,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .clip,
-                                                                text: TextSpan(
-                                                                    text: 'Okay ',
-                                                                    style: GoogleFonts.workSans(
-                                                                        color: color ==
-                                                                                Color(
-                                                                                    0xff00C673)
-                                                                            ? Colors
-                                                                                .white
-                                                                            : Color(
-                                                                                0xff4D5DDD),
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
-                                                                        fontSize:
-                                                                            15.sp),
-                                                                    children: []),
-                                                              ),
+                                            return Container(
+                                              alignment: Alignment.centerLeft,
+                                              width:
+                                                  displayWidth(context) * .62,
+                                              height:
+                                                  displayHeight(context) * .07,
+                                              decoration: BoxDecoration(
+                                                  color: color,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          displayWidth(
+                                                                  context) *
+                                                              .12)),
+                                              child: color == Color(0xff00C673)
+                                                  ? TextButton(
+                                                      onPressed: () {},
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 6.0),
+                                                        child: Center(
+                                                          child: FittedBox(
+                                                            child: Text(
+                                                              'Okay ',
+                                                              style: GoogleFonts.workSans(
+                                                                  color: color ==
+                                                                          Color(
+                                                                              0xff00C673)
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Color(
+                                                                          0xff4D5DDD),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize:
+                                                                      15.sp),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .clip,
                                                             ),
                                                           ),
-                                                        )) : TextButton(
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            color =
-                                                                Color(0xff00C673);
-                                                          });
-                                                          balance = balance + 1000;
-                                                          firestore
-                                                              .collection('User')
-                                                              .doc(userId)
-                                                              .update({
-                                                            'account_balance':
-                                                            balance,
-                                                            'game_score':
-                                                            gameScore +
-                                                                balance +
-                                                                qualityOfLife,
-                                                          });
-                                                          Future.delayed(
-                                                              Duration(seconds: 1),
-                                                                  () => Navigator.pop(
-                                                                  context));
-                                                        },
-                                                        child: Padding(
-                                                          padding: EdgeInsets.only(
-                                                              left: 6.0),
-                                                          child: Center(
-                                                            child: FittedBox(
-                                                              child: RichText(
-                                                                textAlign:
-                                                                TextAlign.left,
-                                                                overflow:
-                                                                TextOverflow
-                                                                    .clip,
-                                                                text: TextSpan(
-                                                                    text: 'Okay ',
-                                                                    style: GoogleFonts.workSans(
-                                                                        color: color ==
-                                                                            Color(
-                                                                                0xff00C673)
-                                                                            ? Colors
-                                                                            .white
-                                                                            : Color(
-                                                                            0xff4D5DDD),
-                                                                        fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                        fontSize:
-                                                                        15.sp),
-                                                                    children: []),
-                                                              ),
+                                                        ),
+                                                      ))
+                                                  : TextButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          color =
+                                                              Color(0xff00C673);
+                                                        });
+                                                        balance =
+                                                            balance + 1000;
+                                                        firestore
+                                                            .collection('User')
+                                                            .doc(userId)
+                                                            .update({
+                                                          'account_balance':
+                                                              balance,
+                                                          'game_score':
+                                                              gameScore +
+                                                                  balance +
+                                                                  qualityOfLife,
+                                                        });
+                                                        Future.delayed(
+                                                            Duration(
+                                                                seconds: 1),
+                                                            () => Navigator.pop(
+                                                                context));
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 6.0),
+                                                        child: Center(
+                                                          child: FittedBox(
+                                                            child: Text(
+                                                              'Okay ',
+                                                              style: GoogleFonts.workSans(
+                                                                  color: color ==
+                                                                          Color(
+                                                                              0xff00C673)
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Color(
+                                                                          0xff4D5DDD),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize:
+                                                                      15.sp),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .clip,
                                                             ),
                                                           ),
-                                                        )),
-                                                  );
+                                                        ),
+                                                      )),
+                                            );
                                           })),
                                       SizedBox(
                                         height: displayHeight(context) * .02,
@@ -1265,7 +1278,8 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
         builder: (context) {
           return WillPopScope(
             onWillPop: () {
-              return Future.value(false);},
+              return Future.value(false);
+            },
             child: AlertDialog(
               elevation: 3.0,
               shape: RoundedRectangleBorder(
@@ -1296,13 +1310,14 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                       Navigator.pushReplacement(
                           context,
                           PageTransition(
-                              child:
-                                  LevelTwoSetUpPage(controller: PageController()),
+                              child: LevelTwoSetUpPage(
+                                  controller: PageController()),
                               type: PageTransitionType.bottomToTop,
                               duration: Duration(milliseconds: 500)));
                     },
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.white)),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.white)),
                     child: Text(
                       'Restart level',
                       style: GoogleFonts.workSans(
@@ -1325,10 +1340,13 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
       category,
       int price) async {
     if (index == snapshot.data!.docs.length - 1) {
-      Future.delayed(
+      firestore.collection('User').doc(userId).update({
+        'level_id': index + 1,
+        'level_2_id': index + 1,
+      }).then((value) => Future.delayed(
           Duration(seconds: 1),
           () => _levelCompleteSummary(
-              context, gameScore, balance, qualityOfLife));
+              context, gameScore, balance, qualityOfLife)));
     }
     if (balance >= 0) {
       firestore.collection('User').doc(userId).update({
@@ -1336,6 +1354,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
         'quality_of_life': FieldValue.increment(qol2),
         'game_score': gameScore + balance + qualityOfLife,
         'level_id': index + 1,
+        'level_2_id': index + 1,
         'need': category == 'Need'
             ? FieldValue.increment(price)
             : FieldValue.increment(0),
@@ -1363,6 +1382,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
     int need = documentSnapshot['need'];
     int want = documentSnapshot['want'];
     int bill = documentSnapshot['bill_payment'];
+    int accountBalance = documentSnapshot['account_balance'];
 
     Color color = Colors.white;
     return showDialog(
@@ -1371,7 +1391,8 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
         builder: (BuildContext context) {
           return WillPopScope(
             onWillPop: () {
-              return Future.value(false);},
+              return Future.value(false);
+            },
             child: Container(
               width: displayWidth(context),
               height: displayHeight(context),
@@ -1442,16 +1463,8 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                     fontSize: 16.sp),
                                                 children: [
                                                   TextSpan(
-                                                    text: '\$',
-                                                    style: GoogleFonts.workSans(
-                                                        color:
-                                                            Color(0xffFEBE16),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16.sp),
-                                                  ),
-                                                  TextSpan(
-                                                    text: 7000.toString(),
+                                                    text:
+                                                        '\$' + 6000.toString(),
                                                     style: GoogleFonts.workSans(
                                                         color:
                                                             Color(0xffFEBE16),
@@ -1472,23 +1485,16 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                             textAlign: TextAlign.left,
                                             overflow: TextOverflow.clip,
                                             text: TextSpan(
-                                                text: 'Bill Payment : ',
+                                                text: 'Bills Paid : ',
                                                 style: GoogleFonts.workSans(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 16.sp),
                                                 children: [
                                                   TextSpan(
-                                                    text: '\$',
-                                                    style: GoogleFonts.workSans(
-                                                        color:
-                                                            Color(0xffFEBE16),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16.sp),
-                                                  ),
-                                                  TextSpan(
-                                                    text: bill.toString(),
+                                                    text:
+                                                        '${(((bill * 6) / 6000) * 100).floor()}' +
+                                                            '%',
                                                     style: GoogleFonts.workSans(
                                                         color:
                                                             Color(0xffFEBE16),
@@ -1509,23 +1515,16 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                             textAlign: TextAlign.left,
                                             overflow: TextOverflow.clip,
                                             text: TextSpan(
-                                                text: 'Need : ',
+                                                text: 'Spent on Needs : ',
                                                 style: GoogleFonts.workSans(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 16.sp),
                                                 children: [
                                                   TextSpan(
-                                                    text: '\$',
-                                                    style: GoogleFonts.workSans(
-                                                        color:
-                                                            Color(0xffFEBE16),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16.sp),
-                                                  ),
-                                                  TextSpan(
-                                                    text: need.toString(),
+                                                    text:
+                                                        '${((need / 6000) * 100).floor()}' +
+                                                            '%',
                                                     style: GoogleFonts.workSans(
                                                         color:
                                                             Color(0xffFEBE16),
@@ -1546,23 +1545,16 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                             textAlign: TextAlign.left,
                                             overflow: TextOverflow.clip,
                                             text: TextSpan(
-                                                text: 'Want : ',
+                                                text: 'Spent on Wants : ',
                                                 style: GoogleFonts.workSans(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 16.sp),
                                                 children: [
                                                   TextSpan(
-                                                    text: '\$',
-                                                    style: GoogleFonts.workSans(
-                                                        color:
-                                                            Color(0xffFEBE16),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16.sp),
-                                                  ),
-                                                  TextSpan(
-                                                    text: want.toString(),
+                                                    text:
+                                                        '${((want / 6000) * 100).floor()}' +
+                                                            '%',
                                                     style: GoogleFonts.workSans(
                                                         color:
                                                             Color(0xffFEBE16),
@@ -1583,27 +1575,16 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                             textAlign: TextAlign.left,
                                             overflow: TextOverflow.clip,
                                             text: TextSpan(
-                                                text: 'Total Saving : ',
+                                                text: 'Money Saved : ',
                                                 style: GoogleFonts.workSans(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 16.sp),
                                                 children: [
                                                   TextSpan(
-                                                    text: '\$',
-                                                    style: GoogleFonts.workSans(
-                                                        color:
-                                                            Color(0xffFEBE16),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16.sp),
-                                                  ),
-                                                  TextSpan(
-                                                    text: (need +
-                                                            want +
-                                                            bill +
-                                                            7000)
-                                                        .toString(),
+                                                    text:
+                                                        '${((accountBalance / 6000) * 100).floor()}' +
+                                                            '%',
                                                     style: GoogleFonts.workSans(
                                                         color:
                                                             Color(0xffFEBE16),
@@ -1621,244 +1602,258 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                                                   displayHeight(context) * .04),
                                           child: StatefulBuilder(
                                               builder: (context, setState) {
-                                            return  Container(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    width:
-                                                        displayWidth(context) *
-                                                            .62,
-                                                    height:
-                                                        displayHeight(context) *
-                                                            .07,
-                                                    decoration: BoxDecoration(
-                                                        color: color,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                displayWidth(
-                                                                        context) *
-                                                                    .12)),
-                                                    child:color == Color(0xff00C673)
-                                                        ?  TextButton(
-                                                        onPressed: () {},
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: 6.0),
-                                                          child: Center(
-                                                            child: FittedBox(
-                                                              child: RichText(
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .clip,
-                                                                text: TextSpan(
-                                                                  text:
-                                                                      'Play Next Level',
-                                                                  style: GoogleFonts.workSans(
-                                                                      color: color ==
-                                                                              Color(
-                                                                                  0xff00C673)
-                                                                          ? Colors
-                                                                              .white
-                                                                          : Color(
-                                                                              0xff4D5DDD),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      fontSize:
-                                                                          15.sp),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        )) : TextButton(
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            color = Color(
-                                                                0xff00C673);
-                                                          });
-                                                          int myBal =
-                                                          documentSnapshot.get(
-                                                              'account_balance');
-                                                          print(
-                                                              'My bal $myBal');
-                                                          if (myBal < 1200) {
-                                                            Future.delayed(
-                                                                Duration(
-                                                                    seconds: 1),
-                                                                    () => _showDialogWhenAmountLessSavingGoal(
-                                                                    context));
-                                                          } else {
-                                                            Future.delayed(
-                                                                Duration(
-                                                                    seconds: 2),
-                                                                    () =>
-                                                                    showDialog(
-                                                                        barrierDismissible:
-                                                                        false,
-                                                                        context:
-                                                                        context,
-                                                                        builder:
-                                                                            (context) {
-                                                                          return WillPopScope(
-                                                                            onWillPop: () {
-                                                                              return Future.value(false);},
-                                                                            child: AlertDialog(
-                                                                              elevation:
-                                                                              3.0,
-                                                                              shape:
-                                                                              RoundedRectangleBorder(borderRadius: BorderRadius.circular(displayWidth(context) * .04)),
-                                                                              actionsPadding:
-                                                                              EdgeInsets.all(8.0),
-                                                                              backgroundColor:
-                                                                              Color(0xff6646E6),
-                                                                              content:
-                                                                              Text(
-                                                                                'Woohoo! Invites unlocked!  \n\n Invite your friends to play the game and challenge them to beat your score!',
-                                                                                style: GoogleFonts.workSans(color: Colors.white, fontWeight: FontWeight.w600),
-                                                                                textAlign: TextAlign.center,
-                                                                              ),
-                                                                              actions: [
-                                                                                Row(
-                                                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                                                  children: [
-                                                                                    ElevatedButton(
-                                                                                        onPressed: () async {
-                                                                                          bool value = documentSnapshot.get('replay_level');
-                                                                                          level = documentSnapshot.get('last_level');
-                                                                                          int myBal = documentSnapshot.get('account_balance');
-                                                                                          print('My bal $myBal');
-                                                                                          level = level.toString().substring(6, 7);
-                                                                                          int lev = int.parse(level);
-
-                                                                                          if (value == true) {
-                                                                                            Future.delayed(
-                                                                                                Duration(seconds: 1),
-                                                                                                    () => showDialog(
-                                                                                                    context: context,
-                                                                                                    barrierDismissible: false,
-                                                                                                    builder: (context) {
-                                                                                                      return WillPopScope(
-                                                                                                        onWillPop: () {
-                                                                                                          return Future.value(false);},
-                                                                                                        child: AlertDialog(
-                                                                                                          elevation: 3.0,
-                                                                                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(displayWidth(context) * .04)),
-                                                                                                          titlePadding: EdgeInsets.zero,
-                                                                                                          title: Container(
-                                                                                                            width: displayWidth(context),
-                                                                                                            child: Padding(
-                                                                                                              padding: EdgeInsets.all(8.0),
-                                                                                                              child: Text(
-                                                                                                                'Congratulations! You have completed this level successfully',
-                                                                                                                textAlign: TextAlign.center,
-                                                                                                                style: GoogleFonts.workSans(fontSize: 14.sp, color: Colors.black, fontWeight: FontWeight.w500),
-                                                                                                              ),
-                                                                                                            ),
-                                                                                                            decoration: BoxDecoration(
-                                                                                                                borderRadius: BorderRadius.only(
-                                                                                                                  topRight: Radius.circular(displayWidth(context) * .04),
-                                                                                                                  topLeft: Radius.circular(displayWidth(context) * .04),
-                                                                                                                ),
-                                                                                                                color: Color(0xffE9E5FF)),
-                                                                                                          ),
-                                                                                                          content: Column(
-                                                                                                            mainAxisSize: MainAxisSize.min,
-                                                                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                                                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                                            children: [
-                                                                                                              if (lev > 1)
-                                                                                                                Text(
-                                                                                                                  'Which level you want play ?',
-                                                                                                                  style: GoogleFonts.workSans(fontSize: 12.sp, color: Colors.black, fontWeight: FontWeight.w400),
-                                                                                                                ),
-                                                                                                              if (lev > 1) _level1(lev),
-                                                                                                              if (lev > 2) _level2(lev),
-                                                                                                              if (lev > 3) _level3(lev),
-                                                                                                              if (lev > 4) _level4(lev),
-                                                                                                              if (lev > 5) _level5(lev),
-                                                                                                              Padding(
-                                                                                                                padding: EdgeInsets.only(top: displayHeight(context) * .03),
-                                                                                                                child: Text(
-                                                                                                                  'Want to play current level ?',
-                                                                                                                  style: GoogleFonts.workSans(fontSize: 12.sp, color: Colors.black, fontWeight: FontWeight.w400),
-                                                                                                                ),
-                                                                                                              ),
-                                                                                                              if (lev == 1) _level1(lev),
-                                                                                                              if (lev == 2) _level2(lev),
-                                                                                                              if (lev == 3) _level3(lev),
-                                                                                                              if (lev == 4) _level4(lev),
-                                                                                                              if (lev == 5) _level5(lev),
-                                                                                                            ],
-                                                                                                          ),
-                                                                                                        ),
-                                                                                                      );
-                                                                                                    }));
-                                                                                          } else {
-                                                                                            FlutterShare.share(title: 'https://finshark.page.link/finshark', text: 'Finshark App', linkUrl: 'https://finshark.page.link/finshark', chooserTitle: 'https://finshark.page.link/finshark').then((value) {
-                                                                                              // Future.delayed(Duration(seconds: 2), () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LevelThreeSetUpPage(controller: PageController()))));
-                                                                                            }).then((value) {
-                                                                                              Navigator.pop(context);
-                                                                                              Future.delayed(Duration(seconds: 1), () =>  _playLevelOrPopQuiz());
-                                                                                            });
-                                                                                          }
-                                                                                        },
-                                                                                        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white)),
-                                                                                        child: Text(
-                                                                                          'Click here to invite ',
-                                                                                          style: GoogleFonts.workSans(
-                                                                                            color: Color(0xff6646E6),
-                                                                                          ),
-                                                                                        )),
-                                                                                    GestureDetector(child: Text('Skip',style: GoogleFonts.workSans(color: Colors.white, fontWeight: FontWeight.w600, decoration: TextDecoration.underline,),),onTap: (){
-                                                                                      Navigator.pop(context);
-                                                                                      Future.delayed(Duration(seconds: 1), () =>  _playLevelOrPopQuiz());
-                                                                                    },),
-                                                                                  ],
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                          );
-                                                                        }));
-                                                          }
-                                                        },
-                                                        child: Padding(
-                                                          padding:
-                                                          EdgeInsets.only(
-                                                              left: 6.0),
-                                                          child: Center(
-                                                            child: FittedBox(
-                                                              child: RichText(
-                                                                textAlign:
-                                                                TextAlign
-                                                                    .left,
-                                                                overflow:
-                                                                TextOverflow
-                                                                    .clip,
-                                                                text: TextSpan(
-                                                                  text:
-                                                                  'Play Next Level',
-                                                                  style: GoogleFonts.workSans(
-                                                                      color: color ==
+                                            return Container(
+                                              alignment: Alignment.centerLeft,
+                                              width:
+                                                  displayWidth(context) * .62,
+                                              height:
+                                                  displayHeight(context) * .07,
+                                              decoration: BoxDecoration(
+                                                  color: color,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          displayWidth(
+                                                                  context) *
+                                                              .12)),
+                                              child: color == Color(0xff00C673)
+                                                  ? TextButton(
+                                                      onPressed: () {},
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 6.0),
+                                                        child: Center(
+                                                          child: FittedBox(
+                                                            child: Text(
+                                                              'Play Next Level',
+                                                              style: GoogleFonts.workSans(
+                                                                  color: color ==
                                                                           Color(
                                                                               0xff00C673)
-                                                                          ? Colors
+                                                                      ? Colors
                                                                           .white
-                                                                          : Color(
+                                                                      : Color(
                                                                           0xff4D5DDD),
-                                                                      fontWeight:
+                                                                  fontWeight:
                                                                       FontWeight
                                                                           .w500,
-                                                                      fontSize:
+                                                                  fontSize:
                                                                       15.sp),
-                                                                ),
-                                                              ),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .clip,
                                                             ),
                                                           ),
-                                                        )),
-                                                  );
+                                                        ),
+                                                      ))
+                                                  : TextButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          color =
+                                                              Color(0xff00C673);
+                                                        });
+                                                        int myBal =
+                                                            documentSnapshot.get(
+                                                                'account_balance');
+                                                        print('My bal $myBal');
+                                                        if (myBal < 1200) {
+                                                          Future.delayed(
+                                                              Duration(
+                                                                  seconds: 1),
+                                                              () =>
+                                                                  _showDialogWhenAmountLessSavingGoal(
+                                                                      context));
+                                                        } else {
+                                                          Future.delayed(
+                                                              Duration(
+                                                                  seconds: 2),
+                                                              () => showDialog(
+                                                                  barrierDismissible:
+                                                                      false,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return WillPopScope(
+                                                                      onWillPop:
+                                                                          () {
+                                                                        return Future.value(
+                                                                            false);
+                                                                      },
+                                                                      child:
+                                                                          AlertDialog(
+                                                                        elevation:
+                                                                            3.0,
+                                                                        shape: RoundedRectangleBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(displayWidth(context) * .04)),
+                                                                        actionsPadding:
+                                                                            EdgeInsets.all(8.0),
+                                                                        backgroundColor:
+                                                                            Color(0xff6646E6),
+                                                                        content:
+                                                                            Text(
+                                                                          'Woohoo! Invites unlocked!  \n\n Invite your friends to play the game and challenge them to beat your score!',
+                                                                          style: GoogleFonts.workSans(
+                                                                              color: Colors.white,
+                                                                              fontWeight: FontWeight.w600),
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                        ),
+                                                                        actions: [
+                                                                          Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceEvenly,
+                                                                            children: [
+                                                                              ElevatedButton(
+                                                                                  onPressed: () async {
+                                                                                    bool value = documentSnapshot.get('replay_level');
+                                                                                    level = documentSnapshot.get('last_level');
+                                                                                    int myBal = documentSnapshot.get('account_balance');
+                                                                                    print('My bal $myBal');
+                                                                                    level = level.toString().substring(6, 7);
+                                                                                    int lev = int.parse(level);
+
+                                                                                    if (value == true) {
+                                                                                      Future.delayed(
+                                                                                          Duration(seconds: 1),
+                                                                                          () => showDialog(
+                                                                                              context: context,
+                                                                                              barrierDismissible: false,
+                                                                                              builder: (context) {
+                                                                                                return WillPopScope(
+                                                                                                  onWillPop: () {
+                                                                                                    return Future.value(false);
+                                                                                                  },
+                                                                                                  child: AlertDialog(
+                                                                                                    elevation: 3.0,
+                                                                                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(displayWidth(context) * .04)),
+                                                                                                    titlePadding: EdgeInsets.zero,
+                                                                                                    title: Container(
+                                                                                                      width: displayWidth(context),
+                                                                                                      child: Padding(
+                                                                                                        padding: EdgeInsets.all(8.0),
+                                                                                                        child: Text(
+                                                                                                          'Congratulations! You have completed this level successfully',
+                                                                                                          textAlign: TextAlign.center,
+                                                                                                          style: GoogleFonts.workSans(fontSize: 14.sp, color: Colors.black, fontWeight: FontWeight.w500),
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                      decoration: BoxDecoration(
+                                                                                                          borderRadius: BorderRadius.only(
+                                                                                                            topRight: Radius.circular(displayWidth(context) * .04),
+                                                                                                            topLeft: Radius.circular(displayWidth(context) * .04),
+                                                                                                          ),
+                                                                                                          color: Color(0xffE9E5FF)),
+                                                                                                    ),
+                                                                                                    content: Column(
+                                                                                                      mainAxisSize: MainAxisSize.min,
+                                                                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                                      children: [
+                                                                                                        if (lev > 1)
+                                                                                                          Text(
+                                                                                                            'Which level you want play ?',
+                                                                                                            style: GoogleFonts.workSans(fontSize: 12.sp, color: Colors.black, fontWeight: FontWeight.w400),
+                                                                                                          ),
+                                                                                                        if (lev > 1) _level1(lev),
+                                                                                                        if (lev > 2) _level2(lev),
+                                                                                                        if (lev > 3) _level3(lev),
+                                                                                                        if (lev > 4) _level4(lev),
+                                                                                                        if (lev > 5) _level5(lev),
+                                                                                                        Padding(
+                                                                                                          padding: EdgeInsets.only(top: displayHeight(context) * .03),
+                                                                                                          child: Text(
+                                                                                                            'Want to play current level ?',
+                                                                                                            style: GoogleFonts.workSans(fontSize: 12.sp, color: Colors.black, fontWeight: FontWeight.w400),
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                        if (lev == 1) _level1(lev),
+                                                                                                        if (lev == 2) _level2(lev),
+                                                                                                        if (lev == 3) _level3(lev),
+                                                                                                        if (lev == 4) _level4(lev),
+                                                                                                        if (lev == 5) _level5(lev),
+                                                                                                      ],
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                );
+                                                                                              }));
+                                                                                    } else {
+                                                                                      FlutterShare.share(title: 'https://finshark.page.link/finshark',
+                                                                                          text: 'Hey! Have you tried out the Finshark app? It\'s a fun game that helps you build smart financial habits. You can learn to budget, invest and more. I think you\'ll like it!',
+                                                                                          linkUrl: 'https://finshark.page.link/finshark',
+                                                                                          chooserTitle: 'https://finshark.page.link/finshark').then((value) {
+                                                                                        // Future.delayed(Duration(seconds: 2), () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LevelThreeSetUpPage(controller: PageController()))));
+                                                                                      }).then((value) {
+                                                                                        Navigator.pop(context);
+                                                                                        Future.delayed(Duration(seconds: 1), () => _playLevelOrPopQuiz());
+                                                                                      });
+                                                                                    }
+                                                                                  },
+                                                                                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white)),
+                                                                                  child: Text(
+                                                                                    'Click here to invite ',
+                                                                                    style: GoogleFonts.workSans(
+                                                                                      color: Color(0xff6646E6),
+                                                                                    ),
+                                                                                  )),
+                                                                              GestureDetector(
+                                                                                child: Text(
+                                                                                  'Skip',
+                                                                                  style: GoogleFonts.workSans(
+                                                                                    color: Colors.white,
+                                                                                    fontWeight: FontWeight.w600,
+                                                                                    decoration: TextDecoration.underline,
+                                                                                  ),
+                                                                                ),
+                                                                                onTap: () {
+                                                                                  Navigator.pop(context);
+                                                                                  Future.delayed(Duration(seconds: 1), () => _playLevelOrPopQuiz());
+                                                                                },
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    );
+                                                                  }));
+                                                        }
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 6.0),
+                                                        child: Center(
+                                                          child: FittedBox(
+                                                            child: Text(
+                                                              'Play Next Level',
+                                                              style: GoogleFonts.workSans(
+                                                                  color: color ==
+                                                                          Color(
+                                                                              0xff00C673)
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Color(
+                                                                          0xff4D5DDD),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize:
+                                                                      15.sp),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .clip,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      )),
+                                            );
                                           })),
                                       SizedBox(
                                         height: displayHeight(context) * .02,
@@ -1889,7 +1884,8 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
         builder: (context) {
           return WillPopScope(
             onWillPop: () {
-              return Future.value(false);},
+              return Future.value(false);
+            },
             child: AlertDialog(
               elevation: 3.0,
               shape: RoundedRectangleBorder(
@@ -1938,9 +1934,12 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                             'score': 0,
                             'need': 0,
                             'want': 0,
+                            'level_2_popQuiz_id': 0,
                           });
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) => PopQuiz()));
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PopQuiz(levelId: 0)));
                         });
                       },
                       child: Text('Play Pop Quiz')),
@@ -1964,6 +1963,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                             'score': 0,
                             'need': 0,
                             'want': 0,
+                            'level_3_popQuiz_id': 0
                           });
                           Navigator.pushReplacement(
                               context,
@@ -1987,7 +1987,8 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
         builder: (context) {
           return WillPopScope(
             onWillPop: () {
-              return Future.value(false);},
+              return Future.value(false);
+            },
             child: AlertDialog(
               elevation: 3.0,
               shape: RoundedRectangleBorder(
@@ -2021,13 +2022,14 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                       Navigator.pushReplacement(
                           context,
                           PageTransition(
-                              child:
-                                  LevelTwoSetUpPage(controller: PageController()),
+                              child: LevelTwoSetUpPage(
+                                  controller: PageController()),
                               type: PageTransitionType.bottomToTop,
                               duration: Duration(milliseconds: 500)));
                     },
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.white)),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.white)),
                     child: Text(
                       'Restart level',
                       style: GoogleFonts.workSans(
@@ -2048,11 +2050,14 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(displayWidth(context) * .12)),
           child: ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
+              DocumentSnapshot document =
+                  await firestore.collection('User').doc(userId).get();
+              gameScore = document.get('game_score');
               if (lev == 1) {
                 firestore.collection('User').doc(userId).update({
                   'replay_level': false,
-                  'previous_session_info': 'Level_1_setUp_page',
+                  'previous_session_info': 'Level_1',
                   'account_balance': 0,
                   'bill_payment': 0,
                   'credit_card_balance': 0,
@@ -2062,19 +2067,27 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                   'payable_bill': 0,
                   'quality_of_life': 0,
                   'score': 0,
-                  'last_level': 'Level_1_setUp_page',
+                  'last_level': 'Level_1',
                 });
                 Navigator.pushReplacement(
                     context,
                     PageTransition(
-                        child: LevelOneSetUpPage(
-                          controller: PageController(),
+                        child: AllQueLevelOne(
+                          billPayment: 0,
+                          gameScore: gameScore,
+                          level: 'Level_1',
+                          levelId: 0,
+                          qOl: 0,
+                          savingBalance: 200,
+                          creditCardBalance: 0,
+                          creditCardBill: 0,
+                          payableBill: 0,
                         ),
                         duration: Duration(milliseconds: 500),
                         type: PageTransitionType.bottomToTop));
               } else {
                 firestore.collection('User').doc(userId).update({
-                  'previous_session_info': 'Level_1_setUp_page',
+                  'previous_session_info': 'Level_1',
                   'account_balance': 0,
                   'bill_payment': 0,
                   'credit_card_balance': 0,
@@ -2088,8 +2101,16 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
                 Navigator.pushReplacement(
                     context,
                     PageTransition(
-                        child: LevelOneSetUpPage(
-                          controller: PageController(),
+                        child: AllQueLevelOne(
+                          billPayment: 0,
+                          gameScore: gameScore,
+                          level: 'Level_1',
+                          levelId: 0,
+                          qOl: 0,
+                          savingBalance: 200,
+                          creditCardBalance: 0,
+                          creditCardBill: 0,
+                          payableBill: 0,
                         ),
                         duration: Duration(milliseconds: 500),
                         type: PageTransitionType.bottomToTop));
@@ -2103,6 +2124,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
           ),
         ));
   }
+
   _level2(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .01),
@@ -2166,6 +2188,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
           ),
         ));
   }
+
   _level3(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .02),
@@ -2216,6 +2239,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
           ),
         ));
   }
+
   _level4(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .02),
@@ -2233,6 +2257,7 @@ class _AllQueLevelTwoState extends State<AllQueLevelTwo> {
           ),
         ));
   }
+
   _level5(int lev) {
     return Padding(
         padding: EdgeInsets.only(top: displayWidth(context) * .02),
